@@ -41,7 +41,7 @@ export default function Team() {
                 <div className="container">
                     <div className="row align-items-center">
 
-                        {/* LEFT SIDE DETAILS */}
+                        {/* LEFT SIDE DETAILS vvvvvvvvvjaiswal*/}
                         <div className="col-lg-6 team-details">
                             <h1>{teamData[activeIndex]?.heading}</h1>
                             <h2>{teamData[activeIndex]?.paragraph}</h2>
