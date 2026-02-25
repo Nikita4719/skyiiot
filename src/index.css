@@ -1,0 +1,273 @@
+.social-icon {
+  width: 35px;
+  height: 35px;
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  background-color: #0d6efd;
+  transform: translateY(-3px);
+}
+
+.navbar-gradient {
+  background: linear-gradient(to right, #edf6ff, #f5e3fc);
+  padding: 1rem 2rem;
+  color: #000; 
+}
+
+.navbar-nav .nav-link {
+  color: rgb(237, 102, 221);
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: rgb(174, 76, 156);
+  text-decoration: underline;
+  transform: translateY(-3px);
+}
+
+.custom-footer {
+  background: #0d0f1a;
+}
+
+.footer-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.custom-footer a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.custom-footer a:hover {
+  color: lavender;
+  padding-left: 5px;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+  background: #1a1c2e;
+  padding: 8px 12px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: lavender;
+  color: #000;
+}
+
+.footer-line {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+#hero {
+  width: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 45vh;  
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hover-circle-1:hover {
+  background-color: #d3f7c2 !important;
+  cursor: pointer;
+}
+.hover-circle-2:hover {
+  background-color: #c6dbf1 !important;
+  cursor: pointer;
+}
+.hover-circle-3:hover {
+  background-color: #fecbcd !important;
+  cursor: pointer;
+}
+.hover-circle-4:hover {
+  background-color: #eec0fa !important;
+  cursor: pointer;
+}
+.hover-circle-5:hover {
+  background-color: #f9d5bf !important;
+  cursor: pointer;
+}
+
+.carousel-wrapper {
+  background-size: cover;
+  background-position: center;
+  padding: 80px 0;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.carousel-card {
+  transition: all 0.4s ease;
+  opacity: 0.5;
+  transform: scale(0.8);
+}
+
+.carousel-card img {
+  width: 250px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.carousel-card.center {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.nav-btn {
+  background: white;
+  border: none;
+  font-size: 30px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.team-section {
+  padding: 100px 0;
+  background: #f8f9fa;
+}
+
+.team-details h2 {
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.team-details h5 {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.image-stack {
+  position: relative;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-img {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: all 0.8s ease;
+  opacity: 0.4;
+  transform: scale(0.8);
+}
+
+.team-img.active {
+  opacity: 1;
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+/* Stack positioning */
+.team-img:nth-child(1) {
+  top: 0;
+}
+
+.team-img:nth-child(2) {
+  top: 60px;
+}
+
+.team-img:nth-child(3) {
+  top: 120px;
+}
+.automation-list {
+  list-style: disc;
+  padding-left: 0;
+  margin-left: 0;
+  list-style-position: inside;
+}
+
+.faq-card {
+  transition: all 0.3s ease;
+}
+
+.faq-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+.feature-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.feature-title {
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 40px;
+}
+.offer-small-img {
+  width: 50px;      
+  height: 50px;     
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+.carousel-card {
+    width: 300px;
+    text-align: center;
+    transition: 0.5s ease;
+}
+
+.carousel-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.focus-img {
+  height: 280px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.focus-img:hover {
+  transform: scale(1.03);
+}
+.focus-img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.focus-img:hover {
+  transform: scale(1.03);
+}
+
+.focus-card {
+  transition: all 0.3s ease;
+}
+
+.focus-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+

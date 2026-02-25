@@ -1,0 +1,132 @@
+/* .custom-navbar {
+ background: linear-gradient(
+    to right,
+    rgba(237, 246, 255, 0.9), 
+    rgba(245, 227, 252, 0.9) 
+  );
+} */
+.navbar-gradient {
+  background: linear-gradient(to right, #edf6ff, #f5e3fc);
+  padding: 1rem 2rem;
+  color: #000; 
+}
+
+.navbar-nav .nav-link {
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: rgb(174, 76, 156);
+  text-decoration: underline;
+}
+
+.custom-footer {
+  background: #0d0f1a;
+}
+
+.footer-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.custom-footer a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.custom-footer a:hover {
+  color: lavender;
+  padding-left: 5px;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+  background: #1a1c2e;
+  padding: 8px 12px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: lavender;
+  color: #000;
+}
+
+.footer-line {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+#hero {
+  width: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 45vh;  
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hover-circle-1:hover {
+  background-color: #d3f7c2 !important;
+  cursor: pointer;
+}
+.hover-circle-2:hover {
+  background-color: #c6dbf1 !important;
+  cursor: pointer;
+}
+.hover-circle-3:hover {
+  background-color: #fecbcd !important;
+  cursor: pointer;
+}
+.hover-circle-4:hover {
+  background-color: #eec0fa !important;
+  cursor: pointer;
+}
+.hover-circle-5:hover {
+  background-color: #f9d5bf !important;
+  cursor: pointer;
+}
+
+.carousel-wrapper {
+  background-size: cover;
+  background-position: center;
+  padding: 80px 0;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.carousel-card {
+  transition: all 0.4s ease;
+  opacity: 0.5;
+  transform: scale(0.8);
+}
+
+.carousel-card img {
+  width: 250px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.carousel-card.center {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.nav-btn {
+  background: white;
+  border: none;
+  font-size: 30px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
