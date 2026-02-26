@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import About_us from "./components/About_us";
 import Solutions from "./components/Solutions";
+// import SolutionDetail from "./components/SolutionDetail";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Embeded from "./components/Embeded";
@@ -12,6 +13,7 @@ import Embeded2 from "./components/Embeded2";
 import Carousal from "./components/Carousal";
 import Faqs from "./components/Faqs";
 import Team from "./components/Team";
+import Testimonials from "./components/Testimonials";
 import Detail1 from "./components/Detail1";
 import Detail2 from "./components/Detail2";
 import Transform_monitor from "./components/Transform_monitor";
@@ -42,6 +44,7 @@ function Home() {
       <Embeded2/>
       <Carousal/>
       <Team/>
+      <Testimonials/>
       <Faqs/>
     </>
   );
@@ -58,6 +61,7 @@ function App() {
         <Route path="/about" element={<About_us />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/solutions" element={<Solutions />} />
+        {/* <Route path="/solution/:id" element={<SolutionDetail />} /> */}
         <Route path="/details/1" element={<Detail1 />} />
         <Route path="/details/2" element={<Detail2 />} />
         <Route path="/details/3" element={<Detail3 />} />
@@ -65,8 +69,8 @@ function App() {
         <Route path="/pump-automate" element={<Pump_automate />} />
         <Route path="/light-monitor" element={<Light_monitor />} />
         <Route path="/rtu-solution" element={<Rtu_solution />} />
-        <Route path="/details/4" element={<Detail4 />} />
-        <Route path="/details/5" element={<Detail5 />} />
+        <Route path="/details/:id" element={<Detail4 />} />
+        {/* <Route path="/details/5" element={<Detail5 />} />
         <Route path="/details/6" element={<Detail6 />} />
         <Route path="/details/7" element={<Detail7 />} />
         <Route path="/details/8" element={<Detail8 />} />
@@ -77,7 +81,7 @@ function App() {
         <Route path="/details/13" element={<Detail13 />} />
         <Route path="/details/14" element={<Detail14 />} />
         <Route path="/details/15" element={<Detail15 />} />
-        <Route path="/details/16" element={<Detail16 />} />
+        <Route path="/details/16" element={<Detail16 />} /> */}
         
 
       </Routes>

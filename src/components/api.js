@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const ROOT_URL =
-  "https://enables-constitutional-incident-shark.trycloudflare.com";
+  "https://nodes-priority-payday-sql.trycloudflare.com";
 
 const api = axios.create({
   baseURL: `${ROOT_URL}/api`,

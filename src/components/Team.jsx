@@ -10,14 +10,17 @@ import { ROOT_URL } from "./api";
 export default function Team() {
     const [teamData, setTeamData] = useState([]);
     const [smarterData, setSmarterData] = useState([]);
+    const [poweredData, setPoweredData] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const teamres = await api.get("/our-team");
                 const smarterres = await api.get("/smarter");
+                const poweredres = await api.get("/ai-powered");
                 setTeamData(teamres.data);
                 setSmarterData(smarterres.data[0]);
+                setPoweredData( poweredres .data[0]);
             } catch (error) {
                 console.log(error);
             }
@@ -93,7 +96,7 @@ export default function Team() {
 
                             <p className="text-muted mb-4">{smarterData.para}</p>
 
-                            <ul className="automation-list">
+                            {/* <ul className="automation-list">
                                 <li className="mb-3">
                                     <strong>Seamless Device Integration</strong> Enable effortless communication between devices, PLCs, and sensors across your infrastructure.
                                 </li>
@@ -109,7 +112,7 @@ export default function Team() {
                                 <li className="mb-3">
                                     <strong>Streamlined Workflows</strong>  Eliminate manual intervention with automated alerts, task assignments, and decision triggers.
                                 </li>
-                            </ul>
+                            </ul> */}
 
                         </div>
 
@@ -121,23 +124,15 @@ export default function Team() {
                 <div className="container">
                     <div className="row align-items-start g-5">
                         <div className="col-lg-6">
-                            <h2 className="fw-bold mb-4">
-                                AI-Powered Intelligence at the Edge
-                            </h2>
-                            <h4 className="fw-semibold mb-1">
-                                Where Raw Data Becomes Actionable Intelligence
-                            </h4>
+                            <h2 className="fw-bold mb-4">{poweredData.heading1}</h2>
+                            <h4 className="fw-semibold mb-1">{poweredData.heading2}</h4>
 
-                            <p className="text-muted mb-2">
-                                our IIOT devices aren't just connected they're smart. With advanced edge computing and real-time analytics, SKY IIOT transforms your infrastructure into an intelligent, self-aware ecosystem.
-                            </p>
+                            <p className="text-muted mb-2">{poweredData.paragraph1}</p>
 
 
-                            <h4 className="fw-semibold mb-1">Turning Data into Real-Time Intelligence</h4>
-                            <p className="text-muted mb-2">
-                                In industrial environments, raw data is only as valuable as the action it drives. SKY IIOT bridges the gap between data generation and smart decision-making with real-time analytics, automation, and edge intelligence.
-                            </p>
-                            <ul className="automation-list text-start ps-0">
+                            <h4 className="fw-semibold mb-1">{poweredData.heading3}</h4>
+                            <p className="text-muted mb-2">{poweredData.paragraph2}</p>
+                            {/* <ul className="automation-list text-start ps-0">
                                 <li className="mb-2">
                                     Edge AI Processing - Analyze and act at the edge to reduce latency.
                                 </li>
@@ -151,14 +146,14 @@ export default function Team() {
                                     Cloud & Edge Sync - Seamlessly synchronize data across your ecosystem.
                                 </li>
 
-                            </ul>
+                            </ul> */}
 
                         </div>
 
                         <div className="col-lg-6">
                             <div className="video-wrapper">
                                 <video
-                                    src={avdo2}
+                                    src={poweredData?.media ? `${ROOT_URL}/${poweredData.media}` : "null"}
                                     autoPlay
                                     muted
                                     loop

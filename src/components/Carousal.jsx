@@ -10,8 +10,8 @@ function Carousel() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await api.get("/everywhere-slide");
-                setEverywhereData(res.data); 
+                const everywhereres = await api.get("/everywhere-slide");
+                setEverywhereData(everywhereres.data); 
             } catch (error) {
                 console.log(error);
             }

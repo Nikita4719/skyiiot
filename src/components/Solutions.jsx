@@ -10,8 +10,25 @@ import sol8 from "../assets/sol8.jpg";
 
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import api from "./api";
+import { ROOT_URL } from "./api";
 export default function Solutions() {
+  const [solution_cat, setSolution_cat] = useState([]);
+  const [solution_image, setSolution_image] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const solution_catres = await api.get("/solution-cat");
+        const solution_imageres = await api.get("/solution-images");
+        setSolution_cat(solution_catres.data);
+        setSolution_image(solution_imageres.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div>
       <section className="py-0 bg-light">
@@ -26,46 +43,48 @@ export default function Solutions() {
 
         <div className="container text-center">
           <div className="row g-4">
-            <div className="col-md-3">
-              <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
-                <div className="position-relative">
-                  <img
-                    src={sol1}
-                    alt="solution"
-                    className="w-100"
-                    style={{ height: "220px", objectFit: "cover" }}
-                  />
-                  <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
-                    NEW
-                  </span>
-                </div>
-                <div className="card-body d-flex flex-column text-start">
-                  <div className="d-flex justify-content-between align-items-start mb-3">
-                    <h4 className="fw-semibold mb-0">
-                      Transforming Monitoring System
-                    </h4>
-                    <FaHeart className="text-danger flex-shrink-0" size={18} />
+            {/* <div className="col-md-3"> */}
+            {solution_cat.map((item) => (
+              <div className="col-md-3" key={item.id}>
+                <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
+                  <div className="position-relative">
+                    <img
+                      src={`${ROOT_URL}/${item.image}`}
+                      alt={item.title}
+                      className="w-100"
+                      style={{ height: "220px", objectFit: "cover" }}
+                    />
+                    <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
+                      NEW
+                    </span>
+                  </div>
+                  <div className="card-body d-flex flex-column text-start">
+                    <div className="d-flex justify-content-between align-items-start mb-3">
+                      <h4 className="fw-semibold mb-0">
+                        {item.title}
+                      </h4>
+                      <FaHeart className="text-danger flex-shrink-0" size={18} />
+
+                    </div>
+                    <div className="mt-auto d-flex gap-1">
+                      <Link 
+                        to="/transform-monitor"
+                        className="btn btn-outline-primary w-50 rounded-pill"
+                      >
+                        View Details
+                      </Link>
+
+                      <Link to="/contact" className="btn btn-primary rounded-pill">
+                        Start Order
+                      </Link>
+                    </div>
 
                   </div>
-                  <div className="mt-auto d-flex gap-1">
-                    <Link
-                      to="/transform-monitor"
-                      className="btn btn-outline-primary w-50 rounded-pill"
-                    >
-                      View Details
-                    </Link>
-
-                    <Link to="/contact" className="btn btn-primary rounded-pill">
-                      Start Order
-                    </Link>
-                  </div>
-
                 </div>
               </div>
-            </div>
+            ))}
 
-
-            <div className="col-md-3">
+            {/* <div className="col-md-3">
               <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
                 <div className="position-relative">
                   <img
@@ -176,7 +195,7 @@ export default function Solutions() {
 
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -187,7 +206,7 @@ export default function Solutions() {
 
             <div className="col-md-6">
               <img
-                src={sol5}
+                src={solution_image?.image1 ? `${ROOT_URL}/${solution_image.image1}` : "null"}
                 alt="sol5"
                 className="img-fluid "
               />
@@ -195,7 +214,7 @@ export default function Solutions() {
 
             <div className="col-md-6">
               <img
-                src={sol6}
+                src={solution_image?.image2 ? `${ROOT_URL}/${solution_image.image2}` : "null"}
                 alt="sol6"
                 className="img-fluid w-100 rounded-4"
               />
@@ -203,7 +222,7 @@ export default function Solutions() {
 
             <div className="col-md-6">
               <img
-                src={sol7}
+                src={solution_image?.image3 ? `${ROOT_URL}/${solution_image.image3}` : "null"}
                 alt="sol7"
                 className="img-fluid w-100 rounded-4"
               />
@@ -211,7 +230,7 @@ export default function Solutions() {
 
             <div className="col-md-6">
               <img
-                src={sol8}
+                src={solution_image?.image4 ? `${ROOT_URL}/${solution_image.image4}` : "null"}
                 alt="sol8"
                 className="img-fluid w-100 rounded-4"
               />
