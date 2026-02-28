@@ -11,7 +11,7 @@ function Carousel() {
         const fetchData = async () => {
             try {
                 const everywhereres = await api.get("/everywhere-slide");
-                setEverywhereData(everywhereres.data); 
+                setEverywhereData(everywhereres.data);
             } catch (error) {
                 console.log(error);
             }
@@ -64,22 +64,23 @@ function Carousel() {
                                 alt={item.heading}
                                 className="carousel-img"
                             />
-                            <div className="bg-white">
-                                <h5 className="mt-3 fw-bold  text-black">
-                                    {item.heading}
-                                </h5>
-                                <p className="text-muted  small">
-                                    {item.paragraph}
-                                </p>
+                            <div className="card-content">
+                                <div className="text-content">
+                                    <h5>{item.heading}</h5>
+                                    <p>{item.paragraph}</p>
+                                </div>
+
+                                <button className="arrow-btn">↗</button>
                             </div>
                         </div>
+
                     );
                 })}
 
                 <button className="nav-btn" onClick={nextSlide}>›</button>
 
             </div>
-        </div>
+        </div >
     );
 }
 

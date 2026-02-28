@@ -91,10 +91,10 @@ export default function Team() {
                         {/* RIGHT CONTENT */}
                         <div className="col-lg-6">
                             <h2 className="fw-bold mb-4">
-                               {smarterData.heading}
+                               {smarterData?.heading}
                             </h2>
 
-                            <p className="text-muted mb-4">{smarterData.para}</p>
+                            <p className="text-muted mb-4">{smarterData?.para}</p>
 
                             {/* <ul className="automation-list">
                                 <li className="mb-3">

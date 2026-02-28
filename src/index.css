@@ -1,7 +1,7 @@
 .social-icon {
   width: 35px;
   height: 35px;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   color: white;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
 .navbar-gradient {
   background: linear-gradient(to right, #edf6ff, #f5e3fc);
   padding: 1rem 2rem;
-  color: #000; 
+  color: #000;
 }
 
 .navbar-nav .nav-link {
@@ -77,27 +77,32 @@
 
 .hero-image {
   width: 100%;
-  height: 45vh;  
+  height: 45vh;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .hover-circle-1:hover {
   background-color: #d3f7c2 !important;
   cursor: pointer;
 }
+
 .hover-circle-2:hover {
   background-color: #c6dbf1 !important;
   cursor: pointer;
 }
+
 .hover-circle-3:hover {
   background-color: #fecbcd !important;
   cursor: pointer;
 }
+
 .hover-circle-4:hover {
   background-color: #eec0fa !important;
   cursor: pointer;
 }
+
 .hover-circle-5:hover {
   background-color: #f9d5bf !important;
   cursor: pointer;
@@ -196,6 +201,7 @@
 .team-img:nth-child(3) {
   top: 120px;
 }
+
 .automation-list {
   list-style: disc;
   padding-left: 0;
@@ -209,13 +215,28 @@
 
 .faq-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
+
 .feature-img {
   width: 70px;
   height: 70px;
   object-fit: contain;
   margin-bottom: 10px;
+  transform: translateY(-3px);
+}
+.feature-img-wrapper {
+  overflow: hidden;         
+ 
+}
+
+.feature-img {
+  width: 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.feature-img-wrapper:hover .feature-img {
+  transform: scale(1.1);  
 }
 
 .feature-title {
@@ -223,24 +244,27 @@
   font-weight: 600;
   min-height: 40px;
 }
+
 .offer-small-img {
-  width: 50px;      
-  height: 50px;     
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   margin-bottom: 15px;
 }
+
 .carousel-card {
-    width: 300px;
-    text-align: center;
-    transition: 0.5s ease;
+  width: 300px;
+  text-align: center;
+  transition: 0.5s ease;
 }
 
 .carousel-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
 }
+
 .focus-img {
   height: 280px;
   width: 100%;
@@ -251,6 +275,7 @@
 .focus-img:hover {
   transform: scale(1.03);
 }
+
 .focus-img {
   height: 250px;
   width: 100%;
@@ -268,8 +293,9 @@
 
 .focus-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
+
 .testimonial-section {
   background: #ffffff;
 }
@@ -364,4 +390,64 @@
   color: #f3f4f6;
   pointer-events: none;
   user-select: none;
+}
+.carousel-card {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* White overlay box */
+.card-content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: #ffffff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left text */
+.text-content h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.text-content p {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 4px 0 0 0;
+}
+
+/* Arrow button */
+.arrow-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.arrow-btn:hover {
+  background-color: #1e40af;
 }

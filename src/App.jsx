@@ -14,6 +14,7 @@ import Carousal from "./components/Carousal";
 import Faqs from "./components/Faqs";
 import Team from "./components/Team";
 import Testimonials from "./components/Testimonials";
+import Details from "./components/Details";
 import Detail1 from "./components/Detail1";
 import Detail2 from "./components/Detail2";
 import Transform_monitor from "./components/Transform_monitor";
@@ -61,15 +62,16 @@ function App() {
         <Route path="/about" element={<About_us />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/solutions" element={<Solutions />} />
+        <Route path="/details/:id" element={<Details />} />
         {/* <Route path="/solution/:id" element={<SolutionDetail />} /> */}
-        <Route path="/details/1" element={<Detail1 />} />
+        {/* <Route path="/details/1" element={<Detail1 />} />
         <Route path="/details/2" element={<Detail2 />} />
-        <Route path="/details/3" element={<Detail3 />} />
-        <Route path="/transform-monitor" element={<Transform_monitor />} />
+        <Route path="/details/3" element={<Detail3 />} /> */}
+        <Route path="/transform-monitor/:id" element={<Transform_monitor />} />
         <Route path="/pump-automate" element={<Pump_automate />} />
         <Route path="/light-monitor" element={<Light_monitor />} />
         <Route path="/rtu-solution" element={<Rtu_solution />} />
-        <Route path="/details/:id" element={<Detail4 />} />
+        {/* <Route path="/details/:id" element={<Detail4 />} /> */}
         {/* <Route path="/details/5" element={<Detail5 />} />
         <Route path="/details/6" element={<Detail6 />} />
         <Route path="/details/7" element={<Detail7 />} />

@@ -1,48 +1,78 @@
-
-import tmbg from "../assets/tmbg.png";
-import sol1 from "../assets/sol1.png";
-import sc1 from "../assets/sc1.png";
-import sc2 from "../assets/sc2.png";
-import sc3 from "../assets/sc3.png";
-import sc4 from "../assets/sc4.png";
-import { Link } from "react-router-dom";
-import tms from "../assets/tms.png";
 import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import api from "./api";
 import { ROOT_URL } from "./api";
+import tmbg from "../assets/tmbg.png";
+import tms from "../assets/tms.png";
+import sol1 from "../assets/sol1.png";
+
 export default function TransformMonitor() {
+  const { id } = useParams(); // get dynamic id from URL
   const [selectedImage, setSelectedImage] = useState(sol1);
-  const [solution_sub_cat, setSolution_sub_cat] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const solution_sub_catres = await api.get("/solution-sub-cat");
+  const [solution_sub_cat, setSolution_sub_cat] = useState(null);
 
-        // 👇 sirf solutionCatId 1 ka data nikalo
-        const filteredData = solution_sub_catres.data.find(
-          (item) => item.solutionCatId === 1
-        );
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const res = await api.get("/solution-sub-cat");
 
-        setSolution_sub_cat(filteredData);
+// console.log(res.data);
+//         // Convert id to number to match API data
+//         const filteredData = res.data.find(
+//           (item) => item.solutionCatId === Number(id)
+//         );
+//         setSolution_sub_cat(filteredData);
 
-        // first image auto select
-        if (filteredData?.image2?.length > 0) {
-          setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
-        }
+//         // Set first image as default if available
+//         if (filteredData?.image2?.length > 0) {
+//           setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
 
-        // console.log(solution_sub_catres.data);
-        // console.log(solution_sub_catres.data[0]?.image2);
-        // console.log(ROOT_URL);
+//     fetchData();
+//   }, [id]); // refetch when id changes
 
-      } catch (error) {
-        console.log(error);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await api.get("/solution-sub-cat");
+
+      const filteredData = res.data.find(
+        (item) => item.solutionCatId === Number(id)
+      );
+
+      //  If no data found
+      if (!filteredData) return;
+
+      //  Convert image2 string into array
+      if (filteredData.image2) {
+        filteredData.image2 = JSON.parse(filteredData.image2);
+      } else {
+        filteredData.image2 = [];
       }
-    };
 
-    fetchData();
-  }, []);
+      setSolution_sub_cat(filteredData);
+      if (filteredData.image2.length > 0) {
+        setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  fetchData();
+}, [id]);
+
+  if (!solution_sub_cat) return <p className="text-center mt-5">Loading...</p>;
+
   return (
     <div>
+      <h1 className="text-center my-4">Details for Item {id}</h1>
+
 
       <section>
         <img
@@ -53,11 +83,12 @@ export default function TransformMonitor() {
         />
       </section>
 
+      {/* Main Section */}
       <section className="py-5 bg-light">
         <div className="container">
           <div className="row g-4 align-items-stretch">
 
-
+            {/* Left Column - Images */}
             <div className="col-lg-6">
               <div className="card border-0 shadow-sm h-100 p-4">
 
@@ -71,12 +102,11 @@ export default function TransformMonitor() {
                 </div>
 
                 <div className="d-flex justify-content-center gap-3 flex-wrap">
-
                   {solution_sub_cat?.image2?.map((img, index) => (
                     <img
                       key={index}
                       src={`${ROOT_URL}/${img}`}
-                      alt="thumb"
+                      alt={`thumb-${index}`}
                       onClick={() => setSelectedImage(`${ROOT_URL}/${img}`)}
                       className="img-thumbnail"
                       style={{
@@ -88,35 +118,15 @@ export default function TransformMonitor() {
                     />
                   ))}
                 </div>
-
               </div>
             </div>
 
-
+            {/* Right Column - Details */}
             <div className="col-lg-6">
               <div className="card border-0 shadow-sm h-100 p-4">
-
-                <h3 className="fw-bold mb-3">{solution_sub_cat?.title}</h3>
-
+                <h3 className="fw-bold mb-3">{solution_sub_cat.title}</h3>
                 <hr />
-                <p>{solution_sub_cat?.para1}</p>
-                {/* <div className="mb-2">
-                  <strong>Model No:</strong> SKYIoT1002
-                </div>
-                <div className="mb-2">
-                  <strong>Screen Size:</strong> No Screen
-                </div>
-                <div className="mb-2">
-                  <strong>Use:</strong> Automotive
-                </div>
-
-                <hr />
-
-                <div className="mt-3 small text-muted">
-                  <p><strong>Shipping Cost:</strong> To be negotiated</p>
-                  <p><strong>Payment Methods:</strong> Visa, MasterCard, UPI</p>
-                  <p><strong>Secure Payments:</strong> Every payment is protected.</p>
-                </div> */}
+                <p>{solution_sub_cat.para1}</p>
 
                 <div className="mt-auto pt-3">
                   <Link to="/contact">
@@ -125,7 +135,6 @@ export default function TransformMonitor() {
                     </button>
                   </Link>
                 </div>
-
               </div>
             </div>
 
@@ -133,6 +142,7 @@ export default function TransformMonitor() {
         </div>
       </section>
 
+      {/* Additional Banner */}
       <section className="mb-5">
         <img
           src={tms}
@@ -142,6 +152,7 @@ export default function TransformMonitor() {
         />
       </section>
 
+      {/* System Components Section */}
       <section className="container py-5">
         <div className="border-bottom d-flex gap-4 mb-4">
           <button className="btn p-0 border-0 border-bottom border-2 border-primary text-primary fw-semibold">
@@ -153,10 +164,8 @@ export default function TransformMonitor() {
 
         <div className="row mt-4 g-4">
 
-
+          {/* Left Column - Tables & Features */}
           <div className="col-lg-6">
-
-
             <div className="card mb-4">
               <div className="table-responsive">
                 <table className="table mb-0">
@@ -214,8 +223,6 @@ export default function TransformMonitor() {
             </div>
 
             <div className="row g-4">
-
-
               <div className="col-md-6">
                 <div className="card h-100 shadow-sm">
                   <div className="card-body">
@@ -251,18 +258,14 @@ export default function TransformMonitor() {
               </div>
 
             </div>
-
           </div>
 
-
+          {/* Right Column - Core Modules */}
           <div className="col-lg-6">
-
             <div className="card shadow-sm p-4">
-
               <h5 className="fw-semibold mb-4">Core Modules</h5>
 
               <div className="d-flex flex-column gap-3">
-
                 <div className="card p-3">
                   <strong>24/7 Real-time Monitoring</strong>
                   <ul className="mb-0">
@@ -301,17 +304,12 @@ export default function TransformMonitor() {
                     <li>SCADA / ERP API integration</li>
                   </ul>
                 </div>
-
               </div>
-
             </div>
-
           </div>
 
         </div>
-
       </section>
-
     </div>
   );
 }

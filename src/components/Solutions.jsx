@@ -68,7 +68,7 @@ export default function Solutions() {
                     </div>
                     <div className="mt-auto d-flex gap-1">
                       <Link 
-                        to="/transform-monitor"
+                        to={`/transform-monitor/${item.id}`}
                         className="btn btn-outline-primary w-50 rounded-pill"
                       >
                         View Details
