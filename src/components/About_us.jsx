@@ -102,7 +102,7 @@ export default function About_us() {
               <div className="row g-4">
 
                 <div className="col-md-6">
-                  <div className="p-4 bg-white rounded-4 shadow-sm h-100 focus-card">
+                  <div className=" p-4 bg-white rounded-4 shadow-sm h-100 focus-card">
                     <h2 className="fw-bold text-success">{about_benifit.heading1}</h2>
                     <h5 className="fw-semibold mt-3">{about_benifit.heading2}</h5>
                     <p className="text-muted small mt-2">{about_benifit.paragraph1}</p>

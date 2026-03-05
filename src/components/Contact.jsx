@@ -1,7 +1,7 @@
 import { FaFacebookF, FaYoutube, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import "./index.css";
 import { useState } from "react";
-
+import axios from "axios";
 
 export default function Contact() {
 
@@ -12,14 +12,14 @@ export default function Contact() {
     phone: "",
     message: ""
   });
-
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-  
+
     if (name === "phone") {
       const onlyNumbers = value.replace(/[^0-9]/g, "");
       setFormData({ ...formData, phone: onlyNumbers });
@@ -57,26 +57,46 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
- 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validate()) {
-      console.log("Form Data:", formData);
 
-      localStorage.setItem("contactData", JSON.stringify(formData));
+      try {
 
-      alert("Form submitted successfully!");
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message
+        };
 
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: ""
-      });
+        await axios.post(
+          "http://localhost:5000/api/contact-messages",
+          payload
+        );
 
-      setErrors({});
+        alert("Message sent successfully!");
+
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+
+        setErrors({});
+
+      } catch (error) {
+
+        console.error(error);
+        alert("Something went wrong while sending message");
+
+      }
+
     }
   };
 
@@ -85,7 +105,7 @@ export default function Contact() {
       <div className="container py-5">
         <div className="row g-5 align-items-center">
 
-    
+
           <div className="col-lg-5 contact-left">
             <h2 className="fw-bold mb-4">Let's Connect With Us</h2>
             <p className="mb-4">
@@ -124,9 +144,9 @@ export default function Contact() {
               <h4 className="text-center mb-3">Send Us a Message</h4>
 
               <form onSubmit={handleSubmit}>
-                <div className="row g-3">  
+                <div className="row g-3">
 
-               
+
                   <div className="col-md-6">
                     <input
                       type="text"
@@ -139,7 +159,7 @@ export default function Contact() {
                     {errors.firstName && <small className="text-danger">{errors.firstName}</small>}
                   </div>
 
-                
+
                   <div className="col-md-6">
                     <input
                       type="text"
@@ -152,7 +172,7 @@ export default function Contact() {
                     {errors.lastName && <small className="text-danger">{errors.lastName}</small>}
                   </div>
 
-                
+
                   <div className="col-md-6">
                     <input
                       type="email"
@@ -165,7 +185,7 @@ export default function Contact() {
                     {errors.email && <small className="text-danger">{errors.email}</small>}
                   </div>
 
-                 
+
                   <div className="col-md-6">
                     <input
                       type="tel"
@@ -179,7 +199,7 @@ export default function Contact() {
                     {errors.phone && <small className="text-danger">{errors.phone}</small>}
                   </div>
 
-              
+
                   <div className="col-12">
                     <textarea
                       rows="4"
@@ -194,7 +214,7 @@ export default function Contact() {
 
                   <div className="col-12">
                     <button type="submit" className="btn contact-btn btn-primary">
-                      Send Request
+                      {loading ? "Sending..." : "Send Request"}
                     </button>
                   </div>
 

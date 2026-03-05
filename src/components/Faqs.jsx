@@ -2,9 +2,61 @@
 import { useState, useEffect } from "react";
 import api from "./api";
 import { ROOT_URL } from "./api";
+import axios from "axios";
+
 export default function Faqs() {
   const [faqsData, setFaqsData] = useState([]);
   const [faqscmsData, setFaqscmsData] = useState([]);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      const numbersOnly = value.replace(/[^0-9]/g, "");
+      setFormData({ ...formData, phone: numbersOnly });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+
+      const payload = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message
+      };
+
+      await axios.post(
+        "http://localhost:5000/api/contact-messages",
+        payload
+      );
+
+      alert("Request sent successfully");
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
+
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,11 +125,14 @@ export default function Faqs() {
                 Send your question or request to our experts.
               </p>
 
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="row g-3">
                   <div className="col-md-6">
                     <input
                       type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="First Name"
                     />
@@ -85,6 +140,9 @@ export default function Faqs() {
                   <div className="col-md-6">
                     <input
                       type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="Last Name"
                     />
@@ -92,20 +150,34 @@ export default function Faqs() {
                   <div className="col-md-6">
                     <input
                       type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="Email Address"
+                      required
+                      pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                     />
                   </div>
                   <div className="col-md-6">
                     <input
                       type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="Phone Number"
+                      required
+                      pattern="[0-9]{10}"
+                      maxLength={10}
                     />
                   </div>
                   <div className="col-12">
                     <textarea
                       rows="4"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="Write your message here..."
                     ></textarea>

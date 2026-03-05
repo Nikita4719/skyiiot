@@ -34,7 +34,7 @@ function Embeded2() {
                     </div>
 
                     <div className="col-md-6">
-                        <h5 className="text-primary">{suppotredData.heading}</h5>
+                        <h5 className="text-skyiiot">{suppotredData.heading}</h5>
                         <h2 className="fw-bold">
                             {suppotredData.paragraph1}
                         </h2>
@@ -45,14 +45,14 @@ function Embeded2() {
                         <div className="row mt-3">
                             <div className="col-6 d-flex align-items-center">
                                 <i className="bi bi-box-seam text-info fs-4 me-2"></i>
-                                <span className="fw-medium text-primary">
+                                <span className="fw-medium text-skyiiot">
                                     Development kits
                                 </span>
                             </div>
 
                             <div className="col-6 d-flex align-items-center">
                                 <i className="bi bi-hdd-network text-info fs-4 me-2"></i>
-                                <span className="fw-medium text-primary">
+                                <span className="fw-medium text-skyiiot">
                                     Gateways
                                 </span>
                             </div>
@@ -61,14 +61,14 @@ function Embeded2() {
                         <div className="row mt-3">
                             <div className="col-6 d-flex align-items-center">
                                 <i className="bi bi-cpu text-info fs-4 me-2"></i>
-                                <span className="fw-medium text-primary">
+                                <span className="fw-medium text-skyiiot">
                                     System-on-Modules (SoMs)
                                 </span>
                             </div>
 
                             <div className="col-6 d-flex align-items-center">
                                 <i className="bi bi-pc-display text-info fs-4 me-2"></i>
-                                <span className="fw-medium text-primary">
+                                <span className="fw-medium text-skyiiot">
                                     Single-board computers (SBCs)
                                 </span>
                             </div>

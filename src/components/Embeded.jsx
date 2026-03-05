@@ -56,7 +56,7 @@ function Embeded() {
 
                     <div className="col-md-6">
 
-                        <h5 className="text-primary">{embeddedData.heading}</h5>
+                        <h5 className="text-skyiiot">{embeddedData.heading}</h5>
                         <h4>{embeddedData.paragraph1}</h4>
                         <p className="text-muted">{embeddedData.paragraph2}</p>
 
@@ -130,12 +130,11 @@ function Embeded() {
                     <div className="col-md-6 text-center">
                         {embeddedData?.video && (
                             <video
-                                className="w-100 rounded shadow"
+                                className="feature-video"
                                 autoPlay
                                 muted
                                 loop
                                 playsInline
-                                controls
                             >
                                 <source
                                     src={`${ROOT_URL}/${embeddedData.video}`}
@@ -149,7 +148,7 @@ function Embeded() {
 
                 <div className="container">
                     <div className="col-md-6 mb-4">
-                        <h5 className="text-primary">{networkData.heading}</h5>
+                        <h5 className="text-skyiiot">{networkData.heading}</h5>
                         <h4>{networkData.paragraph1}</h4>
                         <p className="text-muted">{networkData.paragraph2}</p>
 
@@ -222,7 +221,7 @@ function Embeded() {
 
 
                     <div className="col-md-6 mb-4">
-                        <h5 className="text-primary">{cloudData.heading}</h5>
+                        <h5 className="text-skyiiot">{cloudData.heading}</h5>
                         <h4>{cloudData.paragraph1}</h4>
                         <p className="text-muted">{cloudData.paragraph2}</p>
 
@@ -264,7 +263,7 @@ function Embeded() {
                     </div>
 
                     <div className="col-md-6 mb-4">
-                        <h5 className="text-primary">{managementData.heading}</h5>
+                        <h5 className="text-skyiiot">{managementData.heading}</h5>
                         <h4>{managementData.paragraph1}</h4>
                         <p className="text-muted">{managementData.paragraph2}</p>
                         <div className="row mt-3">
