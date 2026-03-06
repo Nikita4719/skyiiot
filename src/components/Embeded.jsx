@@ -38,6 +38,10 @@ function Embeded() {
                 setNetworkData(networkres.data[0]);
                 setCloudData(cloudres.data[0]);
                 setManagementData(managementres.data[0]);
+                console.log("Embedded:", embeddedres.data);
+                console.log("Network:", networkres.data);
+                console.log("Cloud:", cloudres.data);
+                console.log("Management:", managementres.data);
             } catch (error) {
                 console.log(error);
             }

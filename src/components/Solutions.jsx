@@ -22,7 +22,8 @@ export default function Solutions() {
         const solution_catres = await api.get("/solution-cat");
         const solution_imageres = await api.get("/solution-images");
         setSolution_cat(solution_catres.data);
-        setSolution_image(solution_imageres.data);
+        setSolution_image(solution_imageres.data[0]);
+        // console.log(solution_imageres.data);
       } catch (error) {
         console.log(error);
       }
