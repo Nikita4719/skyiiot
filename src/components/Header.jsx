@@ -1,6 +1,7 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import logo from "../assets/skyiiotlogo.png";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 export default function Header() {
   return (
     <header className="position-relative w-100 " >
@@ -54,20 +55,20 @@ export default function Header() {
           <div className='collapse navbar-collapse' id='navbarNav'>
             <ul className='navbar-nav ms-auto'>
               <li className='nav-item'>
-                <Link className="nav-link " to="/">Home</Link>
+                <NavLink className="nav-link" to="/">Home</NavLink>
               </li>
               <li className='nav-item'>
-                <Link className="nav-link " to="/about">About Us</Link>
+                <NavLink className="nav-link" to="/about">About Us</NavLink>
               </li>
               <li className='nav-item'>
-                <Link className="nav-link " to="/solutions">Solutions</Link>
+                <NavLink className="nav-link" to="/solutions">Solutions</NavLink>
               </li>
             </ul>
 
             <div className='d-flex ms-3'>
-              <Link to="/contact" className="btn btn-light rounded-pill px-4">
+              <NavLink to="/contact" className="btn btn-light rounded-pill px-4">
                 Work With Us
-              </Link>
+              </NavLink>
             </div>
           </div>
         </div>

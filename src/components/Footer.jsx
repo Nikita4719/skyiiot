@@ -1,14 +1,35 @@
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import wechatQR from "../assets/wechat.jpg";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Footer() {
+    const [contacts, setContacts] = useState([]);
+    const [solutions, setSolutions] = useState([]);
+
+    const iconMap = {
+        phone: <FaPhoneAlt className="text-dark" />,
+        email: <FaEnvelope className="text-dark" />,
+        location: <FaMapMarkerAlt className="text-dark" />
+    };
+
+    useEffect(() => {
+        // Fetch contacts
+        axios.get("http://localhost:5000/api/contact-messages")
+            .then(res => setContacts(res.data))
+            .catch(err => console.error(err));
+
+        // Fetch solutions
+        axios.get("http://localhost:5000/api/solution-cat")
+            .then(res => setSolutions(res.data))
+            .catch(err => console.error(err));
+    }, []);
     return (
         <footer className="custom-footer text-white pt-5 pb-3">
             <div className="container">
                 <div className="row">
 
-                   
+
                     <div className="col-md-4 mb-4">
                         <a >
                             <img src="/src/assets/skyiiotlogo.png" alt='SkyIIOT Logo' width="170" height="90" />
@@ -19,7 +40,7 @@ export default function Footer() {
                                 style={{ width: "40px", height: "40px" }}>
                                 <FaPhoneAlt className="text-dark" />
                             </div>
-                            <span className="text-white">+91-9266752831</span>
+                            <span className="text-white">{contacts[0]?.phone}</span>
                         </div>
 
                         <div className="d-flex align-items-center mb-3">
@@ -27,7 +48,7 @@ export default function Footer() {
                                 style={{ width: "40px", height: "40px" }}>
                                 <FaEnvelope className="text-dark" />
                             </div>
-                            <span className="text-white">info@skyiiot.com</span>
+                            <span className="text-white">{contacts[0]?.email}</span>
                         </div>
 
                         <div className="d-flex align-items-center mb-3">
@@ -43,18 +64,17 @@ export default function Footer() {
 
 
 
-                    
+
                     <div className="col-md-4 mb-4">
                         <h6 className="footer-title">Solutions</h6>
                         <ul className="list-unstyled">
-                            <li><a href="#">IoT based Transforming Monitoring System</a></li>
-                            <li><a href="#">IoT based Pump House Automation System</a></li>
-                            <li><a href="#">IoT based Street Light Monitoring System</a></li>
-                            <li><a href="#">RTU based Solution</a></li>
+                            {solutions.map((s, idx) => (
+                                <li key={idx}><a href="#">{s.title}</a></li> // adjust field name if your API returns 'name' instead of 'title'
+                            ))}
                         </ul>
                     </div>
 
-                 
+
                     <div className="col-md-4 mb-4">
                         <div className="col-md-12">
 
@@ -69,7 +89,7 @@ export default function Footer() {
                                     </div>
                                     <p className="mt-2 small text-light">WeChat</p>
                                 </div>
-                                 <div className="col-6 text-center">
+                                <div className="col-6 text-center">
                                     <div className="bg-white p-2 rounded shadow d-inline-block">
                                         <img
                                             src={wechatQR}
@@ -80,7 +100,7 @@ export default function Footer() {
                                     <p className="mt-2 small text-light">Alibaba</p>
                                 </div>
 
-                                 <div className="col-6 text-center">
+                                <div className="col-6 text-center">
                                     <div className="bg-white p-2 rounded shadow d-inline-block">
                                         <img
                                             src={wechatQR}
@@ -91,7 +111,7 @@ export default function Footer() {
                                     <p className="mt-2 small text-light">WhatsApp</p>
                                 </div>
 
-                                 <div className="col-6 text-center">
+                                <div className="col-6 text-center">
                                     <div className="bg-white p-2 rounded shadow d-inline-block">
                                         <img
                                             src={wechatQR}

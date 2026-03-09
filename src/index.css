@@ -28,11 +28,15 @@
 }
 
 .navbar-nav .nav-link:hover {
-  color: rgb(174, 76, 156);
+  /* color: rgb(174, 76, 156); */
   text-decoration: underline;
   transform: translateY(-3px);
+  color: purple; /* ya #800080 for hex */
 }
-
+.navbar-nav .nav-link.active {
+  color: purple; /* or any color you want for active page */
+  text-decoration: underline;
+}
 .custom-footer {
   background: #0d0f1a;
 }

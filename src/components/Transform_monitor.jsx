@@ -11,61 +11,61 @@ export default function TransformMonitor() {
   const [selectedImage, setSelectedImage] = useState(sol1);
   const [solution_sub_cat, setSolution_sub_cat] = useState(null);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const res = await api.get("/solution-sub-cat");
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       try {
+  //         const res = await api.get("/solution-sub-cat");
 
-// console.log(res.data);
-//         // Convert id to number to match API data
-//         const filteredData = res.data.find(
-//           (item) => item.solutionCatId === Number(id)
-//         );
-//         setSolution_sub_cat(filteredData);
+  // console.log(res.data);
+  //         // Convert id to number to match API data
+  //         const filteredData = res.data.find(
+  //           (item) => item.solutionCatId === Number(id)
+  //         );
+  //         setSolution_sub_cat(filteredData);
 
-//         // Set first image as default if available
-//         if (filteredData?.image2?.length > 0) {
-//           setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
-//         }
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
+  //         // Set first image as default if available
+  //         if (filteredData?.image2?.length > 0) {
+  //           setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
+  //         }
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
 
-//     fetchData();
-//   }, [id]); // refetch when id changes
+  //     fetchData();
+  //   }, [id]); // refetch when id changes
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const res = await api.get("/solution-sub-cat");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await api.get("/solution-sub-cat");
 
-      const filteredData = res.data.find(
-        (item) => item.solutionCatId === Number(id)
-      );
+        const filteredData = res.data.find(
+          (item) => item.solutionCatId === Number(id)
+        );
 
-      //  If no data found
-      if (!filteredData) return;
+        //  If no data found
+        if (!filteredData) return;
 
-      //  Convert image2 string into array
-      if (filteredData.image2) {
-        filteredData.image2 = JSON.parse(filteredData.image2);
-      } else {
-        filteredData.image2 = [];
+        //  Convert image2 string into array
+        if (filteredData.image2) {
+          filteredData.image2 = JSON.parse(filteredData.image2);
+        } else {
+          filteredData.image2 = [];
+        }
+
+        setSolution_sub_cat(filteredData);
+        if (filteredData.image2.length > 0) {
+          setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
+        }
+
+      } catch (error) {
+        console.log(error);
       }
+    };
 
-      setSolution_sub_cat(filteredData);
-      if (filteredData.image2.length > 0) {
-        setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
-      }
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  fetchData();
-}, [id]);
+    fetchData();
+  }, [id]);
 
   if (!solution_sub_cat) return <p className="text-center mt-5">Loading...</p>;
 
@@ -164,147 +164,51 @@ useEffect(() => {
 
         <div className="row mt-4 g-4">
 
-          {/* Left Column - Tables & Features */}
+          {/* Card 1 */}
           <div className="col-lg-6">
-            <div className="card mb-4">
-              <div className="table-responsive">
-                <table className="table mb-0">
-                  <thead className="table-light">
-                    <tr>
-                      <th>Component</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Smart Sensor Nodes</td>
-                      <td>Monitor temp, oil level, current, moisture, vibration</td>
-                    </tr>
-                    <tr>
-                      <td>IoT Gateway</td>
-                      <td>Encrypted 4G/GSM data transfer with OTA updates</td>
-                    </tr>
-                    <tr>
-                      <td>Energy Meter Interface</td>
-                      <td>Detects overload, imbalance & anomalies</td>
-                    </tr>
-                    <tr>
-                      <td>Dashboard & Mobile App</td>
-                      <td>Centralized monitoring & reporting</td>
-                    </tr>
-                    <tr>
-                      <td>Alert Engine</td>
-                      <td>Configurable multi-channel alerts</td>
-                    </tr>
-                    <tr>
-                      <td>Integration Layer</td>
-                      <td>SCADA/ERP ready via API</td>
-                    </tr>
-                    <tr>
-                      <td>Offline Data Buffer</td>
-                      <td>Stores data during downtime</td>
-                    </tr>
-                    <tr>
-                      <td>Battery Backup Unit</td>
-                      <td>Ensures uptime during power loss</td>
-                    </tr>
-                    <tr>
-                      <td>Surge Protection Unit</td>
-                      <td>Lightning & voltage spike protection</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="mb-4">
-              <h4 className="fw-semibold">Functional Capabilities</h4>
-              <hr className="border-primary w-25" />
-            </div>
-
-            <div className="row g-4">
-              <div className="col-md-6">
-                <div className="card h-100 shadow-sm">
-                  <div className="card-body">
-                    <h5 className="fw-semibold">Smart Sensor Node</h5>
-                    <p className="text-muted small">
-                      Continuous monitoring of critical transformer parameters.
-                    </p>
-                    <ul>
-                      <li>Temperature monitoring</li>
-                      <li>Load current measurement</li>
-                      <li>Voltage monitoring</li>
-                      <li>Oil level detection</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="card h-100 shadow-sm">
-                  <div className="card-body">
-                    <h5 className="fw-semibold">Key Features</h5>
-                    <ul>
-                      <li>Multi-channel alerts (SMS, Email, App)</li>
-                      <li>Asset-level dashboards</li>
-                      <li>Fault event logging</li>
-                      <li>AI predictive maintenance</li>
-                      <li>Offline data buffering</li>
-                      <li>SMS / Call notifications</li>
-                      <li>Exportable reports (CSV, PDF)</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
+            <div className="p-4 border rounded">
+              <h5 className="fw-semibold">System Architecture</h5>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: solution_sub_cat?.input1 || "",
+                }}
+              />
             </div>
           </div>
 
-          {/* Right Column - Core Modules */}
+          {/* Card 2 */}
           <div className="col-lg-6">
-            <div className="card shadow-sm p-4">
-              <h5 className="fw-semibold mb-4">Core Modules</h5>
+            <div className="p-4 border rounded">
+              <h5 className="fw-semibold">Functional Capabilities</h5>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: solution_sub_cat?.input2 || "",
+                }}
+              />
+            </div>
+          </div>
 
-              <div className="d-flex flex-column gap-3">
-                <div className="card p-3">
-                  <strong>24/7 Real-time Monitoring</strong>
-                  <ul className="mb-0">
-                    <li>Edge diagnostics</li>
-                    <li>Industrial design</li>
-                  </ul>
-                </div>
+          {/* Card 3 */}
+          <div className="col-lg-6">
+            <div className="p-4 border rounded">
+              <h5 className="fw-semibold">Core Modules</h5>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: solution_sub_cat?.input3 || "",
+                }}
+              />
+            </div>
+          </div>
 
-                <div className="card p-3">
-                  <strong>IoT Gateway (4G / GSM)</strong>
-                  <p className="mb-0 text-muted">Secure encrypted communication</p>
-                </div>
-
-                <div className="card p-3">
-                  <strong>Cloud Hosting & Backup Layer</strong>
-                </div>
-
-                <div className="card p-3">
-                  <strong>Role-based Web Dashboard</strong>
-                  <ul className="mb-0">
-                    <li>Analytics</li>
-                    <li>User management</li>
-                    <li>Alert settings</li>
-                  </ul>
-                </div>
-
-                <div className="card p-3">
-                  <strong>Mobile App (Android / iOS)</strong>
-                </div>
-
-                <div className="card p-3">
-                  <strong>Add-ons</strong>
-                  <ul className="mb-0">
-                    <li>Battery backup module</li>
-                    <li>Surge protection unit</li>
-                    <li>SCADA / ERP API integration</li>
-                  </ul>
-                </div>
-              </div>
+          {/* Card 4 */}
+          <div className="col-lg-6">
+            <div className="p-4 border rounded">
+              <h5 className="fw-semibold">Integration Support</h5>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: solution_sub_cat?.input4 || "",
+                }}
+              />
             </div>
           </div>
 
