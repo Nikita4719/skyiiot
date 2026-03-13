@@ -1,75 +1,76 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import wechatQR from "../assets/wechat.jpg";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-
+import api from "./api";
+import { ROOT_URL } from "./api";
+import { Link } from "react-router-dom";
 export default function Footer() {
-    const [contacts, setContacts] = useState([]);
-    const [solutions, setSolutions] = useState([]);
+    const [footer, setFooter] = useState([]);
 
-    const iconMap = {
-        phone: <FaPhoneAlt className="text-dark" />,
-        email: <FaEnvelope className="text-dark" />,
-        location: <FaMapMarkerAlt className="text-dark" />
-    };
+    const [qrCodes, setQrCodes] = useState([]);
 
     useEffect(() => {
-        // Fetch contacts
-        axios.get("http://localhost:5000/api/contact-messages")
-            .then(res => setContacts(res.data))
-            .catch(err => console.error(err));
+        api.get("/footer")
+            .then(res => {
+                setFooter(res.data);
 
-        // Fetch solutions
-        axios.get("http://localhost:5000/api/solution-cat")
-            .then(res => setSolutions(res.data))
+                if (res.data?.qr_code) {
+                    setQrCodes(JSON.parse(res.data.qr_code));
+                }
+            })
             .catch(err => console.error(err));
     }, []);
+    const solutions = footer?.content ? footer.content.split(",") : [];
     return (
         <footer className="custom-footer text-white pt-5 pb-3">
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row">
 
 
-                    <div className="col-md-4 mb-4">
+                    <div className="col-md-4 mb-3">
                         <a >
-                            <img src="/src/assets/skyiiotlogo.png" alt='SkyIIOT Logo' width="170" height="90" />
+                            <img src="/src/assets/skyiiotlogo2.png" alt='SkyIIOT Logo' width="190" height="50" />
                         </a>
 
-                        <div className="d-flex align-items-center mb-3">
+                        <div className="d-flex align-items-center mt-3 mb-2">
                             <div className="bg-light rounded-circle d-flex align-items-center justify-content-center me-3"
                                 style={{ width: "40px", height: "40px" }}>
                                 <FaPhoneAlt className="text-dark" />
                             </div>
-                            <span className="text-white">{contacts[0]?.phone}</span>
+                            <span className="text-white">{footer?.contact_phone}</span>
                         </div>
 
-                        <div className="d-flex align-items-center mb-3">
+                        <div className="d-flex align-items-center mb-2">
                             <div className="bg-light rounded-circle d-flex align-items-center justify-content-center me-3"
                                 style={{ width: "40px", height: "40px" }}>
                                 <FaEnvelope className="text-dark" />
                             </div>
-                            <span className="text-white">{contacts[0]?.email}</span>
+                            <span className="text-white">{footer?.contact_email}</span>
                         </div>
 
-                        <div className="d-flex align-items-center mb-3">
+                        <div className="d-flex align-items-center mb-1">
                             <div className="bg-light rounded-circle d-flex align-items-center justify-content-center me-3"
                                 style={{ width: "40px", height: "40px" }}>
                                 <FaMapMarkerAlt className="text-dark" />
                             </div>
-                            <span className="text-white">B-37, 1st FLOOR, - Sector 2 Noida, 201301</span>
+                            <span className="text-white">{footer?.address}</span>
                         </div>
 
 
                     </div>
 
-
-
-
                     <div className="col-md-4 mb-4">
-                        <h6 className="footer-title">Solutions</h6>
+                        <h6 className="footer-title">{footer?.title}</h6>
                         <ul className="list-unstyled">
-                            {solutions.map((s, idx) => (
-                                <li key={idx}><a href="#">{s.title}</a></li> // adjust field name if your API returns 'name' instead of 'title'
+                            {footer?.links?.map((item, i) => (
+                                <li key={i} className="mb-2">
+                                    <Link
+                                        to={item.link || "#"}
+                                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                                        className="text-white hover:text-purple-600 transition-colors duration-200"
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </li>
                             ))}
                         </ul>
                     </div>
@@ -79,55 +80,29 @@ export default function Footer() {
                         <div className="col-md-12">
 
                             <div className="row g-6">
-                                <div className="col-6 text-center">
-                                    <div className="bg-white p-2 rounded shadow d-inline-block">
-                                        <img
-                                            src={wechatQR}
-                                            alt="QR 1"
-                                            style={{ width: "90px" }}
-                                        />
-                                    </div>
-                                    <p className="mt-2 small text-light">WeChat</p>
-                                </div>
-                                <div className="col-6 text-center">
-                                    <div className="bg-white p-2 rounded shadow d-inline-block">
-                                        <img
-                                            src={wechatQR}
-                                            alt="QR 1"
-                                            style={{ width: "90px" }}
-                                        />
-                                    </div>
-                                    <p className="mt-2 small text-light">Alibaba</p>
-                                </div>
+                                {qrCodes.map((qr, i) => (
 
-                                <div className="col-6 text-center">
-                                    <div className="bg-white p-2 rounded shadow d-inline-block">
-                                        <img
-                                            src={wechatQR}
-                                            alt="QR 1"
-                                            style={{ width: "90px" }}
-                                        />
-                                    </div>
-                                    <p className="mt-2 small text-light">WhatsApp</p>
-                                </div>
+                                    <div className="col-6 text-center mb-4" key={i}>
 
-                                <div className="col-6 text-center">
-                                    <div className="bg-white p-2 rounded shadow d-inline-block">
-                                        <img
-                                            src={wechatQR}
-                                            alt="QR 1"
-                                            style={{ width: "90px" }}
-                                        />
+                                        <div className="bg-white p-2 rounded shadow d-inline-block">
+
+                                            <img
+                                                src={`${ROOT_URL}/uploads/qrcodes/${qr}`}
+                                                alt={`QR ${i + 1}`}
+                                                style={{ width: "90px" }}
+                                            />
+
+                                        </div>
+
                                     </div>
-                                    <p className="mt-2 small text-light">WhatsApp</p>
-                                </div>
+
+                                ))}
 
                             </div>
+
                         </div>
                     </div>
-
                 </div>
-
                 <hr className="footer-line" />
 
                 <div className="text-center small">

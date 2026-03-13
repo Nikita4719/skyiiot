@@ -22,8 +22,8 @@ function Embeded2() {
         fetchData();
     }, []);
     return (
-        <section className="embeded2 py-5">
-            <div className="container">
+        <section className="embeded2">
+            <div className="container mb-4">
                 <div className="row align-items-center mb-5">
                     <div className="col-md-6 text-center">
                         <img
@@ -34,11 +34,11 @@ function Embeded2() {
                     </div>
 
                     <div className="col-md-6">
-                        <h5 className="text-skyiiot">{suppotredData.heading}</h5>
-                        <h2 className="fw-bold">
+                        <h4 className="text-skyiiot">{suppotredData.heading}</h4>
+                        <h1 className="fw-bold">
                             {suppotredData.paragraph1}
-                        </h2>
-                        <p className="text-muted">
+                        </h1>
+                        <p className=" text-dark mt-3 justify-text ">
                             {suppotredData.paragraph2}
                         </p>
 
@@ -104,9 +104,9 @@ function Embeded2() {
                             </div>
                         </div>
 
-                        <button className="btn btn-dark mt-4 px-4 py-2">
+                        {/* <button className="btn btn-dark mt-4 px-4 py-2">
                             Get Started →
-                        </button>
+                        </button> */}
                     </div>
 
                     <div className="col-lg-6">

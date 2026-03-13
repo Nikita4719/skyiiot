@@ -1,10 +1,28 @@
 import { FaFacebookF, FaYoutube, FaTwitter, FaLinkedinIn } from "react-icons/fa";
-import "./index.css";
-import { useState } from "react";
-import axios from "axios";
-
+// import "./index.css";
+import { useState, useEffect } from "react";
+import api from "./api";
+import { ROOT_URL } from "./api";
+import contbg from "../assets/contbg.jpg";
 export default function Contact() {
+  const [contactSettings, setContactSettings] = useState({});
+  useEffect(() => {
+    const fetchContactSettings = async () => {
+      try {
+        const res = await api.get("/contact-settings");
 
+        console.log("API DATA:", res.data);
+
+        if (res.data.length > 0) {
+          setContactSettings(res.data[0]);
+        }
+      } catch (err) {
+        console.error("Error fetching contact settings:", err);
+      }
+    };
+
+    fetchContactSettings();
+  }, []);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -73,8 +91,8 @@ export default function Contact() {
           message: formData.message
         };
 
-        await axios.post(
-          "http://localhost:5000/api/contact-messages",
+        await api.post(
+          "/contact-messages",
           payload
         );
 
@@ -101,131 +119,163 @@ export default function Contact() {
   };
 
   return (
-    <section className="contact-section">
-      <div className="container py-5">
-        <div className="row g-5 align-items-center">
+    <div>
+      <section
+        className="contact-section position-relative"
+        style={{
+          backgroundImage: contactSettings?.bg_image
+            ? `url(${ROOT_URL}/uploads/${contactSettings.bg_image})`
+            : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        <div className="contact-overlay">
+          <div className="container py-5">
+            <div className="row g-5 align-items-center">
 
 
-          <div className="col-lg-5 contact-left">
-            <h2 className="fw-bold mb-4">Let's Connect With Us</h2>
-            <p className="mb-4">
-              We would love to hear from you. Send us your queries and our team will respond shortly.
-            </p>
+              <div className="col-lg-5 contact-left">
+                <h2 className="fw-bold mb-4">Let's Connect With Us</h2>
+                <p className="mb-4">
+                  We would love to hear from you. Send us your queries and our team will respond shortly.
+                </p>
 
-            <div className="mb-4">
-              <h6 className="fw-semibold">Call Us</h6>
-              <p>+91 9266752831</p>
-            </div>
+                <div className="mb-4">
+                  <h6 className="fw-semibold">Call Us</h6>
+                  <p>+91 9266752831</p>
+                </div>
 
-            <div className="mb-4">
-              <h6 className="fw-semibold">Email</h6>
-              <p>info@skylabstech.com</p>
-            </div>
+                <div className="mb-4">
+                  <h6 className="fw-semibold">Email</h6>
+                  <p>info@skylabstech.com</p>
+                </div>
 
-            <div className="mb-4">
-              <h6 className="fw-semibold">Office</h6>
-              <p className="small">
-                A-62, DDA Shed, Okhla Phase 2 (110020) <br />
-                B-37, Sector 2 Noida (201301)
-              </p>
-            </div>
+                <div className="mb-4">
+                  <h6 className="fw-semibold">Office</h6>
+                  <p className="small">
+                    A-62, DDA Shed, Okhla Phase 2 (110020) <br />
+                    B-37, Sector 2 Noida (201301)
+                  </p>
+                </div>
 
-            <div className="d-flex gap-3 mt-4 social-icons">
-              <a href="#" className="bg-primary text-white"><FaFacebookF /></a>
-              <a href="#" className="bg-danger text-white"><FaYoutube /></a>
-              <a href="#" className="bg-info text-white"><FaTwitter /></a>
-              <a href="#" className="bg-primary text-white"><FaLinkedinIn /></a>
-            </div>
-          </div>
+                <div className="d-flex gap-3 mt-4 social-icons">
+                  <a href="#" className="bg-primary text-white"><FaFacebookF /></a>
+                  <a href="#" className="bg-danger text-white"><FaYoutube /></a>
+                  <a href="#" className="bg-info text-white"><FaTwitter /></a>
+                  <a href="#" className="bg-primary text-white"><FaLinkedinIn /></a>
+                </div>
+              </div>
 
-          <div className="col-lg-7">
-            <div className="contact-form-box">
+              <div className="col-lg-7">
+                <div className="contact-form-box">
 
-              <h4 className="text-center mb-3">Send Us a Message</h4>
+                  <h4 className="text-center mb-3">Send Us a Message</h4>
 
-              <form onSubmit={handleSubmit}>
-                <div className="row g-3">
-
-
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      className="form-control"
-                      placeholder="First Name"
-                    />
-                    {errors.firstName && <small className="text-danger">{errors.firstName}</small>}
-                  </div>
+                  <form onSubmit={handleSubmit}>
+                    <div className="row g-3">
 
 
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      className="form-control"
-                      placeholder="Last Name"
-                    />
-                    {errors.lastName && <small className="text-danger">{errors.lastName}</small>}
-                  </div>
+                      <div className="col-md-6">
+                        <input
+                          type="text"
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleChange}
+                          className="form-control"
+                          placeholder="First Name"
+                        />
+                        {errors.firstName && <small className="text-danger">{errors.firstName}</small>}
+                      </div>
 
 
-                  <div className="col-md-6">
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="form-control"
-                      placeholder="Email Address"
-                    />
-                    {errors.email && <small className="text-danger">{errors.email}</small>}
-                  </div>
+                      <div className="col-md-6">
+                        <input
+                          type="text"
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleChange}
+                          className="form-control"
+                          placeholder="Last Name"
+                        />
+                        {errors.lastName && <small className="text-danger">{errors.lastName}</small>}
+                      </div>
 
 
-                  <div className="col-md-6">
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      maxLength="10"
-                      className="form-control"
-                      placeholder="Phone Number"
-                    />
-                    {errors.phone && <small className="text-danger">{errors.phone}</small>}
-                  </div>
+                      <div className="col-md-6">
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className="form-control"
+                          placeholder="Email Address"
+                        />
+                        {errors.email && <small className="text-danger">{errors.email}</small>}
+                      </div>
 
 
-                  <div className="col-12">
-                    <textarea
-                      rows="4"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="form-control"
-                      placeholder="Write your message..."
-                    ></textarea>
-                    {errors.message && <small className="text-danger">{errors.message}</small>}
-                  </div>
+                      <div className="col-md-6">
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          maxLength="10"
+                          className="form-control"
+                          placeholder="Phone Number"
+                        />
+                        {errors.phone && <small className="text-danger">{errors.phone}</small>}
+                      </div>
 
-                  <div className="col-12">
-                    <button type="submit" className="btn contact-btn btn-primary">
-                      {loading ? "Sending..." : "Send Request"}
-                    </button>
-                  </div>
+
+                      <div className="col-12">
+                        <textarea
+                          rows="4"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          className="form-control"
+                          placeholder="Write your message..."
+                        ></textarea>
+                        {errors.message && <small className="text-danger">{errors.message}</small>}
+                      </div>
+
+                      <div className="col-12">
+                        <button type="submit" className="btn contact-btn btn-primary">
+                          {loading ? "Sending..." : "Send Request"}
+                        </button>
+                      </div>
+
+                    </div>
+                  </form>
 
                 </div>
-              </form>
-
+              </div>
             </div>
           </div>
-
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="map-section">
+        <div className="container-fluid mt-5">
+          <div className="map-wrapper shadow-lg">
+            <iframe
+              // src={contactSettings.map_url || ""}
+              src={contactSettings.map_url}
+              width="100%"
+              height="350"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Map"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 }

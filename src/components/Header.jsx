@@ -55,13 +55,24 @@ export default function Header() {
           <div className='collapse navbar-collapse' id='navbarNav'>
             <ul className='navbar-nav ms-auto'>
               <li className='nav-item'>
-                <NavLink className="nav-link" to="/">Home</NavLink>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active-nav" : "nav-link"
+                  }
+                >
+                  Home
+                </NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink className="nav-link" to="/about">About Us</NavLink>
+                <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active-nav" : "nav-link"}>
+                  About Us
+                </NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink className="nav-link" to="/solutions">Solutions</NavLink>
+                <NavLink to="/solutions" className={({ isActive }) => isActive ? "nav-link active-nav" : "nav-link"}>
+                  Solutions
+                </NavLink>
               </li>
             </ul>
 

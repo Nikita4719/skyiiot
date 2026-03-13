@@ -35,6 +35,8 @@ import Detail14 from "./components/Detail14";
 import Detail15 from "./components/Detail15";
 import Detail16 from "./components/Detail16";
 import "./index.css";
+import Carousal2 from "./components/Carousal2";
+
 
 function Home() {
   return (
@@ -43,7 +45,8 @@ function Home() {
       <About />
       <Embeded />
       <Embeded2/>
-      <Carousal/>
+   
+      <Carousal2/>
       <Team/>
       <Testimonials/>
       <Faqs/>

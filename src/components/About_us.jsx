@@ -41,11 +41,16 @@ export default function About_us() {
 
           <div className="row align-items-center mb-5">
             <div className="col-md-6">
-              <h3 className="fw-bold mb-3">{aboutusData.heading}</h3>
-              <p>{aboutusData.paragraph}</p>
+              <h2 className="fw-bold mb-3">{aboutusData.heading}</h2>
+              <p style={{
+                textAlign: "justify",      
+                textJustify: "inter-word", 
+                lineHeight: "1.6",         
+                margin: 0                 
+              }}>{aboutusData.paragraph}</p>
             </div>
 
-            <div className="col-md-6 text-center">
+            <div className="col-md-6 text-center"  style={{ paddingLeft: "30px" }} >
               <img src={aboutusData?.image2 ? `${ROOT_URL}/${aboutusData.image2}` : "null"} alt="about" className="img-fluid rounded shadow" />
             </div>
           </div>
@@ -82,8 +87,13 @@ export default function About_us() {
 
 
             <div className="col-md-6">
-              <h3 className="fw-bold mb-3">{about_enterprise.heading}</h3>
-              <p>{about_enterprise.paragraph}</p>
+              <h2 className="fw-bold mb-3">{about_enterprise.heading}</h2>
+              <p style={{
+                textAlign: "justify",      
+                textJustify: "inter-word", 
+                lineHeight: "1.6",         
+                margin: 0                 
+              }} >{about_enterprise.paragraph}</p>
             </div>
 
           </div>
@@ -94,10 +104,10 @@ export default function About_us() {
       <section className="py-5">
         <div className="container">
 
-          <h2 className="fw-bold mb-5 text-center">Our Focus</h2>
+          {/* <h2 className="fw-bold mb-5 text-center">Our Focus</h2> */}
 
-          <div className="row align-items-center"> 
-            
+          <div className="row align-items-center">
+
             <div className="col-lg-6">
               <div className="row g-4">
 
@@ -136,7 +146,7 @@ export default function About_us() {
               </div>
             </div>
 
-           
+
             <div className="col-md-6">
               <div className="d-flex justify-content-center gap-4">
                 <img

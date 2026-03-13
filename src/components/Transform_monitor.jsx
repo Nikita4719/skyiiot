@@ -71,7 +71,7 @@ export default function TransformMonitor() {
 
   return (
     <div>
-      <h1 className="text-center my-4">Details for Item {id}</h1>
+      {/* <h1 className="text-center my-4">Details for Item {id}</h1> */}
 
 
       <section>
@@ -97,11 +97,34 @@ export default function TransformMonitor() {
                     src={selectedImage}
                     alt="Product"
                     className="img-fluid rounded-3"
-                    style={{ maxHeight: "350px", objectFit: "cover" }}
+                    style={{ maxHeight: "700px", objectFit: "cover" }}
                   />
                 </div>
 
-                <div className="d-flex justify-content-center gap-3 flex-wrap">
+                {/* <div className="d-flex justify-content-center gap-3 flex-wrap">
+                  {solution_sub_cat?.image2?.map((img, index) => (
+                    <img
+                      key={index}
+                      src={`${ROOT_URL}/${img}`}
+                      alt={`thumb-${index}`}
+                      onClick={() => setSelectedImage(`${ROOT_URL}/${img}`)}
+                      className="img-thumbnail"
+                      style={{
+                        width: "80px",
+                        height: "80px",
+                        objectFit: "cover",
+                        cursor: "pointer",
+                      }}
+                    />
+                  ))}
+                </div> */}
+              </div>
+            </div>
+
+            {/* Right Column - Details */}
+            <div className="col-lg-6">
+              <div className="card border-0 shadow-sm h-100 p-4">
+                 <div className="d-flex justify-content-center gap-3 flex-wrap">
                   {solution_sub_cat?.image2?.map((img, index) => (
                     <img
                       key={index}
@@ -118,12 +141,6 @@ export default function TransformMonitor() {
                     />
                   ))}
                 </div>
-              </div>
-            </div>
-
-            {/* Right Column - Details */}
-            <div className="col-lg-6">
-              <div className="card border-0 shadow-sm h-100 p-4">
                 <h3 className="fw-bold mb-3">{solution_sub_cat.title}</h3>
                 <hr />
                 <p>{solution_sub_cat.para1}</p>
