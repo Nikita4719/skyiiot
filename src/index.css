@@ -499,7 +499,7 @@
 }
 
 .text-skyiiot {
-  color: #00A3B2;
+  color: #054f87;
 }
 
 .feature-video {
@@ -532,7 +532,7 @@
 }
 
 .contact-overlay {
-  background: rgba(0, 0, 0, 0.55);
+  /* background: rgba(0, 0, 0, 0.55); */
   width: 100%;
   height: 100%;
   padding: 60px 0;
@@ -566,5 +566,24 @@
   height: 100%;
 }
 
+.sticky-video {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  animation: jump 2s ease-in-out infinite;
+}
 
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* jump upar */
+  }
+}
 
+.feature-video {
+  width: 70%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}

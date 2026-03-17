@@ -2,52 +2,23 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "./api";
 import { ROOT_URL } from "./api";
-import tmbg from "../assets/tmbg.png";
-import tms from "../assets/tms.png";
-import sol1 from "../assets/sol1.png";
 
 export default function TransformMonitor() {
-  const { id } = useParams(); // get dynamic id from URL
-  const [selectedImage, setSelectedImage] = useState(sol1);
+  const { id } = useParams();
+  const [selectedImage, setSelectedImage] = useState(null);
   const [solution_sub_cat, setSolution_sub_cat] = useState(null);
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const res = await api.get("/solution-sub-cat");
-
-  // console.log(res.data);
-  //         // Convert id to number to match API data
-  //         const filteredData = res.data.find(
-  //           (item) => item.solutionCatId === Number(id)
-  //         );
-  //         setSolution_sub_cat(filteredData);
-
-  //         // Set first image as default if available
-  //         if (filteredData?.image2?.length > 0) {
-  //           setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   }, [id]); // refetch when id changes
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await api.get("/solution-sub-cat");
-
         const filteredData = res.data.find(
           (item) => item.solutionCatId === Number(id)
         );
 
-        //  If no data found
         if (!filteredData) return;
 
-        //  Convert image2 string into array
+        // Convert image2 from string to array if necessary
         if (filteredData.image2) {
           filteredData.image2 = JSON.parse(filteredData.image2);
         } else {
@@ -55,119 +26,138 @@ export default function TransformMonitor() {
         }
 
         setSolution_sub_cat(filteredData);
+
+        // Set first thumbnail as default selected image
         if (filteredData.image2.length > 0) {
           setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
+        } else if (filteredData.image1) {
+          setSelectedImage(`${ROOT_URL}/${filteredData.image1}`);
         }
-
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
     fetchData();
   }, [id]);
 
-  if (!solution_sub_cat) return <p className="text-center mt-5">Loading...</p>;
+  if (!solution_sub_cat)
+    return <p className="text-center mt-5">Loading...</p>;
 
   return (
     <div>
-      {/* <h1 className="text-center my-4">Details for Item {id}</h1> */}
-
-
-      <section>
-        <img
-          src={tmbg}
-          alt="Transform Monitoring Banner"
-          className="w-100"
-          style={{ height: "350px", objectFit: "cover" }}
-        />
-      </section>
+      {/* Top Banner */}
+      {solution_sub_cat.image1 && (
+        <section>
+          <img
+            src={`${ROOT_URL}/${solution_sub_cat.image1}`}
+            alt={solution_sub_cat.para3 || "Banner"}
+            className="w-100"
+            style={{ height: "350px", objectFit: "cover" }}
+          />
+        </section>
+      )}
 
       {/* Main Section */}
       <section className="py-5 bg-light">
         <div className="container">
-          <div className="row g-4 align-items-stretch">
+          <div className="row g-4 align-items-start">
 
-            {/* Left Column - Images */}
-            <div className="col-lg-6">
-              <div className="card border-0 shadow-sm h-100 p-4">
+            {/* Left Column - Main Image */}
+            <div className="col-lg-6 d-flex">
+              <div className="me-3">
+                <img
+                  src={selectedImage}
+                  alt={solution_sub_cat.heading}
+                  className="img-fluid rounded-lg"
+                  style={{ maxHeight: "500px", objectFit: "cover" }}
+                />
+              </div>
 
-                <div className="text-center mb-4">
+              {/* Thumbnails Vertical */}
+              <div className="d-flex flex-column gap-3">
+                {solution_sub_cat.image2?.map((img, idx) => (
                   <img
-                    src={selectedImage}
-                    alt="Product"
-                    className="img-fluid rounded-3"
-                    style={{ maxHeight: "700px", objectFit: "cover" }}
+                    key={idx}
+                    src={`${ROOT_URL}/${img}`}
+                    alt={`thumb-${idx}`}
+                    onClick={() => setSelectedImage(`${ROOT_URL}/${img}`)}
+                    className={`border rounded-lg cursor-pointer ${selectedImage === `${ROOT_URL}/${img}`
+                      ? "border-primary"
+                      : "border-secondary"
+                      }`}
+                    style={{
+                      width: "70px",
+                      height: "70px",
+                      objectFit: "cover",
+                    }}
                   />
-                </div>
-
-                {/* <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  {solution_sub_cat?.image2?.map((img, index) => (
-                    <img
-                      key={index}
-                      src={`${ROOT_URL}/${img}`}
-                      alt={`thumb-${index}`}
-                      onClick={() => setSelectedImage(`${ROOT_URL}/${img}`)}
-                      className="img-thumbnail"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        objectFit: "cover",
-                        cursor: "pointer",
-                      }}
-                    />
-                  ))}
-                </div> */}
+                ))}
               </div>
             </div>
 
             {/* Right Column - Details */}
             <div className="col-lg-6">
-              <div className="card border-0 shadow-sm h-100 p-4">
-                 <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  {solution_sub_cat?.image2?.map((img, index) => (
-                    <img
-                      key={index}
-                      src={`${ROOT_URL}/${img}`}
-                      alt={`thumb-${index}`}
-                      onClick={() => setSelectedImage(`${ROOT_URL}/${img}`)}
-                      className="img-thumbnail"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        objectFit: "cover",
-                        cursor: "pointer",
-                      }}
-                    />
-                  ))}
-                </div>
-                <h3 className="fw-bold mb-3">{solution_sub_cat.title}</h3>
-                <hr />
-                <p>{solution_sub_cat.para1}</p>
+              <h2 className="fw-bold mb-3">{solution_sub_cat.heading}</h2>
 
-                <div className="mt-auto pt-3">
-                  <Link to="/contact">
-                    <button className="btn btn-primary rounded-pill px-4">
-                      Start Order Request
-                    </button>
-                  </Link>
-                </div>
+              {/* Product Details */}
+              <div className="border-top pt-3 mb-3">
+                <div
+                  className="text-sm text-muted"
+                  dangerouslySetInnerHTML={{
+                    __html: solution_sub_cat.description1 || "",
+                  }}
+                />
               </div>
-            </div>
 
+              {/* Order Button */}
+              <div className="mb-3">
+                <Link to="/contact">
+                  <button className="btn btn-primary px-4 py-2 rounded-pill">
+                    Start Order Request
+                  </button>
+                </Link>
+              </div>
+
+              {/* Shipping & Payment Info */}
+              <div
+                className="border-top pt-3 text-sm text-muted"
+                dangerouslySetInnerHTML={{
+                  __html: solution_sub_cat.description2 || "",
+                }}
+              />
+
+              {/* Additional Description */}
+              {/* {solution_sub_cat.para4 && (
+                <div className="border-top pt-3 mt-3 text-sm text-muted">
+                  <h5 className="fw-semibold">Description</h5>
+                  {solution_sub_cat.para4
+                    .split(". ")
+                    .map((line, idx) => (
+                      <p key={idx}>{line.trim()}.</p>
+                    ))}
+                </div>
+              )} */}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Additional Banner */}
-      <section className="mb-5">
-        <img
-          src={tms}
-          alt="Transform Monitoring Banner"
-          className="w-100"
-          style={{ height: "350px", objectFit: "cover" }}
-        />
-      </section>
+      {/* Optional Secondary Banner */}
+      {solution_sub_cat.imagechart && (
+        <section className="mb-5">
+          <img
+            src={`${ROOT_URL}/${solution_sub_cat.imagechart}`}
+            alt="Chart Banner"
+            className="w-100"
+            style={{
+              height: "auto",
+              maxHeight: "600px",
+              objectFit: "contain"
+            }}
+          />
+        </section>
+      )}
 
       {/* System Components Section */}
       <section className="container py-5">
@@ -180,55 +170,20 @@ export default function TransformMonitor() {
         <h6 className="fw-semibold text-secondary">Basic Info.</h6>
 
         <div className="row mt-4 g-4">
-
-          {/* Card 1 */}
-          <div className="col-lg-6">
-            <div className="p-4 border rounded">
-              <h5 className="fw-semibold">System Architecture</h5>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: solution_sub_cat?.input1 || "",
-                }}
-              />
+          {["para1", "para2", "para3", "para4"].map((key, idx) => (
+            <div className="col-lg-6" key={idx}>
+              <div className="p-4 border rounded">
+                <h5 className="fw-semibold">
+                  {["System Architecture", "Functional Capabilities", "Core Modules", "Integration Support"][idx]}
+                </h5>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: solution_sub_cat[key] || "",
+                  }}
+                />
+              </div>
             </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="col-lg-6">
-            <div className="p-4 border rounded">
-              <h5 className="fw-semibold">Functional Capabilities</h5>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: solution_sub_cat?.input2 || "",
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="col-lg-6">
-            <div className="p-4 border rounded">
-              <h5 className="fw-semibold">Core Modules</h5>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: solution_sub_cat?.input3 || "",
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="col-lg-6">
-            <div className="p-4 border rounded">
-              <h5 className="fw-semibold">Integration Support</h5>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: solution_sub_cat?.input4 || "",
-                }}
-              />
-            </div>
-          </div>
-
+          ))}
         </div>
       </section>
     </div>

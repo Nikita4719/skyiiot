@@ -35,7 +35,7 @@ export default function Solutions() {
       <section className="py-0 bg-light">
         <div className="mb-5">
           <img
-            src={bgsol}
+            src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
             alt="background img"
             className="img-fluid w-100"
             style={{ height: "300px", objectFit: "cover" }}

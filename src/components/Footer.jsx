@@ -12,7 +12,7 @@ export default function Footer() {
         api.get("/footer")
             .then(res => {
                 setFooter(res.data);
-
+               
                 if (res.data?.qr_code) {
                     setQrCodes(JSON.parse(res.data.qr_code));
                 }
@@ -28,7 +28,7 @@ export default function Footer() {
 
                     <div className="col-md-4 mb-3">
                         <a >
-                            <img src="/src/assets/skyiiotlogo2.png" alt='SkyIIOT Logo' width="190" height="50" />
+                            <img src={`${ROOT_URL}/uploads/qrcodes/${footer?.logo}`} alt='SkyIIOT Logo' width="190" height="50" />
                         </a>
 
                         <div className="d-flex align-items-center mt-3 mb-2">

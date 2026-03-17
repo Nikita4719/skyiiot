@@ -1,7 +1,21 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import api from "./api";
+import { useParams } from "react-router-dom";
+import { ROOT_URL } from "./api";
 import d1 from "../assets/d1.png";
 
 export default function Detail1() {
+  const [detail, setDetail] = useState(null);
+  const { id } = useParams();
+  useEffect(() => {
+  api.get("/services-sub-cat")
+    .then(res => {
+      const found = res.data.find(item => item.id == id);
+      setDetail(found);
+    })
+    .catch(err => console.log(err));
+}, [id]);
+  if (!detail) return <p>Loading...</p>;
   return (
     <div>
 
@@ -9,12 +23,12 @@ export default function Detail1() {
         <div className="bg-white py-3 px-3 px-sm-4 px-lg-5 w-100">
           <div className="container">
             <div className="row g-4 align-items-center text-center text-lg-start">
-              
+
               <div className="col-lg-6">
                 <div className="mb-4">
-                  <h1 className="text-dark fw-bold display-6">Edge Analytics</h1>
+                  <h1 className="text-dark fw-bold display-6">{detail?.title}</h1>
                   <p className="text-muted mt-3">
-                    Process and filter data at the source to reduce latency and cloud costs.
+                    {detail?.description}
                   </p>
                 </div>
 
@@ -51,7 +65,7 @@ export default function Detail1() {
               </div>
               <div className="col-lg-6">
                 <img
-                  src={d1}
+                  src={`${ROOT_URL}/${detail?.image}`}
                   alt="Edge Analytics Frame"
                   className="img-fluid w-100 rounded"
                 />
@@ -63,30 +77,30 @@ export default function Detail1() {
 
       <section className="w-100 overflow-hidden">
 
-        
+
         <div className="bg-light py-4">
           <div className="container">
             <div className="row g-4 align-items-start">
-           
+
               <div className="col-lg-6">
-                <h2 className="text-primary mb-4">With SkylIoT You get:</h2>
+                <h2 className="text-primary mb-4"> {detail?.subheading}</h2>
 
                 <div className="row g-4">
-                 
+
                   <div className="col-12 col-sm-6">
                     <div className="mb-3">
                       <span
                         className="d-inline-flex align-items-center justify-content-center rounded-circle bg-dark text-white fw-bold"
                         style={{ width: "56px", height: "56px" }}
                       >
-                        SaaS
+                        {detail?.subspan1}
                       </span>
                     </div>
                     <h5 className="fw-semibold mb-2">IoT Platform-as-a-Service</h5>
                     <p className="text-muted small">
-                      A unified, end-to-end IoT Platform-as-a-Service that seamlessly integrates
-                      software, hardware, and connectivity to deliver intelligent, scalable,
-                      and reliable IoT solutions.
+                      <p className="text-muted small">
+                        {detail?.subtitle_para1}
+                      </p>
                     </p>
                   </div>
 
@@ -97,14 +111,12 @@ export default function Detail1() {
                         className="d-inline-flex align-items-center justify-content-center rounded-circle bg-dark text-white"
                         style={{ width: "56px", height: "56px", fontSize: "1.2rem" }}
                       >
-                        ⚙
+                        {detail?.subspan2}
                       </span>
                     </div>
                     <h5 className="fw-semibold mb-2">Custom Software & Hardware</h5>
                     <p className="text-muted small">
-                      Flexible and pre-configured software and hardware designed to accelerate
-                      your IoT deployment, easily adaptable to meet your specific business needs
-                      and use cases.
+                       {detail?.subtitle_para2}
                     </p>
                   </div>
                 </div>

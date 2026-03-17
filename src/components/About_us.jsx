@@ -43,14 +43,14 @@ export default function About_us() {
             <div className="col-md-6">
               <h2 className="fw-bold mb-3">{aboutusData.heading}</h2>
               <p style={{
-                textAlign: "justify",      
-                textJustify: "inter-word", 
-                lineHeight: "1.6",         
-                margin: 0                 
+                textAlign: "justify",
+                textJustify: "inter-word",
+                lineHeight: "1.6",
+                margin: 0
               }}>{aboutusData.paragraph}</p>
             </div>
 
-            <div className="col-md-6 text-center"  style={{ paddingLeft: "30px" }} >
+            <div className="col-md-6 text-center" style={{ paddingLeft: "30px" }} >
               <img src={aboutusData?.image2 ? `${ROOT_URL}/${aboutusData.image2}` : "null"} alt="about" className="img-fluid rounded shadow" />
             </div>
           </div>
@@ -89,10 +89,10 @@ export default function About_us() {
             <div className="col-md-6">
               <h2 className="fw-bold mb-3">{about_enterprise.heading}</h2>
               <p style={{
-                textAlign: "justify",      
-                textJustify: "inter-word", 
-                lineHeight: "1.6",         
-                margin: 0                 
+                textAlign: "justify",
+                textJustify: "inter-word",
+                lineHeight: "1.6",
+                margin: 0
               }} >{about_enterprise.paragraph}</p>
             </div>
 
@@ -148,30 +148,32 @@ export default function About_us() {
 
 
             <div className="col-md-6">
-              <div className="d-flex justify-content-center gap-4">
-                <img
-                  src={about_benifit?.image1 ? `${ROOT_URL}/${about_benifit.image1}` : "null"}
-                  alt="abtus2"
-                  className="rounded shadow"
-                  style={{
-                    height: "550px",
-                    width: "50%",
-                    objectFit: "cover"
-                  }}
-                />
-
-                <img
-                  src={about_benifit?.image2 ? `${ROOT_URL}/${about_benifit.image2}` : "null"}
-                  alt="abtus3"
-                  className="rounded shadow mt-4"
-                  style={{
-                    height: "450px",
-                    width: "50%",
-                    objectFit: "cover"
-                  }}
-                />
-              </div>
+              <div className="row">
+  {[ 
+    [about_benifit?.image1, about_benifit?.image2],
+    [about_benifit?.image3, about_benifit?.image4]
+  ].map((columnImages, colIndex) => (
+    <div className="col-md-6 mb-3" key={colIndex}>
+      <div className="d-flex flex-column gap-2">
+        {columnImages.map((imgSrc, idx) => (
+          <img
+            key={idx}
+            src={imgSrc ? `${ROOT_URL}/${imgSrc}` : "null"}
+            alt={`abtus${colIndex * 2 + idx + 1}`}
+            className="rounded shadow"
+            style={{
+              width: "100%",
+              height: idx === 0 ? "250px" : "200px", // first img taller than second
+              objectFit: "cover",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
             </div>
+
 
           </div>
 

@@ -22,33 +22,24 @@ import api from "./api";
 import { ROOT_URL } from "./api";
 
 function Embeded() {
-    const [embeddedData, setEmbeddedData] = useState({});
-    const [networkData, setNetworkData] = useState({});
-    const [cloudData, setCloudData] = useState({});
-    const [managementData, setManagementData] = useState({});
+    const [services, setServices] = useState([]);
+    const [services_category, setServices_category] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const embeddedres = await api.get("/embeddedsection");
-                const networkres = await api.get("/networksection");
-                const cloudres = await api.get("/cloudsection");
-                const managementres = await api.get("/managementsection");
-                setEmbeddedData(embeddedres.data[0]);
-                setNetworkData(networkres.data[0]);
-                setCloudData(cloudres.data[0]);
-                setManagementData(managementres.data[0]);
-                console.log("Embedded:", embeddedres.data);
-                console.log("Network:", networkres.data);
-                console.log("Cloud:", cloudres.data);
-                console.log("Management:", managementres.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
 
-        fetchData();
+        api.get("/services")
+            .then(res => {
+                setServices(res.data);
+                console.log(res.data);
+            })
+
+        api.get("/services-category")
+            .then(res => {
+                setServices_category(res.data);
+            })
+
     }, []);
+
 
     return (
 
@@ -60,76 +51,60 @@ function Embeded() {
                     <div className="col-md-6">
                         <div className="section-box mb-5">
 
-                            <h5 className="text-skyiiot">{embeddedData.heading}</h5>
-                            <h4>{embeddedData.paragraph1}</h4>
-                            <p className="text-muted">{embeddedData.paragraph2}</p>
+                            {/* <h5 className="text-skyiiot">{services.heading}</h5>
+                            <h4>{services.paragraph1}</h4>
+                            <p className="text-muted">{services.paragraph2}</p> */}
 
                             <div className="row mt-3 text-center">
 
-                                <div className="col-6 col-md-3 mb-4">
-                                    {embeddedData?.image1 && (
-                                        <div className="feature-img-wrapper">
-                                            <Link to={`/details/1`} className="text-decoration-none text-dark">
-                                                <img
-                                                    src={`${ROOT_URL}/${embeddedData.image1}`}
-                                                    alt="Plug-and-Play"
-                                                    className="feature-img"
-                                                />
-                                            </Link>
-                                        </div>
-                                    )}
-                                    <p className="feature-title">Edge Analytics</p>
-                                </div>
+                                {services.map(section => (
 
-                                <div className="col-6 col-md-3 mb-4">
-                                    {embeddedData?.image2 && (
-                                        <div className="feature-img-wrapper">
-                                            <Link to={`/details/2`} className="text-decoration-none text-dark">
-                                                <img
-                                                    src={`${ROOT_URL}/${embeddedData.image2}`}
-                                                    alt="Multi-Network"
-                                                    className="feature-img"
-                                                />
-                                            </Link>
-                                        </div>
-                                    )}
-                                    <p className="feature-title">Remote Monitoring</p>
-                                </div>
+                                    <div className="section-box mb-5" key={section.id}>
 
-                                <div className="col-6 col-md-3 mb-4">
-                                    {embeddedData?.image3 && (
-                                        <div className="feature-img-wrapper">
-                                            <Link to={`/details/3`} className="text-decoration-none text-dark">
-                                                <img
-                                                    src={`${ROOT_URL}/${embeddedData.image3}`}
-                                                    alt="Security"
-                                                    className="feature-img"
-                                                />
-                                            </Link>
-                                        </div>
-                                    )}
-                                    <p className="feature-title">Adaptive Algorithm</p>
-                                </div>
+                                        <h5 className=" text-start text-skyiiot">{section.title}</h5>
 
-                                <div className="col-6 col-md-3 mb-4">
-                                    {embeddedData?.image4 && (
-                                        <div className="feature-img-wrapper">
-                                            <Link to={`/details/4`} className="text-decoration-none text-dark">
-                                                <img
-                                                    src={`${ROOT_URL}/${embeddedData.image4}`}
-                                                    alt="Signal"
-                                                    className="feature-img"
-                                                />
-                                            </Link>
+                                        <h3 className="text-start ">{section.heading}</h3>
+
+                                        <p className="text-start text-muted">{section.paragraph}</p>
+
+                                        <div className="row mt-3 text-center">
+
+                                            {services_category
+                                                .filter(icon => icon.service_id === section.id)
+                                                .map(icon => (
+
+                                                    <div className="col-6 col-md-3 mb-4" key={icon.id}>
+
+                                                        <div className="feature-img-wrapper">
+
+                                                            <Link to={`/details/${icon.id}`}>
+
+                                                                <img
+                                                                    src={`${ROOT_URL}/${icon.icon}`}
+                                                                    alt={icon.link}
+                                                                    className="feature-img"
+                                                                />
+
+                                                            </Link>
+
+                                                        </div>
+
+                                                        <p className="feature-title">{icon.link}</p>
+
+                                                    </div>
+
+                                                ))}
+
                                         </div>
-                                    )}
-                                    <p className="feature-title">Secure Updates</p>
-                                </div>
+
+                                    </div>
+
+                                ))}
 
                             </div>
                         </div>
 
-                        <div className="section-box mb-5">
+                        {/* <div className="section-box mb-5">
                             <h5 className="text-skyiiot">{networkData.heading}</h5>
                             <h4>{networkData.paragraph1}</h4>
                             <p className="text-muted">{networkData.paragraph2}</p>
@@ -282,11 +257,11 @@ function Embeded() {
                                 </div>
 
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
-                    <div className="col-md-6 sticky-video text-center">
-                        {embeddedData?.video && (
+                    {/* <div className="col-md-6 sticky-video text-center">
+                        {sections[0]?.image && (
                             <video
                                 className="feature-video"
                                 autoPlay
@@ -295,11 +270,28 @@ function Embeded() {
                                 playsInline
                             >
                                 <source
-                                    src={`${ROOT_URL}/${embeddedData.video}`}
+                                    src={`${ROOT_URL}/${sections[0].image}`}
                                     type="video/mp4"
                                 />
                             </video>
                         )}
+                    </div> */}
+
+                    <div className="col-md-6 sticky-video text-center">
+
+                        {services
+                            .filter(section => section.image)
+                            .map(section => (
+
+                                <img
+                                    key={section.id}
+                                    src={`${ROOT_URL}/${section.image}`}
+                                    className="feature-video"
+                                    alt={section.title}
+                                />
+
+                            ))}
+
                     </div>
                 </div>
             </div>
