@@ -77,7 +77,7 @@ const Carousel = () => {
                 style={{ backgroundImage: `url(${cbg})`, height: "85vh" }}
             >
                 <h2 className="carousel-heading text-white text-center fw-bold mb-4"
-                 style={{ paddingTop: "1rem" }} >
+                    style={{ paddingTop: "1rem" }} >
                     SKY IIOT IS Everywhere
                 </h2>
                 <div className="carousel__wrap">

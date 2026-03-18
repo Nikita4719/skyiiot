@@ -6,17 +6,26 @@ import { ROOT_URL } from "./api";
 import contbg from "../assets/contbg.jpg";
 export default function Contact() {
   const [contactSettings, setContactSettings] = useState({});
+  const [headerTop, setHeaderTop] = useState(null);
+  const [footer, setFooter] = useState([]);
   useEffect(() => {
     const fetchContactSettings = async () => {
       try {
         const res = await api.get("/contact-settings");
 
         console.log("API DATA:", res.data);
+        const headerRes = await api.get("/header-top");
+        setHeaderTop(headerRes.data);
 
         if (res.data.length > 0) {
           setContactSettings(res.data[0]);
         }
-      } catch (err) {
+        api.get("/footer")
+          .then(res => {
+            setFooter(res.data);
+          })
+      }
+      catch (err) {
         console.error("Error fetching contact settings:", err);
       }
     };
@@ -144,27 +153,42 @@ export default function Contact() {
 
                 <div className="mb-4">
                   <h6 className="fw-semibold">Call Us</h6>
-                  <p>+91 9266752831</p>
+                  <p>{headerTop?.phone}</p>
                 </div>
 
                 <div className="mb-4">
                   <h6 className="fw-semibold">Email</h6>
-                  <p>info@skylabstech.com</p>
+                  <p>{headerTop?.email}</p>
                 </div>
 
                 <div className="mb-4">
                   <h6 className="fw-semibold">Office</h6>
                   <p className="small">
-                    A-62, DDA Shed, Okhla Phase 2 (110020) <br />
-                    B-37, Sector 2 Noida (201301)
+                    {footer?.address}
                   </p>
                 </div>
 
                 <div className="d-flex gap-3 mt-4 social-icons">
-                  <a href="#" className="bg-primary text-white"><FaFacebookF /></a>
-                  <a href="#" className="bg-danger text-white"><FaYoutube /></a>
-                  <a href="#" className="bg-info text-white"><FaTwitter /></a>
-                  <a href="#" className="bg-primary text-white"><FaLinkedinIn /></a>
+                  {headerTop?.facebook_link && (
+                    <a href={headerTop.facebook_link} className="social-icon bg-primary" target="_blank" rel="noreferrer">
+                      <FaFacebookF />
+                    </a>
+                  )}
+                  {headerTop?.twitter_link && (
+                    <a href={headerTop.twitter_link} className="social-icon bg-info" target="_blank" rel="noreferrer">
+                      <FaTwitter />
+                    </a>
+                  )}
+                  {headerTop?.youtube_link && (
+                    <a href={headerTop.youtube_link} className="social-icon bg-danger" target="_blank" rel="noreferrer">
+                      <FaYoutube />
+                    </a>
+                  )}
+                  {headerTop?.linkedin_link && (
+                    <a href={headerTop.linkedin_link} className="social-icon bg-primary" target="_blank" rel="noreferrer">
+                      <FaLinkedinIn />
+                    </a>
+                  )}
                 </div>
               </div>
 

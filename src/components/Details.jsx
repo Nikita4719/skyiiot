@@ -32,14 +32,17 @@ export default function Detail1() {
               <div className="col-lg-6">
                 <div className="mb-4">
                   <h1 className="text-skyiiot fw-bold display-6">{detail?.title}</h1>
-                  <p className="text-muted mt-3">
-                    {detail?.description}
-                  </p>
+                  <p
+                    className=" mt-3 " style={{
+                      textAlign: "justify",
+                    }}
+                    dangerouslySetInnerHTML={{ __html: detail?.description }}
+                  ></p>
                 </div>
 
 
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6" style={{ marginTop: "-80px" }}>
                 <img
                   src={`${ROOT_URL}/${detail?.image}`}
                   alt="Edge Analytics Frame"
@@ -77,12 +80,13 @@ export default function Detail1() {
                         {detail?.subspan1}
                       </span>
                     </div>
-                    <h5 className="fw-semibold mb-2">IoT Platform-as-a-Service</h5>
-                    <p className="text-muted small">
-                      <p className="text-muted small">
-                        {detail?.subtitle_para1}
-                      </p>
-                    </p>
+                    {/* <h5 className="fw-semibold mb-2">IoT Platform-as-a-Service</h5> */}
+
+                    <p
+                      className="text-muted small"
+                      dangerouslySetInnerHTML={{ __html: detail?.subtitle_para1 }}
+                    ></p>
+
                   </div>
 
                   {/* Item 2 */}
@@ -95,9 +99,9 @@ export default function Detail1() {
                         {detail?.subspan2}
                       </span>
                     </div>
-                    <h5 className="fw-semibold mb-2">Custom Software & Hardware</h5>
-                    <p className="text-muted small">
-                      {detail?.subtitle_para2}
+                    {/* <h5 className="fw-semibold mb-2">Custom Software & Hardware</h5> */}
+                    <p className="text-muted small"
+                      dangerouslySetInnerHTML={{ __html: detail?.subtitle_para2 }}>
                     </p>
                   </div>
                 </div>
@@ -114,7 +118,7 @@ export default function Detail1() {
             transform: "translate(-50%, -50%)",
             width: "450px",
             zIndex: 10,
-            
+
           }}
         >
           <div className="p-4 shadow-lg rounded"

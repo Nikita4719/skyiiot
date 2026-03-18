@@ -149,29 +149,29 @@ export default function About_us() {
 
             <div className="col-md-6">
               <div className="row">
-  {[ 
-    [about_benifit?.image1, about_benifit?.image2],
-    [about_benifit?.image3, about_benifit?.image4]
-  ].map((columnImages, colIndex) => (
-    <div className="col-md-6 mb-3" key={colIndex}>
-      <div className="d-flex flex-column gap-2">
-        {columnImages.map((imgSrc, idx) => (
-          <img
-            key={idx}
-            src={imgSrc ? `${ROOT_URL}/${imgSrc}` : "null"}
-            alt={`abtus${colIndex * 2 + idx + 1}`}
-            className="rounded shadow"
-            style={{
-              width: "100%",
-              height: idx === 0 ? "250px" : "200px", // first img taller than second
-              objectFit: "cover",
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  ))}
-</div>
+                {[
+                  [about_benifit?.image1, about_benifit?.image2],
+                  [about_benifit?.image3, about_benifit?.image4]
+                ].map((columnImages, colIndex) => (
+                  <div className="col-md-6 mb-3" key={colIndex}>
+                    <div className="d-flex flex-column gap-2">
+                      {columnImages.map((imgSrc, idx) => (
+                        <img
+                          key={idx}
+                          src={imgSrc ? `${ROOT_URL}/${imgSrc}` : "null"}
+                          alt={`abtus${colIndex * 2 + idx + 1}`}
+                          className="rounded shadow"
+                          style={{
+                            width: "100%",
+                            height: idx === 0 ? "250px" : "200px", // first img taller than second
+                            objectFit: "cover",
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
 

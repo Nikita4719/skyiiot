@@ -3,6 +3,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import api from "./api";
 import { ROOT_URL } from "./api";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 export default function Footer() {
     const [footer, setFooter] = useState([]);
 
@@ -12,7 +13,7 @@ export default function Footer() {
         api.get("/footer")
             .then(res => {
                 setFooter(res.data);
-               
+
                 if (res.data?.qr_code) {
                     setQrCodes(JSON.parse(res.data.qr_code));
                 }
@@ -21,7 +22,7 @@ export default function Footer() {
     }, []);
     const solutions = footer?.content ? footer.content.split(",") : [];
     return (
-        <footer className="custom-footer text-white pt-5 pb-3">
+        <footer className="custom-footer  pt-5 pb-3">
             <div className="container-fluid">
                 <div className="row">
 
@@ -63,13 +64,15 @@ export default function Footer() {
                         <ul className="list-unstyled">
                             {footer?.links?.map((item, i) => (
                                 <li key={i} className="mb-2">
-                                    <Link
+                                    <NavLink
                                         to={item.link || "#"}
-                                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                                        className="text-white hover:text-purple-600 transition-colors duration-200"
+                                        className={({ isActive }) => (isActive ? "active" : "")}
+                                        onClick={() =>
+                                            window.scrollTo({ top: 0, behavior: "smooth" })
+                                        }
                                     >
                                         {item.name}
-                                    </Link>
+                                    </NavLink>
                                 </li>
                             ))}
                         </ul>

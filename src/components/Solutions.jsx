@@ -16,13 +16,16 @@ import { ROOT_URL } from "./api";
 export default function Solutions() {
   const [solution_cat, setSolution_cat] = useState([]);
   const [solution_image, setSolution_image] = useState([]);
+  const [navbarMenu, setNavbarMenu] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const solution_catres = await api.get("/solution-cat");
         const solution_imageres = await api.get("/solution-images");
+        const menuRes = await api.get("/navbar-menu");
         setSolution_cat(solution_catres.data);
         setSolution_image(solution_imageres.data[0]);
+        setNavbarMenu(menuRes.data);
         // console.log(solution_imageres.data);
       } catch (error) {
         console.log(error);
@@ -30,6 +33,7 @@ export default function Solutions() {
     };
     fetchData();
   }, []);
+  const contactItem = navbarMenu.find(item => item.id === 4);
   return (
     <div>
       <section className="py-0 bg-light">
@@ -68,135 +72,24 @@ export default function Solutions() {
 
                     </div>
                     <div className="mt-auto d-flex gap-1">
-                      <Link 
+                      <Link
                         to={`/transform-monitor/${item.id}`}
                         className="btn btn-outline-primary w-50 rounded-pill"
                       >
                         View Details
                       </Link>
 
-                      <Link to="/contact" className="btn btn-primary rounded-pill">
-                        Start Order
-                      </Link>
+                      {contactItem && (
+                        <Link to={contactItem.link} className="btn btn-primary rounded-pill">
+                          Start Order
+                        </Link>
+                      )}
                     </div>
 
                   </div>
                 </div>
               </div>
             ))}
-
-            {/* <div className="col-md-3">
-              <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
-                <div className="position-relative">
-                  <img
-                    src={sol2}
-                    alt="solution"
-                    className="w-100"
-                    style={{ height: "220px", objectFit: "cover" }}
-                  />
-                  <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
-                    NEW
-                  </span>
-                </div>
-                <div className="card-body d-flex flex-column text-start">
-                  <div className="d-flex justify-content-between align-items-start mb-3">
-                    <h4 className="fw-semibold mb-0">
-                      Pump House Automation System
-                    </h4>
-                    <FaHeart className="text-danger flex-shrink-0" size={18} />
-
-                  </div>
-                  <div className="mt-auto d-flex gap-1">
-                    <Link
-                      to="/pump-automate"
-                      className="btn btn-outline-primary w-50 rounded-pill"
-                    >
-                      View Details
-                    </Link>
-                    <Link to="/contact" className="btn btn-primary rounded-pill">
-                      Start Order
-                    </Link>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-
-            <div className="col-md-3">
-              <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
-                <div className="position-relative">
-                  <img
-                    src={sol3}
-                    alt="solution"
-                    className="w-100"
-                    style={{ height: "220px", objectFit: "cover" }}
-                  />
-                  <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
-                    NEW
-                  </span>
-                </div>
-                <div className="card-body d-flex flex-column text-start">
-                  <div className="d-flex justify-content-between align-items-start mb-3">
-                    <h4 className="fw-semibold mb-0">
-                      Street Light Monitoring System
-                    </h4>
-                    <FaHeart className="text-danger flex-shrink-0" size={18} />
-
-                  </div>
-                  <div className="mt-auto d-flex gap-1">
-                    <Link
-                      to="/light-monitor"
-                      className="btn btn-outline-primary w-50 rounded-pill"
-                    >
-                      View Details
-                    </Link>
-                    <Link to="/contact" className="btn btn-primary rounded-pill">
-                      Start Order
-                    </Link>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-
-            <div className="col-md-3">
-              <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
-                <div className="position-relative">
-                  <img
-                    src={sol4}
-                    alt="solution"
-                    className="w-100"
-                    style={{ height: "220px", objectFit: "cover" }}
-                  />
-                  <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
-                    NEW
-                  </span>
-                </div>
-                <div className="card-body d-flex flex-column text-start">
-                  <div className="d-flex justify-content-between align-items-start mb-3">
-                    <h4 className="fw-semibold mb-0">
-                      RTU Based Solutuins
-                    </h4>
-                    <FaHeart className="text-danger flex-shrink-0" size={18} />
-
-                  </div>
-                  <div className="mt-auto d-flex gap-1">
-                    <Link
-                      to="/rtu-solution"
-                      className="btn btn-outline-primary w-50 rounded-pill"
-                    >
-                      View Details
-                    </Link>
-                    <Link to="/contact" className="btn btn-primary rounded-pill">
-                      Start Order
-                    </Link>
-                  </div>
-
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </section>

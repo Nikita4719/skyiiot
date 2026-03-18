@@ -101,15 +101,6 @@ export default function Header() {
                 </li>
               ))}
             </ul>
-
-            {/* <div className='d-flex ms-3'>
-              <NavLink
-                to={contactItem?.link || "/contact"}
-                className="btn btn-light rounded-pill px-4"
-              >
-                Work With Us
-              </NavLink>
-            </div> */}
           </div>
         </div>
       </nav>

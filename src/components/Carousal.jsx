@@ -6,7 +6,7 @@ import { ROOT_URL } from "./api";
 function Carousel() {
     const [everywhereData, setEverywhereData] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [transition, setTransition] = useState(true);
+    // const [transition, setTransition] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,30 +21,30 @@ function Carousel() {
         fetchData();
     }, []);
     useEffect(() => {
-    if (activeIndex >= everywhereData.length) {
-        setTimeout(() => {
-            setActiveIndex(0);
-        }, 600); 
-    }
-}, [activeIndex, everywhereData.length]);
+        if (activeIndex >= everywhereData.length) {
+            setTimeout(() => {
+                setActiveIndex(0);
+            }, 600);
+        }
+    }, [activeIndex, everywhereData.length]);
 
-   const nextSlide = () => {
-    if (activeIndex === everywhereData.length - 1) {
-        setActiveIndex(0);
-    } else {
-        setActiveIndex(activeIndex + 1);
-    }
-};
+    const nextSlide = () => {
+        if (activeIndex === everywhereData.length - 1) {
+            setActiveIndex(0);
+        } else {
+            setActiveIndex(activeIndex + 1);
+        }
+    };
 
     const prevSlide = () => {
-    if (activeIndex === 0) {
-        setActiveIndex(everywhereData.length - 1);
-    } else {
-        setActiveIndex(activeIndex - 1);
-    }
-};
+        if (activeIndex === 0) {
+            setActiveIndex(everywhereData.length - 1);
+        } else {
+            setActiveIndex(activeIndex - 1);
+        }
+    };
 
-  
+
 
     return (
         <div
@@ -60,11 +60,11 @@ function Carousel() {
                     ‹
                 </button>
 
-               <div
-  className="carousel-track"
-  style={{ transform: `translateX(-${activeIndex * 100}%)` }}
->
-                  {everywhereData.map((item, index) => {
+                <div
+                    className="carousel-track"
+                    style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+                >
+                    {everywhereData.map((item, index) => {
 
                         return (
                             <div

@@ -144,7 +144,8 @@ export default function Testimonial() {
                 {smarterData?.heading}
               </h2>
 
-              <p className="text-muted mb-4">{smarterData?.para}</p>
+              <p className="text-black mb-4" style={{ textAlign: "justify", }}
+                dangerouslySetInnerHTML={{ __html: smarterData?.para }}></p>
 
             </div>
 
@@ -156,33 +157,25 @@ export default function Testimonial() {
         <div className="container">
           <div className="row align-items-start g-5">
             <div className="col-lg-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4">{poweredData.heading1}</h2>
-              <h6 className="text-black fw-semibold fs-6 mt-4">
-                {poweredData.heading2}
+              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4"
+                dangerouslySetInnerHTML={{ __html: poweredData?.heading1 }}></h2>
+              <h6 className="text-black fw-semibold fs-6 mt-4"
+                dangerouslySetInnerHTML={{ __html: poweredData.heading2 }}>
               </h6>
 
-              <p className="text-muted mb-2">{poweredData.paragraph1}</p>
+              <p className="text-black mb-2"
+                dangerouslySetInnerHTML={{ __html: poweredData.paragraph1 }}></p>
 
 
-              <h6 className="text-black fw-semibold fs-6 mt-4">
-                {poweredData.heading3}
+              <h6 className="text-black fw-semibold fs-6 mt-4"
+                dangerouslySetInnerHTML={{ __html: poweredData.heading3 }}>
               </h6>
-              <p className="text-muted mb-2">{poweredData.paragraph2}</p>
-              {/* <ul className="automation-list text-start ps-0">
-                                <li className="mb-2">
-                                    Edge AI Processing - Analyze and act at the edge to reduce latency.
-                                </li>
-                                <li className="mb-2">
-                                    Event-Based Triggers - Automate actions when specific conditions are met.
-                                </li>
-                                <li className="mb-2">
-                                    Predictive Intelligence - Anticipate failures and optimize performance.
-                                </li>
-                                <li className="mb-2">
-                                    Cloud & Edge Sync - Seamlessly synchronize data across your ecosystem.
-                                </li>
+              <p
+                className="text-black mb-2"
+                style={{ textAlign: "justify" }}
+                dangerouslySetInnerHTML={{ __html: poweredData?.paragraph2 }}
+              ></p>
 
-                            </ul> */}
 
             </div>
 
@@ -201,8 +194,8 @@ export default function Testimonial() {
 
           </div>
         </div>
-      </section>
+      </section >
 
-    </div>
+    </div >
   );
 }

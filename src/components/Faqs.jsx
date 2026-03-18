@@ -5,6 +5,8 @@ import { ROOT_URL } from "./api";
 
 
 export default function Faqs() {
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const [faqsData, setFaqsData] = useState([]);
   const [faqscmsData, setFaqscmsData] = useState([]);
   const [formData, setFormData] = useState({
@@ -24,34 +26,68 @@ export default function Faqs() {
       setFormData({ ...formData, [name]: value });
     }
   };
+
+  const validate = () => {
+    let newErrors = {};
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+    }
+
+    if (!emailPattern.test(formData.email)) {
+      newErrors.email = "Enter valid email address";
+    }
+
+    if (formData.phone.length !== 10) {
+      newErrors.phone = "Phone must be 10 digits";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message cannot be empty";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
+    if (validate()) {
+      try {
+        setLoading(true);
 
-      const payload = {
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message
-      };
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message
+        };
 
-      api.post("/contact-messages", payload);
+        await api.post("/contact-messages", payload);
 
-      alert("Request sent successfully");
+        alert("Request sent successfully");
 
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: ""
-      });
-
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+        setErrors({});
+      } catch (error) {
+        console.log(error);
+        alert("Something went wrong");
+      } finally {
+        setLoading(false);
+      }
     }
   };
   useEffect(() => {
@@ -114,74 +150,78 @@ export default function Faqs() {
 
 
           <div className="col-md-6">
-           <div className="shadow rounded-4 p-4 p-md-5" style={{ backgroundColor: "#F1F5F9" }}>
-  <h4 className="text-center fw-semibold">
-    We are here to help!
-  </h4>
-  <p className="text-center text-muted small mb-4">
-    Send your question or request to our experts.
-  </p>
+            <div className="shadow rounded-4 p-4 p-md-5" style={{ backgroundColor: "#F1F5F9" }}>
+              <h4 className="text-center fw-semibold">
+                We are here to help!
+              </h4>
+              <p className="text-center text-muted small mb-4">
+                Send your question or request to our experts.
+              </p>
 
-  <form onSubmit={handleSubmit}>
-    <div className="row g-3">
-      <div className="col-md-6">
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-          className="form-control bg-white border rounded-md px-3 py-2"
-          placeholder="First Name"
-        />
-      </div>
-      <div className="col-md-6">
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          className="form-control bg-white border rounded-md px-3 py-2"
-          placeholder="Last Name"
-        />
-      </div>
-      <div className="col-md-6">
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="form-control bg-white border rounded-md px-3 py-2"
-          placeholder="Email Address"
-        />
-      </div>
-      <div className="col-md-6">
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          className="form-control bg-white border rounded-md px-3 py-2"
-          placeholder="Phone Number"
-        />
-      </div>
-      <div className="col-12">
-        <textarea
-          rows="4"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          className="form-control bg-white border rounded-md px-3 py-2"
-          placeholder="Write your message here..."
-        ></textarea>
-      </div>
-      <div className="col-12">
-        <button type="submit" className="btn btn-primary w-100 rounded-pill py-2">
-          Send Request
-        </button>
-      </div>
-    </div>
-  </form>
-</div>
+              <form onSubmit={handleSubmit}>
+                <div className="row g-3">
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      className="form-control bg-white border rounded-md px-3 py-2"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      className="form-control bg-white border rounded-md px-3 py-2"
+                      placeholder="Last Name"
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="form-control bg-white border rounded-md px-3 py-2"
+                      placeholder="Email Address"
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="form-control bg-white border rounded-md px-3 py-2"
+                      placeholder="Phone Number"
+                    />
+                  </div>
+                  <div className="col-12">
+                    <textarea
+                      rows="4"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="form-control bg-white border rounded-md px-3 py-2"
+                      placeholder="Write your message here..."
+                    ></textarea>
+                  </div>
+                  <div className="col-12">
+                    <button
+                      type="submit"
+                      className="btn btn-primary w-100 rounded-pill py-2"
+                      disabled={loading}
+                    >
+                      {loading ? "Sending..." : "Send Request"}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
 
         </div>

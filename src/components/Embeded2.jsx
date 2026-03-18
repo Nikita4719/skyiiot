@@ -88,7 +88,7 @@ function Embeded2() {
 
                         <div className="row mt-4 g-4">
                             <div className="col-sm-6">
-                                <img src={offerData?.image1 ? `${ROOT_URL}/${offerData.image1}` : "null"} alt="smart" className="offer-small-img"/>
+                                <img src={offerData?.image1 ? `${ROOT_URL}/${offerData.image1}` : "null"} alt="smart" className="offer-small-img" />
                                 <h5 className="fw-bold">{offerData.heading2}</h5>
                                 <p className="text-muted small mt-2">
                                     {offerData.paragraph1}
@@ -96,17 +96,13 @@ function Embeded2() {
                             </div>
 
                             <div className="col-sm-6">
-                                <img src={offerData?.image2 ? `${ROOT_URL}/${offerData.image2}` : "null"} alt="smart" className="offer-small-img"/>
+                                <img src={offerData?.image2 ? `${ROOT_URL}/${offerData.image2}` : "null"} alt="smart" className="offer-small-img" />
                                 <h5 className="fw-bold">{offerData.heading3}</h5>
                                 <p className="text-muted small mt-2">
                                     {offerData.paragraph2}
                                 </p>
                             </div>
                         </div>
-
-                        {/* <button className="btn btn-dark mt-4 px-4 py-2">
-                            Get Started →
-                        </button> */}
                     </div>
 
                     <div className="col-lg-6">
