@@ -167,20 +167,22 @@ export default function TransformMonitor() {
 
         <div className="row mt-4 g-4">
           {["para1", "para2", "para3", "para4"].map((key, idx) => (
-            <div className="col-lg-6" key={idx}>
-              <div className="p-4 border rounded"
-                style={
-                  idx === 0 || idx === 1 || idx === 2 || idx === 3 
-                    ? { backgroundColor: "#F1F5F9" }
-                    : {}
-                }>
+            <div className="col-lg-6 d-flex" key={idx}>
 
-                <div 
+              <div
+                className="p-4 border rounded d-flex flex-column w-100"
+                style={{ backgroundColor: "#F1F5F9" }}
+              >
+
+                <div
+                  className={key === "para1" ? "table-fix" : ""}
                   dangerouslySetInnerHTML={{
                     __html: solution_sub_cat[key] || "",
                   }}
                 />
+
               </div>
+
             </div>
           ))}
         </div>

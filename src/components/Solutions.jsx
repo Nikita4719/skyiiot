@@ -1,25 +1,17 @@
-import bgsol from "../assets/bgsol.png";
-import sol1 from "../assets/sol1.png";
-import sol2 from "../assets/sol2.png";
-import sol3 from "../assets/sol3.png";
-import sol4 from "../assets/sol4.png";
-import sol5 from "../assets/sol5.png";
-import sol6 from "../assets/sol6.png";
-import sol7 from "../assets/sol7.jpg";
-import sol8 from "../assets/sol8.jpg";
-
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "./api";
 import { ROOT_URL } from "./api";
 export default function Solutions() {
+  const [loading, setLoading] = useState(true);
   const [solution_cat, setSolution_cat] = useState([]);
   const [solution_image, setSolution_image] = useState([]);
   const [navbarMenu, setNavbarMenu] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const solution_catres = await api.get("/solution-cat");
         const solution_imageres = await api.get("/solution-images");
         const menuRes = await api.get("/navbar-menu");
@@ -30,110 +22,121 @@ export default function Solutions() {
       } catch (error) {
         console.log(error);
       }
+      finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, []);
   const contactItem = navbarMenu.find(item => item.id === 4);
   return (
     <div>
-      <section className="py-0 bg-light">
-        <div className="mb-5">
-          <img
-            src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
-            alt="background img"
-            className="img-fluid w-100"
-            style={{ height: "300px", objectFit: "cover" }}
-          />
+      {loading ? (
+
+        <div className="d-flex justify-content-center align-items-center" style={{ height: "80px" }}>
+          <div className="loader"></div>
         </div>
+      ) : (
+        <>
+          <section className="py-0 bg-light">
+            <div className="mb-5">
+              <img
+                src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
+                alt="background img"
+                className="img-fluid w-100"
+                style={{ height: "300px", objectFit: "cover" }}
+              />
+            </div>
 
-        <div className="container text-center">
-          <div className="row g-4">
-            {/* <div className="col-md-3"> */}
-            {solution_cat.map((item) => (
-              <div className="col-md-3" key={item.id}>
-                <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
-                  <div className="position-relative">
-                    <img
-                      src={`${ROOT_URL}/${item.image}`}
-                      alt={item.title}
-                      className="w-100"
-                      style={{ height: "220px", objectFit: "cover" }}
-                    />
-                    <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
-                      NEW
-                    </span>
-                  </div>
-                  <div className="card-body d-flex flex-column text-start">
-                    <div className="d-flex justify-content-between align-items-start mb-3">
-                      <h4 className="fw-semibold mb-0">
-                        {item.title}
-                      </h4>
-                      <FaHeart className="text-danger flex-shrink-0" size={18} />
+            <div className="container text-center">
+              <div className="row g-4">
+                {/* <div className="col-md-3"> */}
+                {solution_cat.map((item) => (
+                  <div className="col-md-3" key={item.id}>
+                    <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
+                      <div className="position-relative">
+                        <img
+                          src={`${ROOT_URL}/${item.image}`}
+                          alt={item.title}
+                          className="w-100"
+                          style={{ height: "220px", objectFit: "cover" }}
+                        />
+                        <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
+                          NEW
+                        </span>
+                      </div>
+                      <div className="card-body d-flex flex-column text-start">
+                        <div className="d-flex justify-content-between align-items-start mb-3">
+                          <h4 className="fw-semibold mb-0">
+                            {item.title}
+                          </h4>
+                          <FaHeart className="text-danger flex-shrink-0" size={18} />
 
+                        </div>
+                        <div className="mt-auto d-flex gap-1">
+                          <Link
+                            to={`/transform-monitor/${item.id}`}
+                            className="btn btn-outline-primary w-50 rounded-pill"
+                          >
+                            View Details
+                          </Link>
+
+                          {contactItem && (
+                            <Link to={contactItem.link} className="btn btn-primary rounded-pill">
+                              Start Order
+                            </Link>
+                          )}
+                        </div>
+
+                      </div>
                     </div>
-                    <div className="mt-auto d-flex gap-1">
-                      <Link
-                        to={`/transform-monitor/${item.id}`}
-                        className="btn btn-outline-primary w-50 rounded-pill"
-                      >
-                        View Details
-                      </Link>
-
-                      {contactItem && (
-                        <Link to={contactItem.link} className="btn btn-primary rounded-pill">
-                          Start Order
-                        </Link>
-                      )}
-                    </div>
-
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-2 bg-light">
-        <div className="container">
-          <div className="row g-4">
-
-            <div className="col-md-6">
-              <img
-                src={solution_image?.image1 ? `${ROOT_URL}/${solution_image.image1}` : "null"}
-                alt="sol5"
-                className="img-fluid "
-              />
             </div>
+          </section>
 
-            <div className="col-md-6">
-              <img
-                src={solution_image?.image2 ? `${ROOT_URL}/${solution_image.image2}` : "null"}
-                alt="sol6"
-                className="img-fluid w-100 rounded-4"
-              />
+          <section className="py-2 bg-light">
+            <div className="container">
+              <div className="row g-4">
+
+                <div className="col-md-6">
+                  <img
+                    src={solution_image?.image1 ? `${ROOT_URL}/${solution_image.image1}` : "null"}
+                    alt="sol5"
+                    className="img-fluid "
+                  />
+                </div>
+
+                <div className="col-md-6">
+                  <img
+                    src={solution_image?.image2 ? `${ROOT_URL}/${solution_image.image2}` : "null"}
+                    alt="sol6"
+                    className="img-fluid w-100 rounded-4"
+                  />
+                </div>
+
+                <div className="col-md-6">
+                  <img
+                    src={solution_image?.image3 ? `${ROOT_URL}/${solution_image.image3}` : "null"}
+                    alt="sol7"
+                    className="img-fluid w-100 rounded-4"
+                  />
+                </div>
+
+                <div className="col-md-6">
+                  <img
+                    src={solution_image?.image4 ? `${ROOT_URL}/${solution_image.image4}` : "null"}
+                    alt="sol8"
+                    className="img-fluid w-100 rounded-4"
+                  />
+                </div>
+
+              </div>
             </div>
-
-            <div className="col-md-6">
-              <img
-                src={solution_image?.image3 ? `${ROOT_URL}/${solution_image.image3}` : "null"}
-                alt="sol7"
-                className="img-fluid w-100 rounded-4"
-              />
-            </div>
-
-            <div className="col-md-6">
-              <img
-                src={solution_image?.image4 ? `${ROOT_URL}/${solution_image.image4}` : "null"}
-                alt="sol8"
-                className="img-fluid w-100 rounded-4"
-              />
-            </div>
-
-          </div>
-        </div>
-      </section>
-
+          </section>
+        </>
+      )}
 
     </div>
   );

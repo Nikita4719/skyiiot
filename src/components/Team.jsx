@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
-import avdo from "../assets/avdo.mp4";
-import avdo2 from "../assets/avdo2.mp4";
-import team1 from "../assets/team1.jpeg";
-import team2 from "../assets/team2.jpg";
-import team3 from "../assets/team3.png";
 import api from "./api";
 import { ROOT_URL } from "./api";
 export default function Team() {
+    const [loading, setLoading] = useState(true);
     const [teamData, setTeamData] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const teamres = await api.get("/our-team");
                 setTeamData(teamres.data);
             } catch (error) {
                 console.log(error);
+            }
+            finally {
+                setLoading(false);
             }
         };
         fetchData();
@@ -33,34 +33,40 @@ export default function Team() {
 
     return (
         <div>
-            <section className="team-section py-0 gap-0">
-                <div className="container">
-                    <div className="row align-items-center g-1 ">
-                        <h1 className=" fw-bold text-center mt-3"> Our Team</h1>
-                        <div className="col-lg-6 team-details">
-                            <h1>{teamData[activeIndex]?.heading}</h1>
-                            <h2>{teamData[activeIndex]?.paragraph}</h2>
-                            {/* <p></p> */}
-                        </div>
+            {loading ? (
 
-                        <div className="col-lg-6 text-center">
-                            <div className="image-stack">
-                                {teamData.map((member, index) => (
-                                    <img
-                                        key={index}
-                                        src={`${ROOT_URL}/${member.image}`}
-                                        alt={member.name}
-                                        className={`team-img ${index === activeIndex ? "active" : ""
-                                            }`}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                    </div>
+                <div className="d-flex justify-content-center align-items-center" style={{ height: "80px" }}>
+                    <div className="loader"></div>
                 </div>
-            </section>
+            ) : (
+                <section className="team-section py-0 gap-0">
+                    <div className="container">
+                        <div className="row align-items-center g-1 ">
+                            <h1 className=" fw-bold text-center mt-3"> Our Team</h1>
+                            <div className="col-lg-6 team-details">
+                                <h1>{teamData[activeIndex]?.heading}</h1>
+                                <h2>{teamData[activeIndex]?.paragraph}</h2>
+                                {/* <p></p> */}
+                            </div>
 
+                            <div className="col-lg-6 text-center">
+                                <div className="image-stack">
+                                    {teamData.map((member, index) => (
+                                        <img
+                                            key={index}
+                                            src={`${ROOT_URL}/${member.image}`}
+                                            alt={member.name}
+                                            className={`team-img ${index === activeIndex ? "active" : ""
+                                                }`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            )}
         </div>
     );
 }

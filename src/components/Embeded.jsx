@@ -24,106 +24,114 @@ import { ROOT_URL } from "./api";
 function Embeded() {
     const [services, setServices] = useState([]);
     const [services_category, setServices_category] = useState([]);
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
 
-        api.get("/services")
-            .then(res => {
-                setServices(res.data);
-                console.log(res.data);
-            })
+                const [servicesRes, categoryRes] = await Promise.all([
+                    api.get("/services"),
+                    api.get("/services-category")
+                ]);
 
-        api.get("/services-category")
-            .then(res => {
-                setServices_category(res.data);
-            })
+                setServices(servicesRes.data);
+                setServices_category(categoryRes.data);
 
+            } catch (err) {
+                console.log(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
     }, []);
-
 
     return (
 
-        <section className="embeded mt-4">
+        <section className="embeded mt-5">
             <div className="container">
+                {loading ? (
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>
+                        <p>Loading...</p>
+                    </div>
+                ) : (
 
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="section-box mb-5">
+                                <div className="row mt-3 text-center">
 
-                <div className="row">
-                    <div className="col-md-6">
-                        <div className="section-box mb-5">
+                                    {services.map(section => (
 
-                            {/* <h5 className="text-skyiiot">{services.heading}</h5>
-                            <h4>{services.paragraph1}</h4>
-                            <p className="text-muted">{services.paragraph2}</p> */}
+                                        <div className="section-box mb-5" key={section.id}>
 
-                            <div className="row mt-3 text-center">
+                                            <h5 className=" text-start text-skyiiot" style={{ color: "#00A3B2" }}>{section.title}</h5>
 
-                                {services.map(section => (
+                                            <h3 className="text-start ">{section.heading}</h3>
 
-                                    <div className="section-box mb-5" key={section.id}>
+                                            <p className="text-start text-muted">{section.paragraph}</p>
 
-                                        <h5 className=" text-start text-skyiiot">{section.title}</h5>
+                                            <div className="row mt-3 text-center">
 
-                                        <h3 className="text-start ">{section.heading}</h3>
+                                                {services_category
+                                                    .filter(icon => icon.service_id === section.id)
+                                                    .map(icon => (
 
-                                        <p className="text-start text-muted">{section.paragraph}</p>
+                                                        <div className="col-6 col-md-3 mb-4" key={icon.id}>
 
-                                        <div className="row mt-3 text-center">
+                                                            <div className="feature-img-wrapper">
 
-                                            {services_category
-                                                .filter(icon => icon.service_id === section.id)
-                                                .map(icon => (
+                                                                <Link to={`/details/${icon.id}`}>
 
-                                                    <div className="col-6 col-md-3 mb-4" key={icon.id}>
+                                                                    <img
+                                                                        src={`${ROOT_URL}/${icon.icon}`}
+                                                                        alt={icon.link}
+                                                                        className="feature-img"
+                                                                    />
 
-                                                        <div className="feature-img-wrapper">
+                                                                </Link>
 
-                                                            <Link to={`/details/${icon.id}`}>
+                                                            </div>
 
-                                                                <img
-                                                                    src={`${ROOT_URL}/${icon.icon}`}
-                                                                    alt={icon.link}
-                                                                    className="feature-img"
-                                                                />
-
-                                                            </Link>
+                                                            <p className="feature-title">{icon.link}</p>
 
                                                         </div>
 
-                                                        <p className="feature-title">{icon.link}</p>
+                                                    ))}
 
-                                                    </div>
-
-                                                ))}
+                                            </div>
 
                                         </div>
 
-                                    </div>
+                                    ))}
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="col-md-6 sticky-video text-center mt-5 mb-5">
+
+                            {services
+                                .filter(section => section.image)
+                                .map(section => (
+
+                                    <img
+                                        key={section.id}
+                                        src={`${ROOT_URL}/${section.image}`}
+                                        className="feature-video"
+                                        alt={section.title}
+                                    />
 
                                 ))}
 
-                            </div>
                         </div>
                     </div>
-
-
-                    <div className="col-md-6 sticky-video text-center">
-
-                        {services
-                            .filter(section => section.image)
-                            .map(section => (
-
-                                <img
-                                    key={section.id}
-                                    src={`${ROOT_URL}/${section.image}`}
-                                    className="feature-video"
-                                    alt={section.title}
-                                />
-
-                            ))}
-
-                    </div>
-                </div>
+                )}
             </div>
+
         </section >
     );
 }

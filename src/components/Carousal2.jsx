@@ -4,7 +4,7 @@ import { ROOT_URL } from "./api";
 import "../carousel.scss";
 import cbg from "../assets/cbg.png";
 const Carousel = () => {
-
+    const [loading, setLoading] = useState(true);
     const [everywhereData, setEverywhereData] = useState([]);
     const [items, setItems] = useState([]);
     const [activeIdx, setActiveIdx] = useState(0);
@@ -13,18 +13,19 @@ const Carousel = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const res = await api.get("/everywhere-slide");
-
                 setEverywhereData(res.data);
                 setItems(res.data);
-
-                console.log(res.data);
-
-            } catch (err) {
+                // console.log(res.data);
+            }
+            catch (err) {
                 console.log(err);
             }
-        };
-
+            finally {
+                setLoading(false);
+            };
+        }
         fetchData();
     }, []);
 
@@ -91,33 +92,39 @@ const Carousel = () => {
                         </button>
 
                         <div className="carousel__container">
-                            <ul className="carousel__slide-list">
+                            {loading ? (
+                                <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>
+                                    <div className="loader"></div>
+                                </div>
+                            ) : (
+                                <ul className="carousel__slide-list">
 
-                                {items.map((item, i) => (
-                                    <li className="carousel__slide-item">
+                                    {items.map((item, i) => (
+                                        <li className="carousel__slide-item">
 
-                                        <img
-                                            src={`${ROOT_URL}/${item.image}`}
-                                            alt={item.heading}
-                                        />
+                                            <img
+                                                src={`${ROOT_URL}/${item.image}`}
+                                                alt={item.heading}
+                                            />
 
-                                        <div className="carousel-card-body">
+                                            <div className="carousel-card-body">
 
-                                            <div className="card-text">
-                                                <h4>{item.heading}</h4>
-                                                <p>{item.paragraph}</p>
+                                                <div className="card-text">
+                                                    <h4>{item.heading}</h4>
+                                                    <p>{item.paragraph}</p>
+                                                </div>
+
+                                                <div className="card-arrow">
+                                                    <button className="arrow-btn">↗</button>
+                                                </div>
+
                                             </div>
 
-                                            <div className="card-arrow">
-                                                <button className="arrow-btn">↗</button>
-                                            </div>
+                                        </li>
+                                    ))}
 
-                                        </div>
-
-                                    </li>
-                                ))}
-
-                            </ul>
+                                </ul>
+                            )}
                         </div>
 
                         <button
