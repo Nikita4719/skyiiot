@@ -53,9 +53,13 @@ export default function About_us() {
               <div className="row align-items-center mb-5 g-5">
 
                 <div className="col-12 col-md-6 d-flex flex-column justify-content-center">
-                  <h2 className="fw-bold mb-3">{aboutusData.heading}</h2>
-                  <p className="text-justify" style={{ lineHeight: "1.6" }}>
-                    {aboutusData.paragraph}
+                  <h2 className="fw-bold mb-3" dangerouslySetInnerHTML={{
+                    __html: aboutusData.heading
+                  }}></h2>
+                  <p className="text-justify" style={{ lineHeight: "1.6" }}
+                    dangerouslySetInnerHTML={{
+                      __html: aboutusData.paragraph
+                    }}>
                   </p>
                 </div>
 
@@ -103,9 +107,13 @@ export default function About_us() {
                 </div>
 
                 <div className="col-12 col-md-6">
-                  <h2 className="fw-bold mb-3">{about_enterprise.heading}</h2>
-                  <p style={{ lineHeight: "1.6" }}>
-                    {about_enterprise.paragraph}
+                  <h2 className="fw-bold mb-3" dangerouslySetInnerHTML={{
+                    __html: about_enterprise.heading
+                  }}></h2>
+                  <p style={{ lineHeight: "1.6" }}
+                    dangerouslySetInnerHTML={{
+                      __html: about_enterprise.paragraph
+                    }}>
                   </p>
                 </div>
 
@@ -127,14 +135,20 @@ export default function About_us() {
                     {[1, 2, 3, 4].map((item, i) => (
                       <div className="col-12 col-md-6" key={i}>
                         <div className="p-4 bg-white rounded-4 shadow-sm h-100 focus-card">
-                          <h2 className="fw-bold text-success">
-                            {about_benifit[`heading${i * 2 + 1}`]}
+                          <h2 className="fw-bold text-success"
+                            dangerouslySetInnerHTML={{
+                              __html: about_benifit[`heading${i * 2 + 1}`]
+                            }}>
                           </h2>
-                          <h5 className="fw-semibold mt-3">
-                            {about_benifit[`heading${i * 2 + 2}`]}
+                          <h5 className="fw-semibold mt-3"
+                            dangerouslySetInnerHTML={{
+                              __html: about_benifit[`heading${i * 2 + 2}`]
+                            }}>
                           </h5>
-                          <p className="text-muted small mt-2">
-                            {about_benifit[`paragraph${i + 1}`]}
+                          <p className="text-muted small mt-2"
+                            dangerouslySetInnerHTML={{
+                              __html: about_benifit[`paragraph${i + 1}`]
+                            }}>
                           </p>
                         </div>
                       </div>

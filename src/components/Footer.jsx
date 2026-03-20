@@ -16,7 +16,7 @@ export default function Footer() {
 
                 const res = await api.get("/footer");
                 setFooter(res.data);
-
+console.log("QR DATA:", qrCodes);
                 if (res.data?.qr_code) {
                     setQrCodes(JSON.parse(res.data.qr_code));
                 }
