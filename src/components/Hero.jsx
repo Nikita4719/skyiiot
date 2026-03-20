@@ -57,7 +57,10 @@ export default function Hero() {
 
                     <section className="container" style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 15px" }}>
                         <div className="row">
-                            <h1 className="text-center fw-bold mt-4">{slideData.title}</h1>
+                            <h1 className="text-center fw-bold mt-4"
+                                dangerouslySetInnerHTML={{
+                                    __html: slideData.title
+                                }}></h1>
                             {what_section.map((item, index) => (
                                 <div className="col-lg col-md-4 col-6 mt-3" key={item.id || index}>
                                     <div className="p-3 text-center">
@@ -77,7 +80,9 @@ export default function Hero() {
                                         </div>
 
                                         <h6 className="fw-bold">{item.title}</h6>
-                                        <p className="text-muted small">{item.description}</p>
+                                        <p className="text-muted small" dangerouslySetInnerHTML={{
+                                            __html: item.description
+                                        }}></p>
 
                                     </div>
                                 </div>

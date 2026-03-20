@@ -44,8 +44,12 @@ export default function Team() {
                         <div className="row align-items-center g-1 ">
                             <h1 className=" fw-bold text-center mt-3"> Our Team</h1>
                             <div className="col-lg-6 team-details">
-                                <h1>{teamData[activeIndex]?.heading}</h1>
-                                <h2>{teamData[activeIndex]?.paragraph}</h2>
+                                <h1 dangerouslySetInnerHTML={{
+                                    __html: teamData[activeIndex]?.heading
+                                }}></h1>
+                                <h2 dangerouslySetInnerHTML={{
+                                    __html: teamData[activeIndex]?.paragraph
+                                }}></h2>
                                 {/* <p></p> */}
                             </div>
 

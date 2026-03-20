@@ -128,8 +128,10 @@ export default function Faqs() {
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={`#collapse${faq.id}`}
-                      >
-                        {faq.title}
+
+                        dangerouslySetInnerHTML={{
+                          __html: faq.title
+                        }}>
                       </button>
                     </h2>
 

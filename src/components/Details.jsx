@@ -31,7 +31,9 @@ export default function Detail1() {
 
               <div className="col-lg-6">
                 <div className="mb-4">
-                  <h1 className="text-skyiiot fw-bold display-6">{detail?.title}</h1>
+                  <h1 className="text-skyiiot fw-bold display-6" dangerouslySetInnerHTML={{
+                    __html: detail?.title
+                  }}></h1>
                   <p
                     className=" mt-3 " style={{
                       textAlign: "justify",
@@ -67,7 +69,9 @@ export default function Detail1() {
             <div className="row g-4 align-items-start">
 
               <div className="col-lg-6">
-                <h2 className="text-skyiiot mb-4"> {detail?.subheading}</h2>
+                <h2 className="text-skyiiot mb-4" dangerouslySetInnerHTML={{
+                  __html: detail?.subheading
+                }}></h2>
 
                 <div className="row g-4">
 
@@ -76,8 +80,10 @@ export default function Detail1() {
                       <span
                         className="d-inline-flex align-items-center justify-content-center rounded-circle bg-dark text-white fw-bold"
                         style={{ width: "56px", height: "56px" }}
-                      >
-                        {detail?.subspan1}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            detail?.subspan1
+                        }}>
                       </span>
                     </div>
                     {/* <h5 className="fw-semibold mb-2">IoT Platform-as-a-Service</h5> */}
@@ -95,8 +101,10 @@ export default function Detail1() {
                       <span
                         className="d-inline-flex align-items-center justify-content-center rounded-circle bg-dark text-white"
                         style={{ width: "56px", height: "56px", fontSize: "1.2rem" }}
-                      >
-                        {detail?.subspan2}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            detail?.subspan2
+                        }}>
                       </span>
                     </div>
                     {/* <h5 className="fw-semibold mb-2">Custom Software & Hardware</h5> */}

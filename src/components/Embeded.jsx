@@ -67,11 +67,16 @@ function Embeded() {
 
                                         <div className="section-box mb-5" key={section.id}>
 
-                                            <h5 className=" text-start text-skyiiot" style={{ color: "#00A3B2" }}>{section.title}</h5>
+                                            <h5 className=" text-start text-skyiiot" style={{ color: "#00A3B2" }}
+                                                dangerouslySetInnerHTML={{
+                                                    __html: section.title
+                                                }}></h5>
 
-                                            <h3 className="text-start ">{section.heading}</h3>
+                                            <h3 className="text-start "dangerouslySetInnerHTML={{
+                                                    __html:section.heading}}></h3>
 
-                                            <p className="text-start text-muted">{section.paragraph}</p>
+                                            <p className="text-start text-muted"dangerouslySetInnerHTML={{
+                                                    __html:section.paragraph}}></p>
 
                                             <div className="row mt-3 text-center">
 

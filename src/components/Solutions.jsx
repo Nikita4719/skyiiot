@@ -67,8 +67,10 @@ export default function Solutions() {
                       </div>
                       <div className="card-body d-flex flex-column text-start">
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                          <h4 className="fw-semibold mb-0">
-                            {item.title}
+                          <h4 className="fw-semibold mb-0"
+                            dangerouslySetInnerHTML={{
+                              __html: item.title
+                            }}>
                           </h4>
                           <FaHeart className="text-danger flex-shrink-0" size={18} />
 

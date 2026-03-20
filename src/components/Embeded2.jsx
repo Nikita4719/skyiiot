@@ -45,12 +45,18 @@ function Embeded2() {
                             </div>
 
                             <div className="col-md-6">
-                                <h4 className="text-skyiiot"  style={{ color: "#00A3B2" }}>{suppotredData.heading}</h4>
-                                <h1 className="fw-bold">
-                                    {suppotredData.paragraph1}
+                                <h4 className="text-skyiiot" style={{ color: "#00A3B2" }} dangerouslySetInnerHTML={{
+                                    __html: suppotredData.heading
+                                }}></h4>
+                                <h1 className="fw-bold"
+                                    dangerouslySetInnerHTML={{
+                                        __html: suppotredData.paragraph1
+                                    }}>
                                 </h1>
-                                <p className=" text-dark mt-3 justify-text ">
-                                    {suppotredData.paragraph2}
+                                <p className=" text-dark mt-3 justify-text "
+                                    dangerouslySetInnerHTML={{
+                                        __html: suppotredData.paragraph2
+                                    }}>
                                 </p>
 
                                 <div className="row mt-3">
@@ -89,28 +95,38 @@ function Embeded2() {
 
                         <div className="row g-5 align-items-start">
                             <div className="col-lg-6">
-                                <span className="text-uppercase text-muted small fw-medium">
-                                    {offerData.title}
+                                <span className="text-uppercase text-muted small fw-medium"
+                                    dangerouslySetInnerHTML={{
+                                        __html: offerData.title
+                                    }}>
                                 </span>
 
-                                <h3 className="mt-3 fw-bold">
-                                    {offerData.heading1}
+                                <h3 className="mt-3 fw-bold"
+                                    dangerouslySetInnerHTML={{
+                                        __html: offerData.heading1
+                                    }}>
                                 </h3>
 
                                 <div className="row mt-4 g-4">
                                     <div className="col-sm-6">
                                         <img src={offerData?.image1 ? `${ROOT_URL}/${offerData.image1}` : "null"} alt="smart" className="offer-small-img" />
-                                        <h5 className="fw-bold">{offerData.heading2}</h5>
-                                        <p className="text-muted small mt-2">
-                                            {offerData.paragraph1}
+                                        <h5 className="fw-bold"dangerouslySetInnerHTML={{
+                                                    __html:offerData.heading2}}></h5>
+                                        <p className="text-muted small mt-2"
+                                            dangerouslySetInnerHTML={{
+                                                __html: offerData.paragraph1
+                                            }}>
                                         </p>
                                     </div>
 
                                     <div className="col-sm-6">
                                         <img src={offerData?.image2 ? `${ROOT_URL}/${offerData.image2}` : "null"} alt="smart" className="offer-small-img" />
-                                        <h5 className="fw-bold">{offerData.heading3}</h5>
-                                        <p className="text-muted small mt-2">
-                                            {offerData.paragraph2}
+                                        <h5 className="fw-bold"dangerouslySetInnerHTML={{
+                                                    __html:offerData.heading3}}></h5>
+                                        <p className="text-muted small mt-2"
+                                            dangerouslySetInnerHTML={{
+                                                __html: offerData.paragraph2
+                                            }}>
                                         </p>
                                     </div>
                                 </div>
@@ -120,9 +136,13 @@ function Embeded2() {
                                 <div className="d-flex align-items-start border-bottom pb-4 mb-4">
                                     <span className="fw-bold fs-5 me-3"></span>
                                     <div>
-                                        <h5 className="fw-bold">{offerData.heading4}</h5>
-                                        <p className="text-muted small">
-                                            {offerData.paragraph3}
+                                        <h5 className="fw-bold" dangerouslySetInnerHTML={{
+                                            __html: offerData.heading4
+                                        }}></h5>
+                                        <p className="text-muted small"
+                                            dangerouslySetInnerHTML={{
+                                                __html: offerData.paragraph3
+                                            }}>
                                         </p>
                                     </div>
                                 </div>
@@ -130,9 +150,13 @@ function Embeded2() {
                                 <div className="d-flex align-items-start">
                                     <span className="fw-bold fs-5 me-3"></span>
                                     <div>
-                                        <h5 className="fw-bold">{offerData.heading5}</h5>
-                                        <p className="text-muted small">
-                                            {offerData.paragraph4}
+                                        <h5 className="fw-bold" dangerouslySetInnerHTML={{
+                                            __html: offerData.heading5
+                                        }}></h5>
+                                        <p className="text-muted small"
+                                            dangerouslySetInnerHTML={{
+                                                __html: offerData.paragraph4
+                                            }}>
                                         </p>
                                     </div>
                                 </div>

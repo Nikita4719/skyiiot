@@ -38,10 +38,14 @@ export default function About() {
             <div className="container" style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 15px" }}>
               <div className="row align-items-center g-4">
                 <div className="col-md-6">
-                  <h2 className="fw-bold text-center text-md-start mb-3">
-                    {aboutusData.heading}
+                  <h2 className="fw-bold text-center text-md-start mb-3"
+                    dangerouslySetInnerHTML={{
+                      __html: aboutusData.heading
+                    }}>
                   </h2>
-                  <p className="text-muted">{aboutusData.paragraph}</p>
+                  <p className="text-muted" dangerouslySetInnerHTML={{
+                    __html: aboutusData.paragraph
+                  }}></p>
                 </div>
 
                 <div className="col-md-6 text-center text-md-end">
@@ -61,12 +65,16 @@ export default function About() {
             <div className="row align-items-center mt-4 mb-4 g-0">
               <div className="col-md-2"></div>
               <div className="col-md-4 text-end">
-                <h2 className="fw-bold text-start mb-3">
-                  {imageData?.heading}
+                <h2 className="fw-bold text-start mb-3"
+                  dangerouslySetInnerHTML={{
+                    __html: imageData?.heading
+                  }}>
                 </h2>
 
-                <p className="text-start fs-5">
-                  {imageData?.paragraph}
+                <p className="text-start fs-5"
+                  dangerouslySetInnerHTML={{
+                    __html: imageData?.paragraph
+                  }}>
                 </p>
               </div>
 

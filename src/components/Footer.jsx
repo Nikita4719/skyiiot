@@ -50,7 +50,9 @@ export default function Footer() {
                                     style={{ width: "40px", height: "40px" }}>
                                     <FaPhoneAlt className="text-dark" />
                                 </div>
-                                <span className="text-white">{footer?.contact_phone}</span>
+                                <span className="text-white" dangerouslySetInnerHTML={{
+                                    __html: footer?.contact_phone
+                                }}></span>
                             </div>
 
                             <div className="d-flex align-items-center mb-2">
@@ -58,7 +60,9 @@ export default function Footer() {
                                     style={{ width: "40px", height: "40px" }}>
                                     <FaEnvelope className="text-dark" />
                                 </div>
-                                <span className="text-white">{footer?.contact_email}</span>
+                                <span className="text-white" dangerouslySetInnerHTML={{
+                                    __html: footer?.contact_email
+                                }}></span>
                             </div>
 
                             <div className="d-flex align-items-center mb-1">
@@ -66,14 +70,18 @@ export default function Footer() {
                                     style={{ width: "40px", height: "40px" }}>
                                     <FaMapMarkerAlt className="text-dark" />
                                 </div>
-                                <span className="text-white">{footer?.address}</span>
+                                <span className="text-white" dangerouslySetInnerHTML={{
+                                    __html: footer?.address
+                                }}></span>
                             </div>
 
 
                         </div>
 
                         <div className="col-md-4 mb-4">
-                            <h6 className="footer-title">{footer?.title}</h6>
+                            <h6 className="footer-title" dangerouslySetInnerHTML={{
+                                __html: footer?.title
+                            }}></h6>
                             <ul className="list-unstyled">
                                 {footer?.links?.map((item, i) => (
                                     <li key={i} className="mb-2">

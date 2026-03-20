@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const ROOT_URL =
-  "http://localhost:5000";
+  "https://skyiot.skylabsapp.com/";
 
 const api = axios.create({
   baseURL: `${ROOT_URL}/api`,

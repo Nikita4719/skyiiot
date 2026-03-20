@@ -68,16 +68,22 @@ export default function Testimonial() {
               <div className="col-md-6">
                 <div className="quote-mark">“</div>
 
-                <p className="testimonial-text">
-                  {testimonial.para2}
+                <p className="testimonial-text"
+                  dangerouslySetInnerHTML={{
+                    __html: testimonial.para2
+                  }}>
                 </p>
 
-                <h5 className="fw-bold text-dark mb-1">
-                  {testimonial.heading}
+                <h5 className="fw-bold text-dark mb-1"
+                  dangerouslySetInnerHTML={{
+                    __html: testimonial.heading
+                  }}>
                 </h5>
 
-                <p className="text-muted small">
-                  {testimonial.para1}
+                <p className="text-muted small"
+                  dangerouslySetInnerHTML={{
+                    __html: testimonial.para1
+                  }}>
                 </p>
               </div>
             </div>
@@ -140,8 +146,10 @@ export default function Testimonial() {
             </div>
 
             <div className="col-lg-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4">
-                {smarterData?.heading}
+              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4"
+                dangerouslySetInnerHTML={{
+                  __html: smarterData?.heading
+                }}>
               </h2>
 
               <p className="text-black mb-4" style={{ textAlign: "justify", }}

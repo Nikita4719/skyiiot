@@ -153,18 +153,24 @@ export default function Contact() {
 
                 <div className="mb-4">
                   <h6 className="fw-semibold">Call Us</h6>
-                  <p>{headerTop?.phone}</p>
+                  <p dangerouslySetInnerHTML={{
+                    __html: headerTop?.phone
+                  }}></p>
                 </div>
 
                 <div className="mb-4">
                   <h6 className="fw-semibold">Email</h6>
-                  <p>{headerTop?.email}</p>
+                  <p dangerouslySetInnerHTML={{
+                    __html: headerTop?.email
+                  }}></p>
                 </div>
 
                 <div className="mb-4">
                   <h6 className="fw-semibold">Office</h6>
-                  <p className="small">
-                    {footer?.address}
+                  <p className="small"
+                    dangerouslySetInnerHTML={{
+                      __html: footer?.address
+                    }}>
                   </p>
                 </div>
 

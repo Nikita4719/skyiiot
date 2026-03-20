@@ -75,7 +75,7 @@ const Carousel = () => {
         <div>
             <div
                 className="carousel-wrapper"
-                style={{ backgroundImage: `url(${cbg})`, height: "85vh" }}
+                style={{ backgroundImage: `url(${cbg})` }}
             >
                 <h2 className="carousel-heading text-white text-center fw-bold mb-4"
                     style={{ paddingTop: "1rem" }} >
@@ -100,7 +100,7 @@ const Carousel = () => {
                                 <ul className="carousel__slide-list">
 
                                     {items.map((item, i) => (
-                                        <li className="carousel__slide-item">
+                                        <li className="carousel__slide-item" key={item.id || i}>
 
                                             <img
                                                 src={`${ROOT_URL}/${item.image}`}
@@ -110,8 +110,10 @@ const Carousel = () => {
                                             <div className="carousel-card-body">
 
                                                 <div className="card-text">
-                                                    <h4>{item.heading}</h4>
-                                                    <p>{item.paragraph}</p>
+                                                    <h4 dangerouslySetInnerHTML={{
+                                                    __html:item.heading}}></h4>
+                                                    <p dangerouslySetInnerHTML={{
+                                                    __html:item.paragraph}}></p>
                                                 </div>
 
                                                 <div className="card-arrow">
