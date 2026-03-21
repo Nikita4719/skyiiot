@@ -108,7 +108,7 @@ export default function Faqs() {
   return (
     <section className="py-5 bg-light">
       <div className="container">
-        <h2 className="text-center fw-bold mb-5">
+        <h2 className="text-center fw-bold mb-5 mobile-heading">
           Frequently Asked Questions
         </h2>
 
@@ -122,17 +122,16 @@ export default function Faqs() {
 
                 return (
                   <div className="accordion-item mb-3 border rounded-3" key={faq.id}>
-                    <h2 className="accordion-header">
+                    <h2 className="accordion-header mobile-heading">
                       <button
-                        className={`accordion-button ${index !== 0 ? "collapsed" : ""}`}
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#collapse${faq.id}`}
-
-                        dangerouslySetInnerHTML={{
-                          __html: faq.title
-                        }}>
-                      </button>
+  className={`accordion-button mobile-h6 ${index !== 0 ? "collapsed" : ""}`}
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target={`#collapse${faq.id}`}
+  dangerouslySetInnerHTML={{
+    __html: faq.title
+  }}
+></button>
                     </h2>
 
                     <div
@@ -140,9 +139,9 @@ export default function Faqs() {
                       className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
                       data-bs-parent="#faqAccordion"
                     >
-                      <div className="accordion-body text-muted">
-                        {matchedAnswer ? matchedAnswer.para : "No Answer Available"}
-                      </div>
+                      <div className="accordion-body text-muted mobile-para">
+  {matchedAnswer ? matchedAnswer.para : "No Answer Available"}
+</div>
                     </div>
                   </div>
                 );
@@ -153,10 +152,10 @@ export default function Faqs() {
 
           <div className="col-md-6">
             <div className="shadow rounded-4 p-4 p-md-5" style={{ backgroundColor: "#F1F5F9" }}>
-              <h4 className="text-center fw-semibold">
+              <h4 className="text-center fw-semibold mobile-heading">
                 We are here to help!
               </h4>
-              <p className="text-center text-muted small mb-4">
+              <p className="text-center text-muted small mb-4 mobile-para">
                 Send your question or request to our experts.
               </p>
 

@@ -42,10 +42,13 @@ export default function Header() {
       ) : (
         <>
           <div className="top-menu py-2 bg-black bg-opacity-75 text-white">
-            <div className='container-fluid d-flex justify-content-between align-items-center'>
-              <small>{headerTop?.phone} {headerTop ? "|" : ""} {headerTop?.email}</small>
-
-              <div className="d-flex gap-2">
+            <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start gap-2">
+              <div className="d-flex align-items-center" style={{ gap: "15px", flexWrap: "nowrap" }}>
+                <span>{headerTop?.phone}</span>
+                <span className="d-none d-md-inline">|</span>
+                <span>{headerTop?.email}</span>
+              </div>
+              <div className="d-flex gap-2 flex-wrap justify-content-center">
                 {headerTop?.facebook_link && (
                   <a href={headerTop.facebook_link} className="social-icon" target="_blank" rel="noreferrer">
                     <FaFacebookF />
@@ -62,7 +65,7 @@ export default function Header() {
                   </a>
                 )}
                 {headerTop?.youtube_link && (
-                  <a href={headerTop.youtube_link} className="social-icon" target="_blank" rel="noreferrer">
+                  <a href={headerTop.youtube_link} className="social-icon youtube-icon" target="_blank" rel="noreferrer">
                     <FaYoutube />
                   </a>
                 )}
@@ -72,35 +75,40 @@ export default function Header() {
           </div>
 
 
-          <nav className='navbar navbar-expand-lg navbar-dark navbar-gradient'>
-            <div className='container-fluid'>
+          <nav className="navbar navbar-expand-lg navbar-light navbar-gradient">
+            <div className="container-fluid px-3 px-md-4">
               <a className='navbar-brand' href='/'>
                 <img
                   src={`${ROOT_URL}/${navbarLogo?.logo}`}
                   alt={navbarLogo?.logo_text}
-                  width="150"
-                  height="40"
+                  className="img-fluid"
+                  style={{ maxHeight: "40px", width: "auto" }}
                 />
               </a>
 
               <button
-                className='navbar-toggler'
-                type='button'
+                className="navbar-toggler custom-toggler"
+                type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
-                <span className='navba
-            r-toggler-icon'></span>
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
               </button>
 
               <div className='collapse navbar-collapse' id='navbarNav'>
-                <ul className='navbar-nav ms-auto'>
+                <ul className="navbar-nav ms-auto align-items-center gap-2">
                   {navbarMenu.map(item => (
                     <li key={item.id} className='nav-item fw-semibold'>
                       <NavLink
                         to={item.link}
                         className={({ isActive }) =>
                           item.id === 4
-                            ? "btn btn-light rounded-pill px-4 ms-3 fw-semibold"
+                            ? "btn btn-light rounded-pill px-3 px-md-4 mt-2 mt-lg-0"
                             : isActive
                               ? "nav-link active-nav"
                               : "nav-link"

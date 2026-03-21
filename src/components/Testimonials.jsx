@@ -68,19 +68,19 @@ export default function Testimonial() {
               <div className="col-md-6">
                 <div className="quote-mark">“</div>
 
-                <p className="testimonial-text"
+                <p className="testimonial-text mobile-para"
                   dangerouslySetInnerHTML={{
                     __html: testimonial.para2
                   }}>
                 </p>
 
-                <h5 className="fw-bold text-dark mb-1"
+                <h5 className="fw-bold text-dark mb-1 mobile-heading"
                   dangerouslySetInnerHTML={{
                     __html: testimonial.heading
                   }}>
                 </h5>
 
-                <p className="text-muted small"
+                <p className="text-muted small mobile-para"
                   dangerouslySetInnerHTML={{
                     __html: testimonial.para1
                   }}>
@@ -146,13 +146,13 @@ export default function Testimonial() {
             </div>
 
             <div className="col-lg-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4"
+              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4 mobile-heading"
                 dangerouslySetInnerHTML={{
                   __html: smarterData?.heading
                 }}>
               </h2>
 
-              <p className="text-black mb-4" style={{ textAlign: "justify", }}
+              <p className="text-black mb-4 mobile-para" style={{ textAlign: "justify", }}
                 dangerouslySetInnerHTML={{ __html: smarterData?.para }}></p>
 
             </div>
@@ -165,21 +165,22 @@ export default function Testimonial() {
         <div className="container">
           <div className="row align-items-start g-5">
             <div className="col-lg-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4"
+              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4 mobile-heading"
                 dangerouslySetInnerHTML={{ __html: poweredData?.heading1 }}></h2>
-              <h6 className="text-black fw-semibold fs-6 mt-4"
-                dangerouslySetInnerHTML={{ __html: poweredData.heading2 }}>
-              </h6>
+              <h6
+                className="text-black fw-semibold mt-4 mobile-h6"
+                dangerouslySetInnerHTML={{ __html: poweredData.heading2 }}
+              ></h6>
 
-              <p className="text-black mb-2"
+              <p className="text-black mb-2 mobile-para"
                 dangerouslySetInnerHTML={{ __html: poweredData.paragraph1 }}></p>
 
 
-              <h6 className="text-black fw-semibold fs-6 mt-4"
+              <h6 className="text-black fw-semibold mt-4 mobile-h6"
                 dangerouslySetInnerHTML={{ __html: poweredData.heading3 }}>
               </h6>
               <p
-                className="text-black mb-2"
+                className="text-black mb-2 mobile-para"
                 style={{ textAlign: "justify" }}
                 dangerouslySetInnerHTML={{ __html: poweredData?.paragraph2 }}
               ></p>

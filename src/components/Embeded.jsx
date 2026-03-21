@@ -67,16 +67,18 @@ function Embeded() {
 
                                         <div className="section-box mb-5" key={section.id}>
 
-                                            <h5 className=" text-start text-skyiiot" style={{ color: "#00A3B2" }}
+                                            <h5 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
                                                 dangerouslySetInnerHTML={{
                                                     __html: section.title
                                                 }}></h5>
 
-                                            <h3 className="text-start "dangerouslySetInnerHTML={{
-                                                    __html:section.heading}}></h3>
+                                            <h3 className="text-start mobile-heading " dangerouslySetInnerHTML={{
+                                                __html: section.heading
+                                            }}></h3>
 
-                                            <p className="text-start text-muted"dangerouslySetInnerHTML={{
-                                                    __html:section.paragraph}}></p>
+                                            <p className="text-start text-muted mobile-para " dangerouslySetInnerHTML={{
+                                                __html: section.paragraph
+                                            }}></p>
 
                                             <div className="row mt-3 text-center">
 
@@ -126,7 +128,7 @@ function Embeded() {
                                     <img
                                         key={section.id}
                                         src={`${ROOT_URL}/${section.image}`}
-                                        className="feature-video"
+                                        className="feature-video d-block mx-auto"
                                         alt={section.title}
                                     />
 

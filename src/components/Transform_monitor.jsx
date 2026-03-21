@@ -56,8 +56,7 @@ export default function TransformMonitor() {
           <img
             src={`${ROOT_URL}/${solution_sub_cat.image1}`}
             alt={solution_sub_cat.para3 || "Banner"}
-            className="w-100"
-            style={{ height: "350px", objectFit: "cover" }}
+            className="solution-banner-img"
           />
         </section>
       )}
@@ -68,31 +67,29 @@ export default function TransformMonitor() {
           <div className="row g-4 align-items-start">
 
             {/* Left Column - Main Image */}
-            <div className="col-lg-6 d-flex">
-              <div className="me-3">
+            <div className="col-lg-6 d-flex flex-column flex-lg-row align-items-center">
+              <div className="mb-3 mb-lg-0 me-lg-3">
                 <img
                   src={selectedImage}
                   alt={solution_sub_cat.heading}
-                  className="img-fluid rounded-lg"
-                  style={{ maxHeight: "500px", objectFit: "cover" }}
+                  className="img-fluid rounded-lg selected-img"
+                  style={{ objectFit: "cover" }}
                 />
               </div>
 
               {/* Thumbnails Vertical */}
-              <div className="d-flex flex-column gap-3">
+              <div className="d-flex flex-row gap-2 mt-3 flex-lg-column">
                 {solution_sub_cat.image2?.map((img, idx) => (
                   <img
                     key={idx}
                     src={`${ROOT_URL}/${img}`}
                     alt={`thumb-${idx}`}
                     onClick={() => setSelectedImage(`${ROOT_URL}/${img}`)}
-                    className={`border rounded-lg cursor-pointer ${selectedImage === `${ROOT_URL}/${img}`
+                    className={`border rounded-lg cursor-pointer thumbnail-img ${selectedImage === `${ROOT_URL}/${img}`
                       ? "border-primary"
                       : "border-secondary"
                       }`}
                     style={{
-                      width: "70px",
-                      height: "70px",
                       objectFit: "cover",
                     }}
                   />
@@ -109,7 +106,7 @@ export default function TransformMonitor() {
               {/* Product Details */}
               <div className="border-top pt-3 mb-3" style={{}}>
                 <div
-                  className="text-sm"
+                  className="text-sm mobile-big-text"
                   dangerouslySetInnerHTML={{
                     __html: solution_sub_cat.description1 || "",
                   }}
@@ -129,7 +126,7 @@ export default function TransformMonitor() {
 
               {/* Shipping & Payment Info */}
               <div
-                className="border-top pt-3 text-sm"
+                className="border-top pt-3 text-sm mobile-big-text"
                 dangerouslySetInnerHTML={{
                   __html: solution_sub_cat.description2 || "",
                 }}
@@ -175,7 +172,7 @@ export default function TransformMonitor() {
               >
 
                 <div
-                  className={key === "para1" ? "table-fix" : ""}
+                  className={`${key === "para1" ? "table-fix" : ""} mobile-big-text`}
                   dangerouslySetInnerHTML={{
                     __html: solution_sub_cat[key] || "",
                   }}

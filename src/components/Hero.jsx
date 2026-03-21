@@ -36,16 +36,16 @@ export default function Hero() {
             ) : (
                 <>
 
-                    <section className="position-relative" style={{ height: "65vh" }}>
+                    <section style={{ position: "relative", width: "100%", minHeight: "60vh" }}>
 
-                        <video
+                        <video style={{ zIndex: 1, objectFit: "cover" }}
                             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                             src={slideData?.media ? `${ROOT_URL}/${slideData.media}` : "null"}
                             autoPlay
                             muted
                             loop
                             playsInline
-                            style={{ zIndex: 1 }}
+                        // style={{ zIndex: 1 }}
                         />
 
                         <div
@@ -57,12 +57,14 @@ export default function Hero() {
 
                     <section className="container" style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 15px" }}>
                         <div className="row">
-                            <h1 className="text-center fw-bold mt-4"
+                            <h1
+                                className="text-center fw-bold mt-4 mobile-h1"
                                 dangerouslySetInnerHTML={{
                                     __html: slideData.title
-                                }}></h1>
+                                }}
+                            ></h1>
                             {what_section.map((item, index) => (
-                                <div className="col-lg col-md-4 col-6 mt-3" key={item.id || index}>
+                                <div className="col-lg col-md-4 col-12 mt-3" key={item.id || index}>
                                     <div className="p-3 text-center">
 
                                         <div
@@ -79,10 +81,19 @@ export default function Hero() {
                                             )}
                                         </div>
 
-                                        <h6 className="fw-bold">{item.title}</h6>
-                                        <p className="text-muted small" dangerouslySetInnerHTML={{
-                                            __html: item.description
-                                        }}></p>
+                                        <h6
+  className="fw-bold mobile-h6"
+  dangerouslySetInnerHTML={{
+    __html: item.title
+  }}
+></h6>
+
+<p
+  className="text-muted mobile-para"
+  dangerouslySetInnerHTML={{
+    __html: item.description
+  }}
+></p>
 
                                     </div>
                                 </div>

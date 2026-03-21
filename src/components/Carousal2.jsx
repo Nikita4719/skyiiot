@@ -77,7 +77,7 @@ const Carousel = () => {
                 className="carousel-wrapper"
                 style={{ backgroundImage: `url(${cbg})` }}
             >
-                <h2 className="carousel-heading text-white text-center fw-bold mb-4"
+                <h2 className="carousel-heading text-white text-center fw-bold mb-4 mobile-heading"
                     style={{ paddingTop: "1rem" }} >
                     SKY IIOT IS Everywhere
                 </h2>
@@ -110,7 +110,7 @@ const Carousel = () => {
                                             <div className="carousel-card-body">
 
                                                 <div className="card-text">
-                                                    <h4 dangerouslySetInnerHTML={{
+                                                    <h4  dangerouslySetInnerHTML={{
                                                     __html:item.heading}}></h4>
                                                     <p dangerouslySetInnerHTML={{
                                                     __html:item.paragraph}}></p>
