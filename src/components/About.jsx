@@ -61,41 +61,41 @@ export default function About() {
             </div>
           </section>
 
-         <section className="mt-3 text-white bg-dark py-5">
-  <div className="container-fluid p-0">
+          <section className="mt-3 text-white bg-dark py-4">
+            <div className="container py-4">
 
-    <div className="row align-items-center g-0 m-0">
+              <div className="row justify-content-center align-items-center g-5">
 
-      {/* TEXT */}
-      <div className="col-12 col-md-6 px-3">
-        <h2
-          className="fw-bold mb-3 mobile-heading"
-          dangerouslySetInnerHTML={{
-            __html: imageData?.heading
-          }}
-        ></h2>
+                {/* TEXT */}
+                <div className="col-12 col-md-5">
+                  <h2
+                    className="fw-bold mb-3 mobile-heading"
+                    dangerouslySetInnerHTML={{
+                      __html: imageData?.heading
+                    }}
+                  ></h2>
 
-        <p
-          className="about-text mobile-para"
-          dangerouslySetInnerHTML={{
-            __html: imageData?.paragraph
-          }}
-        ></p>
-      </div>
+                  <p
+                    className="about-text mobile-para"
+                    dangerouslySetInnerHTML={{
+                      __html: imageData?.paragraph
+                    }}
+                  ></p>
+                </div>
 
-      {/* IMAGE */}
-      <div className="col-12 col-md-6 p-0">
-        <img
-          src={imageData?.image ? `${ROOT_URL}/${imageData.image}` : ""}
-          className="w-100 d-block"
-          alt="About"
-        />
-      </div>
+                {/* IMAGE */}
+                <div className="col-12 col-md-5">
+                  <img
+                    src={imageData?.image ? `${ROOT_URL}/${imageData.image}` : ""}
+                    className="w-100 d-block"
+                    alt="About"
+                  />
+                </div>
 
-    </div>
+              </div>
 
-  </div>
-</section>
+            </div>
+          </section>
         </>
       )}
     </div >

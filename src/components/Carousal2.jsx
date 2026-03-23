@@ -28,7 +28,13 @@ const Carousel = () => {
         }
         fetchData();
     }, []);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextClick(); // auto move next
+        }, 2000); // 2 sec
 
+        return () => clearInterval(interval); // cleanup
+    }, [items, isTicking]);
     const sleep = (ms = 0) =>
         new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -53,17 +59,17 @@ const Carousel = () => {
     };
 
     const nextClick = (jump = 1) => {
-        if (!isTicking) {
-            setIsTicking(true);
+        if (isTicking) return; // prevent overlap
 
-            setItems((prev) => {
-                return prev.map(
-                    (_, i) => prev[(i - jump + bigLength) % bigLength]
-                );
-            });
+        setIsTicking(true);
 
-            setActiveIdx((prev) => (prev + 1) % bigLength);
-        }
+        setItems((prev) => {
+            return prev.map(
+                (_, i) => prev[(i - jump + bigLength) % bigLength]
+            );
+        });
+
+        setActiveIdx((prev) => (prev + 1) % bigLength);
     };
 
     const handleDotClick = (idx) => {
