@@ -370,7 +370,9 @@ body {
   }
 
 }
-
+.mobile-para {
+  line-height: 1.4; /* kam kar diya (default ~1.7 hota hai) */
+}
 @media (max-width: 768px) {
 
   .contact-left h2 {
@@ -405,7 +407,7 @@ body {
 
   .mobile-para {
     font-size: 16px !important;
-    line-height: 1.8 !important;
+    line-height: 1.6 !important;
   }
 
   .mobile-h5 {
@@ -465,7 +467,7 @@ body {
 
   .mobile-para {
     font-size: 16px !important;
-    line-height: 1.8 !important;
+    line-height: 1.6 !important;
   }
 
 }

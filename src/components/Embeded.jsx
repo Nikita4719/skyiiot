@@ -76,7 +76,7 @@ function Embeded() {
                                                 __html: section.heading
                                             }}></h3>
 
-                                            <p className="text-start text-muted mobile-para " dangerouslySetInnerHTML={{
+                                            <p className="text-start text-black mobile-para " dangerouslySetInnerHTML={{
                                                 __html: section.paragraph
                                             }}></p>
 
