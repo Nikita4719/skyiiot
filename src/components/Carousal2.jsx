@@ -105,15 +105,18 @@ const Carousel = () => {
                                             <img
                                                 src={`${ROOT_URL}/${item.image}`}
                                                 alt={item.heading}
+                                                className={i === 5 ? "special-img" : ""}
                                             />
 
                                             <div className="carousel-card-body">
 
                                                 <div className="card-text">
-                                                    <h4  dangerouslySetInnerHTML={{
-                                                    __html:item.heading}}></h4>
+                                                    <h4 dangerouslySetInnerHTML={{
+                                                        __html: item.heading
+                                                    }}></h4>
                                                     <p dangerouslySetInnerHTML={{
-                                                    __html:item.paragraph}}></p>
+                                                        __html: item.paragraph
+                                                    }}></p>
                                                 </div>
 
                                                 <div className="card-arrow">

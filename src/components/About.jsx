@@ -61,37 +61,41 @@ export default function About() {
             </div>
           </section>
 
-          <section className="container-fluid mt-3 text-white bg-dark py-5">
-            <div className="row align-items-center mt-4 mb-4 g-0">
-              <div className="col-md-2"></div>
-              <div className="col-md-4 text-end">
-                <h2
-                  className="fw-bold text-start mb-3 mobile-heading"
-                  dangerouslySetInnerHTML={{
-                    __html: imageData?.heading
-                  }}
-                ></h2>
+         <section className="mt-3 text-white bg-dark py-5">
+  <div className="container-fluid p-0">
 
-                <p
-                  className="text-start about-text mobile-para"
-                  dangerouslySetInnerHTML={{
-                    __html: imageData?.paragraph
-                  }}
-                ></p>
-              </div>
+    <div className="row align-items-center g-0 m-0">
 
-              <div className="col-md-5 text-center ">
-                <img
-                  src={imageData?.image ? `${ROOT_URL}/${imageData.image}` : "null"}
-                  className="img-fluid rounded"
-                  alt="About SkyIIOT"
-                  style={{ maxWidth: "80%" }}
-                />
-              </div>
-              <div className="col-md-1"></div>
-            </div>
+      {/* TEXT */}
+      <div className="col-12 col-md-6 px-3">
+        <h2
+          className="fw-bold mb-3 mobile-heading"
+          dangerouslySetInnerHTML={{
+            __html: imageData?.heading
+          }}
+        ></h2>
 
-          </section >
+        <p
+          className="about-text mobile-para"
+          dangerouslySetInnerHTML={{
+            __html: imageData?.paragraph
+          }}
+        ></p>
+      </div>
+
+      {/* IMAGE */}
+      <div className="col-12 col-md-6 p-0">
+        <img
+          src={imageData?.image ? `${ROOT_URL}/${imageData.image}` : ""}
+          className="w-100 d-block"
+          alt="About"
+        />
+      </div>
+
+    </div>
+
+  </div>
+</section>
         </>
       )}
     </div >
