@@ -43,7 +43,7 @@ export default function About() {
                       __html: aboutusData.heading
                     }}>
                   </h2>
-                  <p className="text-muted text-justify about-text mobile-para" dangerouslySetInnerHTML={{
+                  <p className="text-black text-justify about-text mobile-para" dangerouslySetInnerHTML={{
                     __html: aboutusData.paragraph
                   }}></p>
                 </div>

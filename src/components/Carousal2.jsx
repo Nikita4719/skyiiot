@@ -116,7 +116,7 @@ const Carousel = () => {
 
                                             <div className="carousel-card-body">
 
-                                                <div className="card-text">
+                                                <div className="card-text gap-2">
                                                     <h4 dangerouslySetInnerHTML={{
                                                         __html: item.heading
                                                     }}></h4>

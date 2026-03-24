@@ -53,7 +53,7 @@ function Embeded2() {
                                         __html: suppotredData.paragraph1
                                     }}>
                                 </h1>
-                                <p className=" text-dark mt-3 justify-text mobile-para "
+                                <p className=" text-black mt-3 justify-text mobile-para "
                                     dangerouslySetInnerHTML={{
                                         __html: suppotredData.paragraph2
                                     }}>
