@@ -82,7 +82,7 @@ export default function Header() {
                   src={`${ROOT_URL}/${navbarLogo?.logo}`}
                   alt={navbarLogo?.logo_text}
                   className="img-fluid"
-                  style={{ maxHeight: "40px", width: "auto" }}
+                  style={{ maxHeight: "100px", width: "auto" }}
                 />
               </a>
 

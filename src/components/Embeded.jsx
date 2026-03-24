@@ -20,11 +20,14 @@ import img16 from "../assets/img16.png";
 import { useState, useEffect } from "react";
 import api from "./api";
 import { ROOT_URL } from "./api";
+import { useRef } from "react";
 
 function Embeded() {
+    const [activeIndex, setActiveIndex] = useState(0);
     const [services, setServices] = useState([]);
     const [services_category, setServices_category] = useState([]);
     const [loading, setLoading] = useState(true);
+    const sectionRefs = useRef([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -47,6 +50,33 @@ function Embeded() {
 
         fetchData();
     }, []);
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = sectionRefs.current.findIndex(
+                            (el) => el === entry.target
+                        );
+                        setActiveIndex(index);
+                    }
+                });
+            },
+            {
+                threshold: 0.6,
+            }
+        );
+
+        sectionRefs.current.forEach((section) => {
+            if (section) observer.observe(section);
+        });
+
+        return () => {
+            sectionRefs.current.forEach((section) => {
+                if (section) observer.unobserve(section);
+            });
+        };
+    }, [services]);
 
     return (
 
@@ -63,9 +93,13 @@ function Embeded() {
                             <div className="section-box mb-5">
                                 <div className="row mt-3 text-center">
 
-                                    {services.map(section => (
+                                    {services.map((section, index) => (
 
-                                        <div className="section-box mb-5" key={section.id}>
+                                        <div
+                                            className="section-box mb-5"
+                                            key={section.id}
+                                            ref={(el) => (sectionRefs.current[index] = el)}
+                                        >
 
                                             <h5 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
                                                 dangerouslySetInnerHTML={{
@@ -120,20 +154,20 @@ function Embeded() {
 
 
                         <div className="col-md-6 sticky-video text-center mt-5 mb-5">
+                            <div className="position-relative w-100 h-100">
 
-                            {services
-                                .filter(section => section.image)
-                                .map(section => (
+                                {services
+                                    .filter(section => section.image)
+                                    .map((section, index) => (
+                                        <img
+                                            key={section.id}
+                                            src={`${ROOT_URL}/${section.image}`}
+                                            alt={section.title}
+                                            className={`stack-img ${activeIndex === index ? "active" : ""}`}
+                                        />
+                                    ))}
 
-                                    <img
-                                        key={section.id}
-                                        src={`${ROOT_URL}/${section.image}`}
-                                        className="feature-video d-block mx-auto"
-                                        alt={section.title}
-                                    />
-
-                                ))}
-
+                            </div>
                         </div>
                     </div>
                 )}

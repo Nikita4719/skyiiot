@@ -3,8 +3,11 @@ import iot from "../assets/iot.png";
 import { useState, useEffect } from "react";
 import api from "./api";
 import { ROOT_URL } from "./api";
+import { useRef } from "react";
 
 export default function About() {
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [imageData, setImageData] = useState({});
   const [aboutusData, setAboutusData] = useState({});
@@ -26,6 +29,23 @@ export default function About() {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+
+      if (rect.top < window.innerHeight - 100 && !isVisible) {
+        setIsVisible(true);
+      }
+    };
+
+    handleScroll(); // 🔥 THIS LINE FIXES INITIAL LOAD ISSUE
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <div>
       {loading ? (
@@ -35,7 +55,7 @@ export default function About() {
       ) : (
         <>
           <section id="about" className="py-1">
-            <div className="container" style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 15px" }}>
+            <div className="container-fluid" style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 15px" }}>
               <div className="row align-items-center g-4">
                 <div className="col-md-6">
                   <h2 className="fw-bold text-center text-md-start mb-3 mobile-heading "
@@ -61,22 +81,34 @@ export default function About() {
             </div>
           </section>
 
-          <section className="mt-3 text-white bg-dark py-4">
-            <div className="container py-4">
+          <section
+            className="relative w-full overflow-hidden reveal-section bg-image-section"
+            ref={sectionRef}
+            style={{
+              backgroundImage: imageData?.bgimage
+                ? `url(${ROOT_URL}/${imageData.bgimage})`
+                : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat"
+            }}
+          >
+
+            <div className="container py-4 mb-3 mt-3">
 
               <div className="row justify-content-center align-items-center g-5">
 
                 {/* TEXT */}
-                <div className="col-12 col-md-5">
+                <div className={`col-12 col-md-5 animate-left ${isVisible ? "show" : ""}`}>
                   <h2
-                    className="fw-bold mb-3 mobile-heading"
+                    className="fw-bold mb-3 mobile-heading text-white"
                     dangerouslySetInnerHTML={{
                       __html: imageData?.heading
                     }}
                   ></h2>
 
                   <p
-                    className="about-text mobile-para"
+                    className="about-text mobile-para text-white"
                     dangerouslySetInnerHTML={{
                       __html: imageData?.paragraph
                     }}
@@ -84,7 +116,7 @@ export default function About() {
                 </div>
 
                 {/* IMAGE */}
-                <div className="col-12 col-md-5">
+                <div className={`col-12 col-md-5 animate-right ${isVisible ? "show" : ""}`}>
                   <img
                     src={imageData?.image ? `${ROOT_URL}/${imageData.image}` : ""}
                     className="w-100 d-block"

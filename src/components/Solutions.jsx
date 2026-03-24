@@ -59,11 +59,11 @@ export default function Solutions() {
                           src={`${ROOT_URL}/${item.image}`}
                           alt={item.title}
                           className="w-100"
-                          style={{ height: "220px", objectFit: "cover" }}
+                          style={{ height: "220px", objectFit: "contain", height:"auto" }}
                         />
-                        <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
+                        {/* <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
                           NEW
-                        </span>
+                        </span> */}
                       </div>
                       <div className="card-body d-flex flex-column text-start">
                         <div className="d-flex justify-content-between align-items-start mb-3">
