@@ -190,7 +190,7 @@ export default function Faqs() {
             </div>
           </div>
 
-
+          {/* form starts here */}
           <div className="col-md-6">
             <div className="shadow rounded-4 p-4 p-md-5" style={{ backgroundColor: "#F1F5F9" }}>
               <h4 className="text-center fw-semibold mobile-heading">
