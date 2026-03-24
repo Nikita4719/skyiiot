@@ -46,19 +46,59 @@ export default function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    let updatedValue = value;
+    let errorMsg = "";
 
+    // 🔥 PHONE HANDLING (fixed)
     if (name === "phone") {
-      const onlyNumbers = value.replace(/[^0-9]/g, "");
-      setFormData({ ...formData, phone: onlyNumbers });
-    } else {
-      setFormData({ ...formData, [name]: value });
+      // only numbers
+      updatedValue = value.replace(/[^0-9]/g, "");
+
+      // limit to 10 digits
+      if (updatedValue.length > 10) {
+        updatedValue = updatedValue.slice(0, 10);
+      }
+
+      // validation only when length = 10
+      if (updatedValue.length === 10) {
+        const phonePattern = /^[6-9]\d{9}$/;
+        if (!phonePattern.test(updatedValue)) {
+          errorMsg = "Enter valid number";
+        }
+      } else if (updatedValue.length > 0 && updatedValue.length < 10) {
+        errorMsg = "Enter 10 digit number";
+      }
     }
+
+    // 🔥 EMAIL HANDLING (improved)
+    if (name === "email") {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      if (!updatedValue.trim()) {
+        errorMsg = "Email is required";
+      } else if (!emailPattern.test(updatedValue.trim())) {
+        errorMsg = "Enter valid email";
+      }
+    }
+
+    // 🔥 UPDATE STATE
+    setFormData((prev) => ({
+      ...prev,
+      [name]: updatedValue,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: errorMsg,
+    }));
   };
 
 
   const validate = () => {
     let newErrors = {};
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const phonePattern = /^[6-9]\d{9}$/; // Indian numbers
 
     if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required";
@@ -68,12 +108,16 @@ export default function Contact() {
       newErrors.lastName = "Last name is required";
     }
 
-    if (!emailPattern.test(formData.email)) {
-      newErrors.email = "Enter valid email address";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!emailPattern.test(formData.email.trim())) {
+      newErrors.email = "Enter valid email (example@gmail.com)";
     }
 
-    if (formData.phone.length !== 10) {
-      newErrors.phone = "Phone must be 10 digits";
+    if (!formData.phone) {
+      newErrors.phone = "Phone number is required";
+    } else if (!phonePattern.test(formData.phone)) {
+      newErrors.phone = "Enter valid 10-digit Indian number";
     }
 
     if (!formData.message.trim()) {
@@ -89,8 +133,8 @@ export default function Contact() {
     e.preventDefault();
 
     if (validate()) {
-
       try {
+        setLoading(true); // 🔥 start loading
 
         const payload = {
           first_name: formData.firstName,
@@ -100,12 +144,9 @@ export default function Contact() {
           message: formData.message
         };
 
-        await api.post(
-          "/contact-messages",
-          payload
-        );
+        await api.post("/contact-messages", payload);
 
-        alert("Message sent successfully!");
+        alert("✅ Message sent successfully!");
 
         setFormData({
           firstName: "",
@@ -116,14 +157,12 @@ export default function Contact() {
         });
 
         setErrors({});
-
       } catch (error) {
-
         console.error(error);
-        alert("Something went wrong while sending message");
-
+        alert("❌ Something went wrong while sending message");
+      } finally {
+        setLoading(false); // 🔥 stop loading
       }
-
     }
   };
 
@@ -273,7 +312,11 @@ export default function Contact() {
                       </div>
 
                       <div className="col-12">
-                        <button type="submit" className="btn contact-btn btn-primary">
+                        <button
+                          type="submit"
+                          className="btn contact-btn btn-primary"
+                          disabled={loading}
+                        >
                           {loading ? "Sending..." : "Send Request"}
                         </button>
                       </div>

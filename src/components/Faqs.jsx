@@ -19,17 +19,54 @@ export default function Faqs() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    let updatedValue = value;
+    let errorMsg = "";
+
+    // PHONE
     if (name === "phone") {
-      const numbersOnly = value.replace(/[^0-9]/g, "");
-      setFormData({ ...formData, phone: numbersOnly });
-    } else {
-      setFormData({ ...formData, [name]: value });
+      updatedValue = value.replace(/[^0-9]/g, "");
+
+      if (updatedValue.length > 10) {
+        updatedValue = updatedValue.slice(0, 10);
+      }
+
+      if (updatedValue.length === 10) {
+        const phonePattern = /^[6-9]\d{9}$/;
+        if (!phonePattern.test(updatedValue)) {
+          errorMsg = "Enter valid number";
+        }
+      } else if (updatedValue.length > 0 && updatedValue.length < 10) {
+        errorMsg = "Enter 10 digit number";
+      }
     }
+
+    // EMAIL
+    if (name === "email") {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      if (!updatedValue.trim()) {
+        errorMsg = "Email is required";
+      } else if (!emailPattern.test(updatedValue.trim())) {
+        errorMsg = "Enter valid email";
+      }
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: updatedValue,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: errorMsg,
+    }));
   };
 
   const validate = () => {
     let newErrors = {};
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const phonePattern = /^[6-9]\d{9}$/;
 
     if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required";
@@ -39,12 +76,16 @@ export default function Faqs() {
       newErrors.lastName = "Last name is required";
     }
 
-    if (!emailPattern.test(formData.email)) {
-      newErrors.email = "Enter valid email address";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!emailPattern.test(formData.email)) {
+      newErrors.email = "Enter valid email";
     }
 
-    if (formData.phone.length !== 10) {
-      newErrors.phone = "Phone must be 10 digits";
+    if (!formData.phone) {
+      newErrors.phone = "Phone is required";
+    } else if (!phonePattern.test(formData.phone)) {
+      newErrors.phone = "Enter valid number";
     }
 
     if (!formData.message.trim()) {
@@ -124,14 +165,14 @@ export default function Faqs() {
                   <div className="accordion-item mb-3 border rounded-3" key={faq.id}>
                     <h2 className="accordion-header mobile-heading">
                       <button
-  className={`accordion-button mobile-h6 ${index !== 0 ? "collapsed" : ""}`}
-  type="button"
-  data-bs-toggle="collapse"
-  data-bs-target={`#collapse${faq.id}`}
-  dangerouslySetInnerHTML={{
-    __html: faq.title
-  }}
-></button>
+                        className={`accordion-button mobile-h6 ${index !== 0 ? "collapsed" : ""}`}
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse${faq.id}`}
+                        dangerouslySetInnerHTML={{
+                          __html: faq.title
+                        }}
+                      ></button>
                     </h2>
 
                     <div
@@ -140,8 +181,8 @@ export default function Faqs() {
                       data-bs-parent="#faqAccordion"
                     >
                       <div className="accordion-body text-muted mobile-para">
-  {matchedAnswer ? matchedAnswer.para : "No Answer Available"}
-</div>
+                        {matchedAnswer ? matchedAnswer.para : "No Answer Available"}
+                      </div>
                     </div>
                   </div>
                 );
@@ -170,6 +211,7 @@ export default function Faqs() {
                       className="form-control bg-white border rounded-md px-3 py-2"
                       placeholder="First Name"
                     />
+                    {errors.firstName && <small className="text-danger">{errors.firstName}</small>}
                   </div>
                   <div className="col-md-6">
                     <input
@@ -180,6 +222,7 @@ export default function Faqs() {
                       className="form-control bg-white border rounded-md px-3 py-2"
                       placeholder="Last Name"
                     />
+                    {errors.lastName && <small className="text-danger">{errors.lastName}</small>}
                   </div>
                   <div className="col-md-6">
                     <input
@@ -190,6 +233,7 @@ export default function Faqs() {
                       className="form-control bg-white border rounded-md px-3 py-2"
                       placeholder="Email Address"
                     />
+                    {errors.email && <small className="text-danger">{errors.email}</small>}
                   </div>
                   <div className="col-md-6">
                     <input
@@ -200,6 +244,7 @@ export default function Faqs() {
                       className="form-control bg-white border rounded-md px-3 py-2"
                       placeholder="Phone Number"
                     />
+                    {errors.phone && <small className="text-danger">{errors.phone}</small>}
                   </div>
                   <div className="col-12">
                     <textarea
@@ -210,6 +255,7 @@ export default function Faqs() {
                       className="form-control bg-white border rounded-md px-3 py-2"
                       placeholder="Write your message here..."
                     ></textarea>
+                    {errors.message && <small className="text-danger">{errors.message}</small>}
                   </div>
                   <div className="col-12">
                     <button
