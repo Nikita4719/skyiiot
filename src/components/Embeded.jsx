@@ -153,7 +153,8 @@ function Embeded() {
                         </div>
 
 
-                        <div className="col-md-6 sticky-video text-center mt-5 mb-5">
+                        <div className="col-md-6 sticky-video text-center mt-5"
+                            style={{ marginBottom: "12rem" }}>
                             <div className="position-relative w-100 h-100">
 
                                 {services

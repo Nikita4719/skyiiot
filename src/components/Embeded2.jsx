@@ -27,8 +27,8 @@ function Embeded2() {
         fetchData();
     }, []);
     return (
-        <section className="embeded2">
-            <div className="container mb-4">
+        <section className="embeded2"  style={{ marginTop: "-60px" }}>
+            <div className="container mb-4 mt-2">
                 {loading ? (
                     <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>
                         <div className="loader"></div>
@@ -101,7 +101,7 @@ function Embeded2() {
                                     }}>
                                 </span>
 
-                                <h3 className="mt-3 fw-bold mobile-heading"
+                                <h3 className="mt-3  mobile-heading"
                                     dangerouslySetInnerHTML={{
                                         __html: offerData.heading1
                                     }}>
@@ -110,7 +110,7 @@ function Embeded2() {
                                 <div className="row mt-4 g-4">
                                     <div className="col-sm-6">
                                         <img src={offerData?.image1 ? `${ROOT_URL}/${offerData.image1}` : "null"} alt="smart" className="offer-small-img" />
-                                        <h5 className="fw-bold mobile-para"dangerouslySetInnerHTML={{
+                                        <h5 className=" mobile-para"dangerouslySetInnerHTML={{
                                                     __html:offerData.heading2}}></h5>
                                         <p className="text-muted small mt-2 mobile-para"
                                             dangerouslySetInnerHTML={{
@@ -121,7 +121,7 @@ function Embeded2() {
 
                                     <div className="col-sm-6">
                                         <img src={offerData?.image2 ? `${ROOT_URL}/${offerData.image2}` : "null"} alt="smart" className="offer-small-img" />
-                                        <h5 className="fw-bold mobile-para"dangerouslySetInnerHTML={{
+                                        <h5 className=" mobile-para"dangerouslySetInnerHTML={{
                                                     __html:offerData.heading3}}></h5>
                                         <p className="text-muted small mt-2 mobile-para"
                                             dangerouslySetInnerHTML={{
@@ -136,7 +136,7 @@ function Embeded2() {
                                 <div className="d-flex align-items-start border-bottom pb-4 mb-4">
                                     <span className="fw-bold fs-5 me-3"></span>
                                     <div>
-                                        <h5 className="fw-bold mobile-para" dangerouslySetInnerHTML={{
+                                        <h5 className=" mobile-para" dangerouslySetInnerHTML={{
                                             __html: offerData.heading4
                                         }}></h5>
                                         <p className="text-muted small mobile-para"
@@ -150,7 +150,7 @@ function Embeded2() {
                                 <div className="d-flex align-items-start">
                                     <span className="fw-bold fs-5 me-3"></span>
                                     <div>
-                                        <h5 className="fw-bold mobile-para" dangerouslySetInnerHTML={{
+                                        <h5 className=" mobile-para" dangerouslySetInnerHTML={{
                                             __html: offerData.heading5
                                         }}></h5>
                                         <p className="text-muted small mobile-para"

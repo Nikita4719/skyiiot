@@ -51,7 +51,10 @@ export default function Footer() {
                                     src={`${ROOT_URL}/uploads/qrcodes/${footer?.logo}`}
                                     alt="SkyIIOT Logo"
                                     className="footer-logo"
-                                    style={{ maxHeight: "50px", width: "auto" }}
+                                    // style={{
+                                    //     width: "auto",
+                                    //     maxHeight: window.innerWidth <= 768 ? "30px" : "60px"
+                                    // }}
                                 />
                             </a>
 

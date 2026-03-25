@@ -169,7 +169,7 @@ export default function Detail1() {
 
               <div className="col-lg-6">
                 <div className="mb-4">
-                  <h1 className="text-skyiiot fw-bold display-6 mobile-heading" dangerouslySetInnerHTML={{
+                  <h1 className="text-skyiiot fw-bold display-6 mobile-heading text-start" dangerouslySetInnerHTML={{
                     __html: detail?.title
                   }}></h1>
                   <p
@@ -182,7 +182,10 @@ export default function Detail1() {
 
 
               </div>
-              <div className="col-lg-6" style={{ marginTop: "-80px" }}>
+              <div
+                className="col-lg-6 mt-4 mt-lg-0"
+                style={{ marginTop: window.innerWidth < 768 ? "0px" : "-80px" }}
+              >
                 <img
                   src={`${ROOT_URL}/${detail?.image}`}
                   alt="Edge Analytics Frame"
@@ -219,7 +222,7 @@ export default function Detail1() {
                   <div className="col-12 col-sm-6">
                     <div className="mb-3">
                       <span
-                        className="circle-icon"
+                        className="circle-icon fw-bold mobile-para"
                         dangerouslySetInnerHTML={{ __html: detail?.subspan1 }}
                       ></span>
                     </div>
@@ -232,7 +235,7 @@ export default function Detail1() {
                   <div className="col-12 col-sm-6">
                     <div className="mb-3">
                       <span
-                        className="circle-icon"
+                        className="circle-icon fw-bold mobile-para"
                         dangerouslySetInnerHTML={{ __html: detail?.subspan2 }}
                       ></span>
                     </div>

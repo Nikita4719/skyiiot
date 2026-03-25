@@ -165,23 +165,24 @@ export default function Testimonial() {
         <div className="container">
           <div className="row align-items-start g-5">
             <div className="col-lg-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4 mobile-heading"
-                dangerouslySetInnerHTML={{ __html: poweredData?.heading1 }}></h2>
+              <h2
+                className="text-2xl sm:text-3xl font-semibold text-black mb-4 mobile-heading"
+                dangerouslySetInnerHTML={{ __html: poweredData?.heading1 }}
+              ></h2>
               <h6
-                className="text-black fw-semibold mt-4 mobile-h6"
+                className="text-2xl sm:text-3xl font-bold text-black mb-4 mobile-heading"
                 dangerouslySetInnerHTML={{ __html: poweredData.heading2 }}
               ></h6>
 
-              <p className="text-black mb-2 mobile-para"
+              <p className="text-black mb-4 mobile-para" style={{ textAlign: "justify", }}
                 dangerouslySetInnerHTML={{ __html: poweredData.paragraph1 }}></p>
 
 
-              <h6 className="text-black fw-semibold mt-4 mobile-h6"
-                dangerouslySetInnerHTML={{ __html: poweredData.heading3 }}>
-              </h6>
-              <p
-                className="text-black mb-2 mobile-para"
-                style={{ textAlign: "justify" }}
+              <h6
+                className="text-2xl sm:text-3xl font-bold text-black mb-4 mobile-heading"
+                dangerouslySetInnerHTML={{ __html: poweredData.heading3 }}
+              ></h6>
+               <p className="text-black mb-4 mobile-para" style={{ textAlign: "justify", }}
                 dangerouslySetInnerHTML={{ __html: poweredData?.paragraph2 }}
               ></p>
 

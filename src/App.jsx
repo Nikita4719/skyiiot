@@ -15,7 +15,7 @@ import Details from "./components/Details";
 import Transform_monitor from "./components/Transform_monitor";
 import "./index.css";
 import Carousal2 from "./components/Carousal2";
-
+import { useEffect, useState } from "react";
 
 function Home() {
   return (
@@ -33,6 +33,10 @@ function Home() {
 }
 
 function App() {
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
   return (
     <BrowserRouter>
       <Header />

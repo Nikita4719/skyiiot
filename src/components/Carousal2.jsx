@@ -116,11 +116,13 @@ const Carousel = () => {
 
                                             <div className="carousel-card-body">
 
-                                                <div className="card-text gap-2">
-                                                    <h4 dangerouslySetInnerHTML={{
+                                                <div className="card-text ">
+                                                    <h4 style={{ marginBottom: "2px" }}
+                                                     dangerouslySetInnerHTML={{
                                                         __html: item.heading
                                                     }}></h4>
-                                                    <p dangerouslySetInnerHTML={{
+                                                    <p style={{ marginTop: "0" }} 
+                                                    dangerouslySetInnerHTML={{
                                                         __html: item.paragraph
                                                     }}></p>
                                                 </div>

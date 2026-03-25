@@ -81,7 +81,7 @@ export default function About_us() {
 
                 <div className="col-12 col-md-6">
                   <div className="row g-3">
-                    <div className="col-12 col-md-6">
+                     <div className="col-6 col-md-6 text-center">
                       <img
                         src={about_enterprise?.image1 ? `${ROOT_URL}/${about_enterprise.image1}` : ""}
                         alt=""
@@ -93,7 +93,7 @@ export default function About_us() {
                         }}
                       />
                     </div>
-                    <div className="col-12 col-md-6">
+                    <div className="col-6 col-md-6 text-center">
                       <img
                         src={about_enterprise?.image2 ? `${ROOT_URL}/${about_enterprise.image2}` : ""}
                         alt=""

@@ -79,11 +79,14 @@ export default function Header() {
             <div className="container-fluid px-3 px-md-4">
               <a className='navbar-brand' href='/'>
                 <img
-                  src={`${ROOT_URL}/${navbarLogo?.logo}`}
-                  alt={navbarLogo?.logo_text}
-                  className="img-fluid"
-                  style={{ maxHeight: "100px", width: "auto" }}
-                />
+  src={`${ROOT_URL}/${navbarLogo?.logo}`}
+  alt={navbarLogo?.logo_text}
+  className="img-fluid navbar-logo"
+  // style={{
+  //   maxHeight: window.innerWidth < 768 ? "50px" : "100px",
+  //   width: "auto"
+  // }}
+/>
               </a>
 
               <button
