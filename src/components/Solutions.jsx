@@ -38,28 +38,28 @@ export default function Solutions() {
         </div>
       ) : (
         <>
-          <section className="py-0 bg-light">
+          <section className="py-0 bg-white">
             <div className="mb-5">
-             <img
-  src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
-  alt="background img"
-  className="img-fluid w-100"
-  style={{ maxHeight: "300px", objectFit: "cover" }}
-/>
+              <img
+                src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
+                alt="background img"
+                className="img-fluid w-100"
+                style={{ maxHeight: "300px", objectFit: "cover" }}
+              />
             </div>
 
             <div className="container text-center">
               <div className="row g-4">
                 {/* <div className="col-md-3"> */}
                 {solution_cat.map((item) => (
-                 <div className="col-6 col-md-3" key={item.id}>
+                  <div className="col-6 col-md-3" key={item.id}>
                     <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
                       <div className="position-relative">
                         <img
                           src={`${ROOT_URL}/${item.image}`}
                           alt={item.title}
                           className="w-100"
-                          style={{ height: "220px", objectFit: "contain", height:"auto" }}
+                          style={{ height: "220px", objectFit: "contain", height: "auto" }}
                         />
                         {/* <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
                           NEW
@@ -98,7 +98,7 @@ export default function Solutions() {
             </div>
           </section>
 
-          <section className="py-2 bg-light">
+          <section className="py-2 bg-white">
             <div className="container">
               <div className="row g-4">
 

@@ -147,7 +147,7 @@ export default function Faqs() {
 
 
   return (
-    <section className="py-5 bg-light">
+    <section className="py-2 bg-white">
       <div className="container">
         <h2 className="text-center fw-bold mb-5 mobile-heading">
           Frequently Asked Questions

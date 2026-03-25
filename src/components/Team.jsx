@@ -39,7 +39,7 @@ export default function Team() {
                     <div className="loader"></div>
                 </div>
             ) : (
-                <section className="team-section py-0 gap-0">
+                <section className="team-section bg-white py-0 gap-0">
                     <div className="container">
                         <div className="row align-items-center g-1 ">
                             <h1 className=" fw-bold text-center mt-3"> Our Team</h1>

@@ -128,7 +128,7 @@ export default function Testimonial() {
         </div>
       </section>
 
-      <section className="automation-section py-5 bg-light">
+      <section className="automation-section py-5 bg-white">
         <div className="container">
           <div className="row align-items-start g-5">
 
@@ -161,7 +161,7 @@ export default function Testimonial() {
         </div>
       </section>
 
-      <section className="automation-section py-2 bg-light">
+      <section className="automation-section py-2 bg-white">
         <div className="container">
           <div className="row align-items-start g-5">
             <div className="col-lg-6">

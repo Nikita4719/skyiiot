@@ -207,7 +207,7 @@ export default function Detail1() {
         />
 
         {/* Content + Form Wrapper */}
-        <div className="bg-light py-4">
+        <div className="bg-white py-4">
           <div className="container">
             <div className="row g-4 align-items-start">
 
