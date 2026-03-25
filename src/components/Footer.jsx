@@ -86,7 +86,7 @@ export default function Footer() {
                             }}></h6>
                             <ul className="list-unstyled">
                                 {footer?.links?.map((item, i) => (
-                                    <li key={i} className="mb-3">
+                                    <li key={i} className="mb-0">
                                         <NavLink
                                             to={item.link || "#"}
                                             className={({ isActive }) =>
@@ -123,10 +123,10 @@ export default function Footer() {
                         </div>
                     </div>
                 )}
-                <hr className="footer-line" />
+                <hr className="footer-line " />
 
-                <div className="text-center small">
-                    © 2026 Skyiiot. All Rights Reserved.
+                <div className="text-center small text-white">
+                   © 2025-2026 SKYLABS TELEMATICS PVT. LTD 
                 </div>
             </div>
         </footer>

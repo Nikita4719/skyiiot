@@ -131,6 +131,7 @@ a {
   flex: 1;
   min-width: 0;
   margin-bottom: auto;
+  
 }
 
 .carousel-card-body h4 {
@@ -140,7 +141,7 @@ a {
 
 .carousel-card-body p {
   font-size: 14px;
-  color: #666;
+  color: black;
 }
 
 /* MOBILE TEXT */
@@ -213,7 +214,7 @@ a {
 
 /* POSITION FIX */
 .carousel__btn--prev {
-  left: 10px;
+  left: 20px;
 }
 
 .carousel__btn--next {

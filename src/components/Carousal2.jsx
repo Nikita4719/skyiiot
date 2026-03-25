@@ -117,7 +117,7 @@ const Carousel = () => {
                                             <div className="carousel-card-body">
 
                                                 <div className="card-text ">
-                                                    <h4 style={{ marginBottom: "2px" }}
+                                                    <h4 style={{ marginBottom: "1px" }}
                                                      dangerouslySetInnerHTML={{
                                                         __html: item.heading
                                                     }}></h4>

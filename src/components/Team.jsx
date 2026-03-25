@@ -47,7 +47,7 @@ export default function Team() {
                                 <h1 dangerouslySetInnerHTML={{
                                     __html: teamData[activeIndex]?.heading
                                 }}></h1>
-                                <h2 dangerouslySetInnerHTML={{
+                                <h2 className="text-muted fw-semibold" dangerouslySetInnerHTML={{
                                     __html: teamData[activeIndex]?.paragraph
                                 }}></h2>
                                 {/* <p></p> */}

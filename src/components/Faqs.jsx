@@ -149,9 +149,9 @@ export default function Faqs() {
   return (
     <section className="py-2 bg-white">
       <div className="container">
-        <h2 className="text-center fw-bold mb-5 mobile-heading">
+        <h1 className="text-center fw-bold mb-5 mobile-heading">
           Frequently Asked Questions
-        </h2>
+        </h1>
 
         <div className="row g-5">
           <div className="col-md-6">
@@ -163,7 +163,7 @@ export default function Faqs() {
 
                 return (
                   <div className="accordion-item mb-3 border rounded-3" key={faq.id}>
-                    <h2 className="accordion-header mobile-heading">
+                    <h2 className="accordion-header text-black mobile-heading">
                       <button
                         className={`accordion-button mobile-h6 ${index !== 0 ? "collapsed" : ""}`}
                         type="button"
