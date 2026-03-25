@@ -62,7 +62,7 @@ export default function TransformMonitor() {
       )}
 
       {/* Main Section */}
-      <section className="py-5 bg-light">
+      <section className="py-5 bg-white">
         <div className="container">
           <div className="row g-4 align-items-start">
 
