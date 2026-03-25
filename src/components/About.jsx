@@ -58,7 +58,7 @@ export default function About() {
             <div className="container-fluid" style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 15px" }}>
               <div className="row align-items-center g-4">
                 <div className="col-md-6">
-                  <h2 className="fw-bold text-center text-md-start mb-3 mobile-heading "
+                  <h2 className="fw-bold text-start text-md-start mb-3 mobile-heading "
                     dangerouslySetInnerHTML={{
                       __html: aboutusData.heading
                     }}>

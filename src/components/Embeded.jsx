@@ -36,6 +36,7 @@ function Embeded() {
                 const [servicesRes, categoryRes] = await Promise.all([
                     api.get("/services"),
                     api.get("/services-category")
+
                 ]);
 
                 setServices(servicesRes.data);
@@ -93,60 +94,65 @@ function Embeded() {
                             <div className="section-box mb-5">
                                 <div className="row mt-3 text-center">
 
-                                    {services.map((section, index) => (
+                                    {services.map((section, index) => {
+                                        console.log(section.heading);
+                                        return (
+                                            <div className="col-12" key={section.id}>
+                                                <div
+                                                    className="section-box mb-5"
+                                                    key={section.id}
+                                                    ref={(el) => (sectionRefs.current[index] = el)}
+                                                >
 
-                                        <div
-                                            className="section-box mb-5"
-                                            key={section.id}
-                                            ref={(el) => (sectionRefs.current[index] = el)}
-                                        >
+                                                    <h5 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: section.title
+                                                        }}></h5>
 
-                                            <h5 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
-                                                dangerouslySetInnerHTML={{
-                                                    __html: section.title
-                                                }}></h5>
+                                                    <h3
+                                                        className="text-start service-heading"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: section.heading
+                                                        }}
+                                                    ></h3>
 
-                                            <h3 className="text-start mobile-heading " dangerouslySetInnerHTML={{
-                                                __html: section.heading
-                                            }}></h3>
+                                                    <p className="text-start text-black mobile-para " dangerouslySetInnerHTML={{
+                                                        __html: section.paragraph
+                                                    }}></p>
 
-                                            <p className="text-start text-black mobile-para " dangerouslySetInnerHTML={{
-                                                __html: section.paragraph
-                                            }}></p>
+                                                    <div className="row mt-3 text-center">
 
-                                            <div className="row mt-3 text-center">
+                                                        {services_category
+                                                            .filter(icon => icon.service_id === section.id)
+                                                            .map(icon => (
 
-                                                {services_category
-                                                    .filter(icon => icon.service_id === section.id)
-                                                    .map(icon => (
+                                                                <div className="col-6 col-md-3 mb-4" key={icon.id}>
 
-                                                        <div className="col-6 col-md-3 mb-4" key={icon.id}>
+                                                                    <div className="feature-img-wrapper">
 
-                                                            <div className="feature-img-wrapper">
+                                                                        <Link to={`/details/${icon.id}`}>
 
-                                                                <Link to={`/details/${icon.id}`}>
+                                                                            <img
+                                                                                src={`${ROOT_URL}/${icon.icon}`}
+                                                                                alt={icon.link}
+                                                                                className="feature-img"
+                                                                            />
 
-                                                                    <img
-                                                                        src={`${ROOT_URL}/${icon.icon}`}
-                                                                        alt={icon.link}
-                                                                        className="feature-img"
-                                                                    />
+                                                                        </Link>
 
-                                                                </Link>
+                                                                    </div>
 
-                                                            </div>
+                                                                    <p className="feature-title">{icon.link}</p>
 
-                                                            <p className="feature-title">{icon.link}</p>
+                                                                </div>
 
-                                                        </div>
+                                                            ))}
 
-                                                    ))}
+                                                    </div>
 
+                                                </div>
                                             </div>
-
-                                        </div>
-
-                                    ))}
+                                        )})}
 
                                 </div>
                             </div>

@@ -42,8 +42,8 @@ export default function Team() {
                 <section className="team-section bg-white py-0 gap-0">
                     <div className="container">
                         <div className="row align-items-center g-1 ">
-                            <h1 className=" fw-bold text-center mt-3"> Our Team</h1>
-                            <div className="col-lg-6 team-details">
+                            <h1 className=" fw-bold text-center mt-2"> Our Team</h1>
+                            <div className="col-lg-6 team-details mt-4">
                                 <h1 dangerouslySetInnerHTML={{
                                     __html: teamData[activeIndex]?.heading
                                 }}></h1>
