@@ -80,14 +80,21 @@ const Carousel = () => {
     return (
         <div>
             <div
-                className="carousel-wrapper"
-                style={{ backgroundImage: `url(${cbg})` }}
+                className="container-fluid"
+                style={{
+                    backgroundImage: `url(${cbg})`,
+                    paddingLeft: "clamp(10px, 3vw, 30px)",
+                    paddingRight: "clamp(10px, 3vw, 30px)"
+                }}
             >
-                <h2 className="carousel-heading text-white text-center fw-bold mb-4 mobile-heading"
+                <h2 className="carousel-heading text-white text-center fw-bold mb-1 mobile-heading"
                     style={{ paddingTop: "1rem" }} >
                     SKY IIOT IS Everywhere
                 </h2>
-                <div className="carousel__wrap">
+                <div
+                    className="carousel__wrap"
+                    style={{ paddingLeft: "0", marginLeft: "0" }}
+                >
                     <div className="carousel__inner">
 
                         <button
@@ -118,13 +125,13 @@ const Carousel = () => {
 
                                                 <div className="card-text ">
                                                     <h4 style={{ marginBottom: "1px" }}
-                                                     dangerouslySetInnerHTML={{
-                                                        __html: item.heading
-                                                    }}></h4>
-                                                    <p style={{ marginTop: "0" }} 
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: item.paragraph
-                                                    }}></p>
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: item.heading
+                                                        }}></h4>
+                                                    <p style={{ marginTop: "0" }}
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: item.paragraph
+                                                        }}></p>
                                                 </div>
 
                                                 <div className="card-arrow">
@@ -149,7 +156,7 @@ const Carousel = () => {
 
                         {/* DOTS */}
 
-                        <div className="carousel__dots">
+                        {/* <div className="carousel__dots mt-2 mb-3">
 
                             {everywhereData.map((_, idx) => (
                                 <button
@@ -159,7 +166,7 @@ const Carousel = () => {
                                 />
                             ))}
 
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>

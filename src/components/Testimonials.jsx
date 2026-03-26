@@ -46,11 +46,11 @@ export default function Testimonial() {
 
   return (
     <div>
-      <section className="testimonial-section py-4 bg-white">
+      <section className="testimonial-section py-4 mt-4 bg-white">
         <div className="container">
           <div className="testimonial-wrapper position-relative p-4 p-md-5">
 
-            <div className="testimonial-label">
+            <div className="testimonial-label mt-4">
               <span className="icon-circle">👍</span>
               Testimonial
             </div>
@@ -68,7 +68,7 @@ export default function Testimonial() {
               <div className="col-md-6">
                 <div className="quote-mark">“</div>
 
-                <p className="testimonial-text mobile-para"
+                <p className="testimonial-text mobile-para para2-center"
                   dangerouslySetInnerHTML={{
                     __html: testimonial.para2
                   }}>
@@ -80,7 +80,8 @@ export default function Testimonial() {
                   }}>
                 </h5>
 
-                <p className="text-muted small mobile-para"
+                <p
+                  className="testimonial-text justify-text align-item-center mobile-para para1-shift"
                   dangerouslySetInnerHTML={{
                     __html: testimonial.para1
                   }}>
@@ -104,7 +105,7 @@ export default function Testimonial() {
               />
             </div>
 
-            <div className="testimonial-buttons d-flex justify-content-between mt-4 mt-md-5">
+            <div className="testimonial-buttons d-flex justify-content-between">
               <button
                 className="btn btn-primary px-4"
                 onClick={prevSlide}
@@ -130,10 +131,10 @@ export default function Testimonial() {
 
       <section className="automation-section py-5 bg-white">
         <div className="container">
-          <div className="row align-items-start g-5">
+          <div className="row g-5">
 
-            <div className="col-lg-6">
-              <div className="video-wrapper">
+            <div className="col-lg-6 d-flex">
+              <div className="video-wrapper w-100">
                 <video
                   src={smarterData?.media ? `${ROOT_URL}/${smarterData.media}` : "null"}
                   autoPlay
@@ -182,7 +183,7 @@ export default function Testimonial() {
                 className="text-2xl sm:text-3xl font-bold text-black mb-4 mobile-heading"
                 dangerouslySetInnerHTML={{ __html: poweredData.heading3 }}
               ></h6>
-               <p className="text-black mb-4 mobile-para" style={{ textAlign: "justify", }}
+              <p className="text-black mb-4 mobile-para" style={{ textAlign: "justify", }}
                 dangerouslySetInnerHTML={{ __html: poweredData?.paragraph2 }}
               ></p>
 

@@ -59,7 +59,7 @@ export default function Solutions() {
                           src={`${ROOT_URL}/${item.image}`}
                           alt={item.title}
                           className="w-100"
-                          style={{  objectFit: "contain", height: "auto" }}
+                          style={{ objectFit: "contain", height: "auto" }}
                         />
                         {/* <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
                           NEW
@@ -100,38 +100,46 @@ export default function Solutions() {
 
           <section className="py-2 bg-white">
             <div className="container">
-              <div className="row g-4">
+              <div className="row g-4 mb-4">
 
                 <div className="col-md-6">
-                  <img
-                    src={solution_image?.image1 ? `${ROOT_URL}/${solution_image.image1}` : "null"}
-                    alt="sol5"
-                    className="img-fluid "
-                  />
+                  <div className="solution-img-box">
+                    <img
+                      src={solution_image?.image1 ? `${ROOT_URL}/${solution_image.image1}` : "null"}
+                      alt="sol5"
+                      className="img-fluid w-100 rounded-0"
+                    />
+                  </div>
                 </div>
 
                 <div className="col-md-6">
-                  <img
-                    src={solution_image?.image2 ? `${ROOT_URL}/${solution_image.image2}` : "null"}
-                    alt="sol6"
-                    className="img-fluid w-100 rounded-4"
-                  />
+                  <div className="solution-img-box">
+                    <img
+                      src={solution_image?.image2 ? `${ROOT_URL}/${solution_image.image2}` : "null"}
+                      alt="sol6"
+                      className="img-fluid w-100 rounded-0"
+                    />
+                  </div>
                 </div>
 
                 <div className="col-md-6">
-                  <img
-                    src={solution_image?.image3 ? `${ROOT_URL}/${solution_image.image3}` : "null"}
-                    alt="sol7"
-                    className="img-fluid w-100 rounded-4"
-                  />
+                  <div className="solution-img-box">
+                    <img
+                      src={solution_image?.image3 ? `${ROOT_URL}/${solution_image.image3}` : "null"}
+                      alt="sol7"
+                      className="img-fluid w-100 rounded-2"
+                    />
+                  </div>
                 </div>
 
                 <div className="col-md-6">
-                  <img
-                    src={solution_image?.image4 ? `${ROOT_URL}/${solution_image.image4}` : "null"}
-                    alt="sol8"
-                    className="img-fluid w-100 rounded-4"
-                  />
+                  <div className="solution-img-box">
+                    <img
+                      src={solution_image?.image4 ? `${ROOT_URL}/${solution_image.image4}` : "null"}
+                      alt="sol8"
+                      className="img-fluid w-100 rounded-2"
+                    />
+                  </div>
                 </div>
 
               </div>

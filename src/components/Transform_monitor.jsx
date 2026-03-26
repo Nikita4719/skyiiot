@@ -52,11 +52,11 @@ export default function TransformMonitor() {
     <div>
       {/* Top Banner */}
       {solution_sub_cat.image1 && (
-        <section>
+        <section className="pt-5 rounded-4 overflow-hidden">
           <img
             src={`${ROOT_URL}/${solution_sub_cat.image1}`}
             alt={solution_sub_cat.para3 || "Banner"}
-            className="solution-banner-img"
+            className="solution-banner-img "
           />
         </section>
       )}
@@ -69,12 +69,15 @@ export default function TransformMonitor() {
             {/* Left Column - Main Image */}
             <div className="col-lg-6 d-flex flex-column flex-lg-row align-items-center">
               <div className="mb-3 mb-lg-0 me-lg-3">
-                <img
-                  src={selectedImage}
-                  alt={solution_sub_cat.heading}
-                  className="img-fluid rounded-lg selected-img"
-                  style={{ objectFit: "cover" }}
-                />
+
+                <div className="rounded-lg overflow-hidden selected-img-wrapper">
+                  <img
+                    src={selectedImage}
+                    alt={solution_sub_cat.heading}
+                    className="w-100 h-100"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
               </div>
 
               {/* Thumbnails Vertical */}
@@ -138,7 +141,7 @@ export default function TransformMonitor() {
 
       {/* Optional Secondary Banner */}
       {solution_sub_cat.imagechart && (
-        <section className="mb-5">
+        <section className="mb-0">
           <img
             src={`${ROOT_URL}/${solution_sub_cat.imagechart}`}
             alt="Chart Banner"

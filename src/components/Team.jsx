@@ -39,35 +39,50 @@ export default function Team() {
                     <div className="loader"></div>
                 </div>
             ) : (
-                <section className="team-section bg-white py-0 gap-0">
-                    <div className="container">
-                        <div className="row align-items-center g-1 ">
-                            <h1 className=" fw-bold text-center mt-2"> Our Team</h1>
-                            <div className="col-lg-6 team-details mt-4">
-                                <h1 dangerouslySetInnerHTML={{
-                                    __html: teamData[activeIndex]?.heading
-                                }}></h1>
-                                <h2 className="text-muted fw-semibold" dangerouslySetInnerHTML={{
-                                    __html: teamData[activeIndex]?.paragraph
-                                }}></h2>
-                                {/* <p></p> */}
-                            </div>
+                <section className="container mt-2">
+                    <h1 className="text-center fw-bold mb-5">
+                        Our Team
+                    </h1>
 
-                            <div className="col-lg-6 text-center">
-                                <div className="image-stack">
-                                    {teamData.map((member, index) => (
-                                        <img
-                                            key={index}
-                                            src={`${ROOT_URL}/${member.image}`}
-                                            alt={member.name}
-                                            className={`team-img ${index === activeIndex ? "active" : ""
-                                                }`}
-                                        />
-                                    ))}
+                    <div className="row row-custom-gap">
+                        {teamData.map((member, index) => (
+                            <div key={index} className="col-12 col-sm-6 col-lg-4">
+
+                                <div className="team-card text-center position-relative">
+
+                                    {/* Card Background */}
+                                    <div className="card shadow border-0 pt-3 pb-2"></div>
+
+                                    {/* Content */}
+                                    <div className="team-content text-center">
+                                        <div className="img-wrapper">
+                                            <img
+                                                src={`${ROOT_URL}/${member.image}`}
+                                                alt={member.name}
+                                                // className={`team-img rounded-circle shadow`} 
+                                                className="team-img rounded-circle shadow team-bounce"
+                                            />
+                                        </div>
+
+
+                                        <div className="team-info">
+                                            <h1 className=" text-black " dangerouslySetInnerHTML={{
+                                                    __html: member.heading,
+                                                }}></h1>
+
+                                            <p
+                                                className="text-black"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: member.paragraph
+                                                }}
+                                            ></p>
+                                        </div>
+
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 </section>
             )}

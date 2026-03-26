@@ -13,7 +13,8 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  margin: 0;
+  // overflow-x: hidden;
 }
 
 ul {
@@ -29,27 +30,41 @@ a {
 /* ================= WRAPPER ================= */
 
 .carousel__wrap {
-  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 60px;
   padding-top: 1rem;
+
+  // margin-left: -30px;
+  // margin-right: -30px;
+
+  width: calc(100% + 60px);
+  max-width: unset;   /* 🔥 ADD THIS */
+   margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .carousel__inner {
   width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
   position: relative;
-  padding: 0 15px;
+  // padding: 0 15px;
 }
 
 /* IMPORTANT FIX */
 .carousel__container {
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 /* ================= SLIDES ================= */
@@ -57,9 +72,16 @@ a {
 .carousel__slide-list {
   display: flex;
   gap: 15px;
+ padding-left: 10px;
+  padding-right: 15px;
+  // width: calc(100% + 60px); 
   transition: transform 0.3s ease-in-out;
 }
-
+// .carousel__wrap {
+//   margin-left: -30px;
+//   margin-right: -30px;
+//   width: calc(100% + 60px); /* 👈 IMPORTANT */
+// }
 .carousel__slide-item {
   min-width: 260px;
   // flex: 0 0 260px;  
@@ -96,19 +118,25 @@ a {
 
 .carousel__slide-item img {
   width: 100%;
-  height: 220px;        /* FIXED HEIGHT */
-  object-fit: cover;    /* AUTO CROP (best) */
+  height: 220px;
+  /* FIXED HEIGHT */
+  object-fit: cover;
+  /* AUTO CROP (best) */
   object-position: center;
-   transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
+
 .carousel__slide-item:hover img {
   transform: scale(1.05);
 }
+
 /* MOBILE IMAGE */
 @media (max-width: 768px) {
   .carousel__slide-item img {
-    width: 260px;     /* full card width */
-    height: 180px;   /* fixed height */
+    width: 260px;
+    /* full card width */
+    height: 180px;
+    /* fixed height */
     object-fit: cover;
   }
 }
@@ -131,7 +159,7 @@ a {
   flex: 1;
   min-width: 0;
   margin-bottom: auto;
-  
+
 }
 
 .carousel-card-body h4 {
@@ -214,7 +242,7 @@ a {
 
 /* POSITION FIX */
 .carousel__btn--prev {
-  left: 20px;
+  left: 5px;
 }
 
 .carousel__btn--next {
@@ -265,8 +293,10 @@ a {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 15px;   /* 👈 adjust this */
+  bottom: 10px;
+  /* 👈 adjust this */
 }
+
 @media (max-width: 768px) {
   .carousel__dots {
     bottom: 5px;

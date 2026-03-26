@@ -107,7 +107,7 @@ export default function Footer() {
                             <div className="row g-2">
                                 {qrCodes.map((qr, i) => (
                                     <div className="col-6 text-center mb-3" key={i}>
-                                        <div className="bg-white p-1 rounded shadow d-inline-block">
+                                        <div className="bg-white p-1 shadow d-inline-block">
                                             <img
                                                 src={`${ROOT_URL}/uploads/qrcodes/${qr}`}
                                                 alt={`QR ${i + 1}`}
