@@ -51,10 +51,7 @@ export default function Footer() {
                                     src={`${ROOT_URL}/uploads/qrcodes/${footer?.logo}`}
                                     alt="SkyIIOT Logo"
                                     className="footer-logo"
-                                    // style={{
-                                    //     width: "auto",
-                                    //     maxHeight: window.innerWidth <= 768 ? "30px" : "60px"
-                                    // }}
+                               
                                 />
                             </a>
 
@@ -125,8 +122,8 @@ export default function Footer() {
                 )}
                 <hr className="footer-line " />
 
-                <div className="text-center small text-white">
-                   © 2025-2026 SKYLABS TELEMATICS PVT. LTD 
+                <div className="text-center small text-white mt-4 mb-3">
+                    © 2025-2026 SKYLABS TELEMATICS PVT. LTD
                 </div>
             </div>
         </footer>

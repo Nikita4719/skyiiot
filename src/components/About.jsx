@@ -54,7 +54,7 @@ export default function About() {
         </div>
       ) : (
         <>
-          <section id="about" className="py-1">
+          <section id="about" className="py-4">
             <div className="container-fluid" style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 15px" }}>
               <div className="row align-items-center g-4">
                 <div className="col-md-6">

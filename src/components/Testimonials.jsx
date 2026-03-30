@@ -50,10 +50,10 @@ export default function Testimonial() {
         <div className="container">
           <div className="testimonial-wrapper position-relative p-4 p-md-5">
 
-            <div className="testimonial-label mt-4">
+            {/* <div className="testimonial-label mt-4">
               <span className="icon-circle">👍</span>
               Testimonial
-            </div>
+            </div> */}
 
             <div className="row align-items-center g-4">
 

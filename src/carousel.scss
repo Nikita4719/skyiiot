@@ -1,304 +1,205 @@
-html {
-  box-sizing: border-box;
-
-  @media (max-width: 425px) {
-    font-size: 8px;
-  }
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-  // overflow-x: hidden;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* ================= WRAPPER ================= */
-
-.carousel__wrap {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 60px;
-  padding-top: 1rem;
-
-  // margin-left: -30px;
-  // margin-right: -30px;
-
-  width: calc(100% + 60px);
-  max-width: unset;   /* 🔥 ADD THIS */
-   margin-left: 0;
-  margin-right: 0;
-  width: 100%;
-}
-
-.container-fluid {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.carousel__inner {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  // padding: 0 15px;
-}
-
-/* IMPORTANT FIX */
-.carousel__container {
-  overflow: visible;
-  width: 100%;
-  padding-bottom: 20px;
-}
-
-/* ================= SLIDES ================= */
-
 .carousel__slide-list {
   display: flex;
-  gap: 15px;
- padding-left: 10px;
-  padding-right: 15px;
-  // width: calc(100% + 60px); 
-  transition: transform 0.3s ease-in-out;
+  align-items: stretch;
+  transition: transform 0.5s ease;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transform: translateZ(0);
+  will-change: transform;
+  gap: 20px;
+  /* 🔥 USE GAP INSTEAD OF MARGIN */
 }
-// .carousel__wrap {
-//   margin-left: -30px;
-//   margin-right: -30px;
-//   width: calc(100% + 60px); /* 👈 IMPORTANT */
-// }
+
+/* 🔥 FIX: equal width + no shrink */
 .carousel__slide-item {
-  min-width: 260px;
-  // flex: 0 0 260px;  
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #fcfafa;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  flex: 0 0 270px;
 }
 
-/* DEFAULT (desktop first) */
-.carousel__slide-item {
-  flex: 0 0 300px;
-}
-
-/* TABLET */
-@media (max-width: 1024px) {
-  .carousel__slide-item {
-    flex: 0 0 260px;
-  }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .carousel__slide-item {
-    flex: 0 0 220px;
-  }
-}
-
-/* ================= IMAGE FIX ================= */
-
-.carousel__slide-item img {
+.carousel__container {
   width: 100%;
-  height: 220px;
-  /* FIXED HEIGHT */
-  object-fit: cover;
-  /* AUTO CROP (best) */
-  object-position: center;
-  transition: transform 0.3s ease;
+  overflow: hidden;
+  padding: 0 40px; /* 🔥 equal left-right spacing */
+  box-sizing: border-box;
 }
 
-.carousel__slide-item:hover img {
-  transform: scale(1.05);
-}
-
-/* MOBILE IMAGE */
-@media (max-width: 768px) {
-  .carousel__slide-item img {
-    width: 260px;
-    /* full card width */
-    height: 180px;
-    /* fixed height */
-    object-fit: cover;
-  }
-}
-
-
-
-
-/* ================= CARD BODY ================= */
-
-.carousel-card-body {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  gap: 10px;
-}
-
-/* TEXT FIX */
-.card-text {
-  flex: 1;
-  min-width: 0;
-  margin-bottom: auto;
-
-}
-
-.carousel-card-body h4 {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.carousel-card-body p {
-  font-size: 14px;
-  color: black;
-}
-
-/* MOBILE TEXT */
-@media (max-width: 768px) {
-  .carousel-card-body {
-    padding: 12px;
-  }
-
-  .carousel-card-body h4 {
-    font-size: 16px;
-  }
-
-  .carousel-card-body p {
-    font-size: 13px;
-  }
-}
-
-/* ================= BLUE ARROW BUTTON FIX ================= */
-
-.card-arrow {
-  flex-shrink: 0;
-}
-
-.arrow-btn {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  background: #2f66d4;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
+.carousel__wrap {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
 
-/* MOBILE BUTTON */
-@media (max-width: 768px) {
-  .arrow-btn {
-    width: 36px;
-    height: 36px;
-  }
-}
-
-.arrow-btn:hover {
-  background: #1e4fb1;
-}
-
-/* ================= SIDE NAV BUTTONS (‹ ›) ================= */
-
-.carousel__btn {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
-  background: #fff;
-  color: #000;
-  border: none;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-/* POSITION FIX */
-.carousel__btn--prev {
+.carousel__btn:first-of-type {
   left: 5px;
 }
 
-.carousel__btn--next {
-  right: 10px;
+.carousel__btn:last-of-type {
+  right: 15px;
 }
 
-/* MOBILE FIX */
+@media (max-width: 1024px) {
+  .carousel__slide-item {
+    flex: 0 0 220px;
+  }
+
+  .carousel__container {
+    padding: 0 30px;
+  }
+}
+.carousel-card {
+  border-radius: 14px;   /* 🔥 smoother */
+}
 @media (max-width: 768px) {
-  .carousel__btn {
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
+
+  .carousel__slide-list {
+    gap: 16px;
   }
 
-  .carousel__btn--prev {
-    left: 5px;
+  .carousel__slide-item {
+   flex: 0 0 100%;
+    padding: 0 6px;   /* 🔥 THIS FIXES STICKING */
+    box-sizing: border-box; 
   }
 
-  .carousel__btn--next {
-    right: 5px;
+  .carousel__container {
+       padding: 0 20px;   /* 🔥 left-right breathing space */
+    overflow: hidden;
+  }
+
+  .carousel-card-img {
+    height: 200px;
   }
 }
-
-/* ================= DOTS ================= */
-
-.carousel__dots {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: -1.5rem;
+/* CARD */
+.carousel-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.carousel__dots .dot {
-  background: #ede8e8;
+/* 🔥 FIX: image same height */
+.carousel-card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-text {
+  margin-top: 20px; // 👈 ye content ko thoda neeche push karega
+  text-align: left;
+  flex: 1;
+}
+
+/* TEXT */
+.card-text h4 {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.card-text p {
+  font-size: 13px;
+  color: #555;
+  margin-top: 0;
+}
+
+/* ARROW */
+.arrow-btn {
+  align-self: flex-end;
   border: none;
-  border-radius: 50%;
+  color: white;
+  background: transparent;
   cursor: pointer;
-  height: 12px;
-  width: 10px;
-  margin: 0 4px;
+  font-size: 18px;
 }
 
-.carousel__dots .dot.active {
-  background: rgb(237, 174, 174);
+/* ACTIVE CARD */
+.carousel__slide-item.active {
+  transform: scale(1.05);
 }
 
-.carousel__dots {
+/* BUTTON */
+.carousel__btn {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 10px;
-  /* 👈 adjust this */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  background: white;
+  color: black;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+
+
+/* RESPONSIVE */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .carousel__slide-item {
+    flex: 0 0 220px;
+  }
+
+  .carousel-card-img {
+    height: 140px;
+  }
+}
+
+
+.carousel-heading {
+  position: relative;
+  z-index: 5;
+  color: #fff !important;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.carousel-bg {
+  position: relative;
+  padding-top: 1rem;
+}
+
+.carousel-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  // background: rgba(0, 0, 0, 0.5); // dark overlay
+  z-index: 1;
+}
+
+.carousel-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; // 🔥 add this
+}
+/* Content stays bottom */
+.carousel-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; // vertically center
+  padding: 12px;
+  height: 35%;
 }
 
 @media (max-width: 768px) {
-  .carousel__dots {
-    bottom: 5px;
+  .carousel-card-img {
+    height: 160px; // mobile me thoda kam
+  }
+
+  .carousel__container {
+    padding: 0 20px; // 👈 equal left-right space
+    padding-top: 1px;
+    overflow: hidden;
+    /* 🔥 THIS FIXES RIGHT SPACE */
+    width: 100%;
+    justify-content: center;
   }
 }

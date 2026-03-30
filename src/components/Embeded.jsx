@@ -152,7 +152,8 @@ function Embeded() {
 
                                                 </div>
                                             </div>
-                                        )})}
+                                        )
+                                    })}
 
                                 </div>
                             </div>

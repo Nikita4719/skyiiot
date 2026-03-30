@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "./api";
 import { ROOT_URL } from "./api";
-
+import Header from "./Header";
 export default function Hero() {
     const [loading, setLoading] = useState(true);
     const [slideData, setSlideData] = useState({});
@@ -36,7 +36,7 @@ export default function Hero() {
             ) : (
                 <>
 
-                    <section style={{ position: "relative", width: "100%", minHeight: "60vh" }}>
+                    <section style={{ position: "relative", width: "100%", minHeight: "85vh" }}>
 
                         <video style={{ zIndex: 1, objectFit: "cover" }}
                             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
@@ -52,6 +52,10 @@ export default function Hero() {
                             className="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"
                             style={{ zIndex: 2 }}
                         ></div>
+                        {/* 🔥 HEADER (IMPORTANT) */}
+                        <div style={{ position: "relative", zIndex: 10 }}>
+                            <Header />
+                        </div>
 
                     </section>
 
@@ -82,18 +86,18 @@ export default function Hero() {
                                         </div>
 
                                         <h6
-  className="fw-bold mobile-h6"
-  dangerouslySetInnerHTML={{
-    __html: item.title
-  }}
-></h6>
+                                            className="fw-bold mobile-h6"
+                                            dangerouslySetInnerHTML={{
+                                                __html: item.title
+                                            }}
+                                        ></h6>
 
-<p
-  className="text-muted mobile-para"
-  dangerouslySetInnerHTML={{
-    __html: item.description
-  }}
-></p>
+                                        <p
+                                            className="text-muted mobile-para"
+                                            dangerouslySetInnerHTML={{
+                                                __html: item.description
+                                            }}
+                                        ></p>
 
                                     </div>
                                 </div>

@@ -3,176 +3,107 @@ import api from "./api";
 import { ROOT_URL } from "./api";
 import "../carousel.scss";
 import cbg from "../assets/cbg.png";
+
 const Carousel = () => {
-    const [loading, setLoading] = useState(true);
-    const [everywhereData, setEverywhereData] = useState([]);
-    const [items, setItems] = useState([]);
-    const [activeIdx, setActiveIdx] = useState(0);
-    const [isTicking, setIsTicking] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const res = await api.get("/everywhere-slide");
-                setEverywhereData(res.data);
-                setItems(res.data);
-                // console.log(res.data);
-            }
-            catch (err) {
-                console.log(err);
-            }
-            finally {
-                setLoading(false);
-            };
-        }
-        fetchData();
-    }, []);
-    useEffect(() => {
-        const interval = setInterval(() => {
-            nextClick(); // auto move next
-        }, 2000); // 2 sec
 
-        return () => clearInterval(interval); // cleanup
-    }, [items, isTicking]);
-    const sleep = (ms = 0) =>
-        new Promise((resolve) => setTimeout(resolve, ms));
-
-    const bigLength = items.length;
-
-    useEffect(() => {
-        if (isTicking) sleep(300).then(() => setIsTicking(false));
-    }, [isTicking]);
-
-    const prevClick = (jump = 1) => {
-        if (!isTicking) {
-            setIsTicking(true);
-
-            setItems((prev) => {
-                return prev.map((_, i) => prev[(i + jump) % bigLength]);
-            });
-
-            setActiveIdx((prev) =>
-                prev === 0 ? bigLength - 1 : prev - 1
-            );
-        }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await api.get("/everywhere-slide");
+        setItems(res.data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     };
+    fetchData();
+  }, []);
 
-    const nextClick = (jump = 1) => {
-        if (isTicking) return; // prevent overlap
+  // Auto slide
+  useEffect(() => {
+    const interval = setInterval(nextClick, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
-        setIsTicking(true);
+  const nextClick = () => {
+    setItems((prev) => {
+      const newArr = [...prev];
+      const first = newArr.shift(); // first remove
+      newArr.push(first); // last me add
+      return newArr;
+    });
+  };
+  const prevClick = () => {
+    setItems((prev) => {
+      const newArr = [...prev];
+      const last = newArr.pop();
+      newArr.unshift(last);
+      return newArr;
+    });
+  };
 
-        setItems((prev) => {
-            return prev.map(
-                (_, i) => prev[(i - jump + bigLength) % bigLength]
-            );
-        });
+  return (
+    <div className="carousel-container mb-4">
+      <div
+        className="carousel-bg pt-3 pb-4"
+        style={{ backgroundImage: `url(${cbg})` }}
+      >
+        <h2 className="carousel-heading ">
+          SKY IIOT IS Everywhere
+        </h2>
 
-        setActiveIdx((prev) => (prev + 1) % bigLength);
-    };
+        <div className="carousel__wrap">
+          <button className="carousel__btn" onClick={prevClick}>‹</button>
 
-    const handleDotClick = (idx) => {
-        if (idx < activeIdx) prevClick(activeIdx - idx);
-        if (idx > activeIdx) nextClick(idx - activeIdx);
-    };
+          <div className="carousel__container">
+            {loading ? (
+              <div className="loader-wrap">
+                <div className="loader"></div>
+              </div>
+            ) : (
+              <ul
+                className="carousel__slide-list"
+              >
+                {items.map((item, i) => (
+                  <li
+                    className="carousel__slide-item"
+                    key={item.id || i}
+                  >
+                    <div className="carousel-card">
+                      <img
+                        src={`${ROOT_URL}/${item.image}`}
+                        alt=""
+                        className="carousel-card-img"
+                      />
 
-    return (
-        <div>
-            <div
-                className="container-fluid"
-                style={{
-                    backgroundImage: `url(${cbg})`,
-                    paddingLeft: "clamp(10px, 3vw, 30px)",
-                    paddingRight: "clamp(10px, 3vw, 30px)"
-                }}
-            >
-                <h2 className="carousel-heading text-white text-center fw-bold mb-1 mobile-heading"
-                    style={{ paddingTop: "1rem" }} >
-                    SKY IIOT IS Everywhere
-                </h2>
-                <div
-                    className="carousel__wrap"
-                    style={{ paddingLeft: "0", marginLeft: "0" }}
-                >
-                    <div className="carousel__inner">
-
-                        <button
-                            className="carousel__btn carousel__btn--prev"
-                            onClick={() => prevClick()}
-                        >
-                            ‹
-                        </button>
-
-                        <div className="carousel__container">
-                            {loading ? (
-                                <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>
-                                    <div className="loader"></div>
-                                </div>
-                            ) : (
-                                <ul className="carousel__slide-list">
-
-                                    {items.map((item, i) => (
-                                        <li className="carousel__slide-item" key={item.id || i}>
-
-                                            <img
-                                                src={`${ROOT_URL}/${item.image}`}
-                                                alt={item.heading}
-                                                className={i === 5 ? "special-img" : ""}
-                                            />
-
-                                            <div className="carousel-card-body">
-
-                                                <div className="card-text ">
-                                                    <h4 style={{ marginBottom: "1px" }}
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: item.heading
-                                                        }}></h4>
-                                                    <p style={{ marginTop: "0" }}
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: item.paragraph
-                                                        }}></p>
-                                                </div>
-
-                                                <div className="card-arrow">
-                                                    <button className="arrow-btn">↗</button>
-                                                </div>
-
-                                            </div>
-
-                                        </li>
-                                    ))}
-
-                                </ul>
-                            )}
+                      <div className="carousel-card-body">
+                        <div className="card-text">
+                          <h4 dangerouslySetInnerHTML={{ __html: item.heading }} />
+                          <p dangerouslySetInnerHTML={{ __html: item.paragraph }} />
                         </div>
 
-                        <button
-                            className="carousel__btn carousel__btn--next"
-                            onClick={() => nextClick()}
-                        >
-                            ›
-                        </button>
-
-                        {/* DOTS */}
-
-                        {/* <div className="carousel__dots mt-2 mb-3">
-
-                            {everywhereData.map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    className={`dot ${activeIdx === idx ? "active" : ""}`}
-                                    onClick={() => handleDotClick(idx)}
-                                />
-                            ))}
-
-                        </div> */}
-
+                        <div className="card-action bg-primary">
+                          <button className="arrow-btn">↗</button>
+                        </div>
+                      </div>
                     </div>
-                </div>
-            </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <button className="carousel__btn" onClick={nextClick}>›</button>
         </div>
-    );
+
+       
+      </div>
+    </div>
+  );
 };
 
 export default Carousel;
