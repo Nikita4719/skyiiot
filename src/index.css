@@ -2,6 +2,20 @@ body {
   overflow-x: hidden;
 }
 
+
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
 .solution-banner-img {
   width: 100%;
   /* full width */
@@ -209,7 +223,10 @@ body {
     line-height: 1.6;
   }
 }
+.custom-toggler {
+  margin-right: 20px;
 
+}
 .custom-toggler .bar {
   height: 2.1px;
   /* 👈 thodi patli line */
@@ -217,6 +234,7 @@ body {
   background-color: #000;
   /* border-radius: 2px; */
   display: block;
+   /* margin-right: 15px; */
 }
 
 .custom-toggler:focus,
@@ -1571,7 +1589,7 @@ header {
 }
 
 .top-menu {
-  background: #17012CE6;;
+  background: #20023be6;
   padding: 6px 15px;
 }
 
