@@ -211,12 +211,14 @@ body {
 }
 
 .custom-toggler .bar {
-  height: 2.1px;   /* 👈 thodi patli line */
+  height: 2.1px;
+  /* 👈 thodi patli line */
   width: 100%;
   background-color: #000;
   /* border-radius: 2px; */
   display: block;
 }
+
 .custom-toggler:focus,
 .custom-toggler:active {
   outline: none !important;
@@ -229,7 +231,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 38px;
-  height: 23px;   /* 👈 thoda increase karo */
+  height: 23px;
+  /* 👈 thoda increase karo */
   border: none;
   background: transparent;
   padding: 0;
@@ -1223,9 +1226,10 @@ section {
 
 /* Default (Desktop) → BIG logo */
 .navbar-logo {
-  max-height: 50px;
+  max-height: 47px;
   /* yaha bada kar do */
   width: auto;
+  padding-left: 12px;
 }
 
 @media (max-width: 768px) {
@@ -1283,7 +1287,11 @@ section {
 
 
 
-
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 
 /* Team Card */
 .team-card {
@@ -1563,7 +1571,7 @@ header {
 }
 
 .top-menu {
-  background: rgba(0, 0, 0, 0.7);
+  background: #17012CE6;;
   padding: 6px 15px;
 }
 
@@ -1574,11 +1582,6 @@ header {
   } */
 }
 
-.custom-navbar-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 .custom-navbar-container {
   display: flex;
@@ -1621,6 +1624,7 @@ body {
 /* 🔥 Only HOME pe floating */
 .floating-header {
   position: absolute;
+  width: 100;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -1649,6 +1653,7 @@ body {
 
 .navbar-nav {
   margin-left: auto !important;
+  padding: 6px 15px;
 }
 
 #navbarNav {
@@ -1664,6 +1669,8 @@ body {
 }
 
 .navbar {
+  position: sticky !important;
+  top: 0;
   display: flex;
   align-items: center;
   width: 100%;
@@ -1754,24 +1761,24 @@ body {
 @media (max-width: 768px) {
   @media (max-width: 768px) {
 
-  /* 🏠 ONLY HOME PAGE */
-  .floating-header .header-wrapper {
-    max-width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 20px;
-    overflow: hidden;
-  }
+    /* 🏠 ONLY HOME PAGE */
+    .floating-header .header-wrapper {
+      max-width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
 
-  /* 📄 OTHER PAGES */
-  .normal-header .header-wrapper {
-    max-width: 100%;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    border-radius: 0 !important;
-  }
+    /* 📄 OTHER PAGES */
+    .normal-header .header-wrapper {
+      max-width: 100%;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      border-radius: 0 !important;
+    }
 
-}
+  }
 
   .header-wrapper img,
   .header-wrapper video,
@@ -1823,7 +1830,7 @@ body {
 
   .header-wrapper {
     border-radius: 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
     /* 🔥 VERY IMPORTANT */
   }
 
@@ -1840,78 +1847,93 @@ body {
 
 /* Mobile-only card adjustments */
 @media (max-width: 768px) {
+
   /* Equal height cards */
-  .col-6 > .card {
+  .col-6>.card {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
   /* Card image */
-  .col-6 > .card img {
-    height: 150px; /* smaller image */
+  .col-6>.card img {
+    height: 150px;
+    /* smaller image */
     object-fit: cover;
   }
 
   /* Card body */
-  .col-6 > .card .card-body {
+  .col-6>.card .card-body {
     display: flex;
     flex-direction: column;
-    padding: 0.5rem; /* reduce padding */
+    padding: 0.5rem;
+    /* reduce padding */
   }
 
   /* Card title */
-  .col-6 > .card .card-body h4 {
-    font-size: 14px; /* smaller title */
+  .col-6>.card .card-body h4 {
+    font-size: 14px;
+    /* smaller title */
     margin-bottom: 0.5rem;
   }
 
   /* Buttons container */
-  .col-6 > .card .mt-auto {
+  .col-6>.card .mt-auto {
     display: flex;
     gap: 0.5rem;
   }
 
   /* Buttons */
-  .col-6 > .card .btn {
-    font-size: 12px; /* smaller font */
-    padding: 0.3rem 0.5rem; /* smaller height & width */
+  .col-6>.card .btn {
+    font-size: 12px;
+    /* smaller font */
+    padding: 0.3rem 0.5rem;
+    /* smaller height & width */
   }
 
- @media (max-width: 768px) {
+  @media (max-width: 768px) {
 
-  /* Solution images section */
-  .solution-img-box {
-    width: 100%;
-    height: 180px;        /* slightly smaller for mobile */
-    overflow: hidden;
-    border-radius: 4px;
-    margin: 2px 0;        /* tiny margin to separate images vertically */
-    padding: 0;           /* remove internal padding */
-  }
+    /* Solution images section */
+    .solution-img-box {
+      width: 100%;
+      height: 180px;
+      /* slightly smaller for mobile */
+      overflow: hidden;
+      border-radius: 4px;
+      margin: 2px 0;
+      /* tiny margin to separate images vertically */
+      padding: 0;
+      /* remove internal padding */
+    }
 
-  /* Images inside the box */
-  .solution-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* ensures image fills box without stretching */
-    display: block;
-  }
+    /* Images inside the box */
+    .solution-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* ensures image fills box without stretching */
+      display: block;
+    }
 
-  /* Reduce spacing between columns */
-  .row.g-4.mb-4 {
-    row-gap: 4px;         /* vertical gap */
-    column-gap: 4px;      /* horizontal gap */
-    margin-left: -2px;    /* compensate for column padding */
-    margin-right: -2px;
-  }
+    /* Reduce spacing between columns */
+    .row.g-4.mb-4 {
+      row-gap: 4px;
+      /* vertical gap */
+      column-gap: 4px;
+      /* horizontal gap */
+      margin-left: -2px;
+      /* compensate for column padding */
+      margin-right: -2px;
+    }
 
-  .col-md-6 {
-    padding-left: 2px;
-    padding-right: 2px;
+    .col-md-6 {
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+
   }
 
 }
-
+.main-content {
+  margin-top: 110px; 
 }
-

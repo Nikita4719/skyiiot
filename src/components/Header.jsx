@@ -37,7 +37,7 @@ export default function Header() {
     fetchData();
   }, []);
   return (
-    <header className={isHome ? "header floating-header" : "header normal-header"}>
+    <header className={isHome ? "header floating-header fixed-bottom"  : "header normal-header fixed-top"}>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center" style={{ height: "80px" }}>
           <div className="loader"></div>
@@ -45,7 +45,7 @@ export default function Header() {
       ) : (
         <>
           <div className="header-wrapper">
-            <div className="top-menu py-1 bg-black bg-opacity-75 text-white">
+            <div className="top-menu py-1 bg-opacity-75 text-white">
              <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center px-3">
                 <div className="top-contact">
                   <span>{headerTop?.phone}</span>
@@ -79,7 +79,7 @@ export default function Header() {
             </div>
 
 
-            <nav className="navbar navbar-expand-lg navbar-light navbar-gradient">
+            <nav className="navbar navbar-expand-lg navbar-light navbar-gradient  ">
               <div className="container-fluid d-flex align-items-center justify-content-between px-3">
                 <a className='navbar-brand' href='/'>
                   <img

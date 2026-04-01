@@ -53,7 +53,8 @@ export default function Hero() {
                             style={{ zIndex: 2 }}
                         ></div>
                         {/* 🔥 HEADER (IMPORTANT) */}
-                        <div style={{ position: "relative", zIndex: 10 }}>
+                        <div style={{ position: "relative", zIndex: 10 }}
+                        >
                             <Header />
                         </div>
 

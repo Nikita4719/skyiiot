@@ -38,7 +38,8 @@ export default function Solutions() {
         </div>
       ) : (
         <>
-          <section className="py-0 bg-white">
+         <main className="main-content no-gap">
+          <section className=" bg-white">
             <div className="mb-5">
               <img
                 src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
@@ -97,6 +98,7 @@ export default function Solutions() {
               </div>
             </div>
           </section>
+          </main>
 
           <section className="py-2 bg-white">
             <div className="container">

@@ -50,9 +50,9 @@ export default function TransformMonitor() {
   const contactItem = navbarMenu.find(item => item.id === 4);
   return (
     <div>
-      {/* Top Banner */}
+    <main className="main-content">
       {solution_sub_cat.image1 && (
-        <section className="pt-5 rounded-4 overflow-hidden">
+        <section className="pt-4 rounded-4 overflow-hidden">
           <img
             src={`${ROOT_URL}/${solution_sub_cat.image1}`}
             alt={solution_sub_cat.para3 || "Banner"}
@@ -60,6 +60,7 @@ export default function TransformMonitor() {
           />
         </section>
       )}
+      </main>
 
       {/* Main Section */}
       <section className="py-5 bg-white">

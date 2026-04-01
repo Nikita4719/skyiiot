@@ -37,9 +37,9 @@ export default function About_us() {
         </div>
       ) : (
         <>
-          {/* HERO IMAGE */}
+         <main className="main-content">
           <section className="py-0">
-            <div className="mb-4">
+            <div className="mb-4 ">
               <img
                 src={aboutusData?.image1 ? `${ROOT_URL}/${aboutusData.image1}` : ""}
                 alt="about"
@@ -125,7 +125,7 @@ export default function About_us() {
 
             </div>
           </section>
-
+</main>
           {/* BENEFITS SECTION */}
           <section className="py-5">
             <div className="container">
