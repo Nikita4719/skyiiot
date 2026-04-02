@@ -50,21 +50,20 @@ export default function TransformMonitor() {
   const contactItem = navbarMenu.find(item => item.id === 4);
   return (
     <div>
-    <main className="main-content">
-      {solution_sub_cat.image1 && (
-        <section className="pt-4 rounded-4 overflow-hidden">
-          <img
-            src={`${ROOT_URL}/${solution_sub_cat.image1}`}
-            alt={solution_sub_cat.para3 || "Banner"}
-            className="solution-banner-img "
-          />
-        </section>
-      )}
+      <main className="main-content">
+        {solution_sub_cat.image1 && (
+          <section className="top-banner pt-4">
+            <img
+              src={`${ROOT_URL}/${solution_sub_cat.image1}`}
+              alt="Banner"
+            />
+          </section>
+        )}
       </main>
 
       {/* Main Section */}
       <section className="py-5 bg-white">
-        <div className="container">
+        <div className="custom-wrapper">
           <div className="row g-4 align-items-start">
 
             {/* Left Column - Main Image */}
@@ -82,7 +81,7 @@ export default function TransformMonitor() {
               </div>
 
               {/* Thumbnails Vertical */}
-              <div className="d-flex flex-row gap-2 mt-3 flex-lg-column">
+             <div className="thumbnail-container d-flex gap-2 mt-3">
                 {solution_sub_cat.image2?.map((img, idx) => (
                   <img
                     key={idx}
@@ -142,16 +141,11 @@ export default function TransformMonitor() {
 
       {/* Optional Secondary Banner */}
       {solution_sub_cat.imagechart && (
-        <section className="mb-0">
+        <section className="mb-0 ">
           <img
             src={`${ROOT_URL}/${solution_sub_cat.imagechart}`}
             alt="Chart Banner"
-            className="w-100"
-            style={{
-              height: "auto",
-              maxHeight: "600px",
-              objectFit: "contain"
-            }}
+            className="chart-img"
           />
         </section>
       )}

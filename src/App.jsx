@@ -15,11 +15,13 @@ import Details from "./components/Details";
 import Transform_monitor from "./components/Transform_monitor";
 import "./index.css";
 import Carousal2 from "./components/Carousal2";
+import SystemDetails from "./components/SystemDetails";
 import { useEffect, useState } from "react";
 
 function Home() {
   return (
     <>
+      {/* <SystemDetails /> */}
       <Hero />
       <About />
       <Embeded />
@@ -34,8 +36,8 @@ function Home() {
 
 function App() {
   useEffect(() => {
-  window.scrollTo(0, 0);
-}, []);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <BrowserRouter>
@@ -47,6 +49,7 @@ function App() {
         <Route path="/solutions" element={<Solutions />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/transform-monitor/:id" element={<Transform_monitor />} />
+        <Route path="/cards" element={<SystemDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>

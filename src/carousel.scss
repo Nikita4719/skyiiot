@@ -19,7 +19,8 @@
 .carousel__container {
   width: 100%;
   overflow: hidden;
-  padding: 0 40px; /* 🔥 equal left-right spacing */
+  padding: 0 40px;
+  /* 🔥 equal left-right spacing */
   box-sizing: border-box;
 }
 
@@ -47,9 +48,12 @@
     padding: 0 30px;
   }
 }
+
 .carousel-card {
-  border-radius: 14px;   /* 🔥 smoother */
+  border-radius: 14px;
+  /* 🔥 smoother */
 }
+
 @media (max-width: 768px) {
 
   .carousel__slide-list {
@@ -57,13 +61,15 @@
   }
 
   .carousel__slide-item {
-   flex: 0 0 100%;
-    padding: 0 6px;   /* 🔥 THIS FIXES STICKING */
-    box-sizing: border-box; 
+    flex: 0 0 100%;
+    padding: 0 6px;
+    /* 🔥 THIS FIXES STICKING */
+    box-sizing: border-box;
   }
 
   .carousel__container {
-       padding: 0 20px;   /* 🔥 left-right breathing space */
+    padding: 0 20px;
+    /* 🔥 left-right breathing space */
     overflow: hidden;
   }
 
@@ -71,6 +77,7 @@
     height: 200px;
   }
 }
+
 /* CARD */
 .carousel-card {
   display: flex;
@@ -180,13 +187,16 @@
   background-position: center;
   background-repeat: no-repeat; // 🔥 add this
 }
+
 /* Content stays bottom */
 .carousel-card-body {
   display: flex;
   justify-content: space-between;
   align-items: center; // vertically center
   padding: 12px;
-  height: 35%;
+  height: auto;
+  min-height: auto;
+  flex: 1;
 }
 
 @media (max-width: 768px) {

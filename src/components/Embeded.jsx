@@ -95,7 +95,7 @@ function Embeded() {
                                 <div className="row mt-3 text-center">
 
                                     {services.map((section, index) => {
-                                        console.log(section.heading);
+                                        
                                         return (
                                             <div className="col-12" key={section.id}>
                                                 <div
@@ -104,10 +104,10 @@ function Embeded() {
                                                     ref={(el) => (sectionRefs.current[index] = el)}
                                                 >
 
-                                                    <h5 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
+                                                    <h6 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
                                                         dangerouslySetInnerHTML={{
                                                             __html: section.title
-                                                        }}></h5>
+                                                        }}></h6>
 
                                                     <h3
                                                         className="text-start service-heading"

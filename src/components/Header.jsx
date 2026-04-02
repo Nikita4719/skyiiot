@@ -37,7 +37,7 @@ export default function Header() {
     fetchData();
   }, []);
   return (
-    <header className={isHome ? "header floating-header fixed-bottom"  : "header normal-header fixed-top"}>
+    <header className={isHome ? "header floating-header fixed-bottom" : "header normal-header fixed-top"}>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center" style={{ height: "80px" }}>
           <div className="loader"></div>
@@ -46,7 +46,7 @@ export default function Header() {
         <>
           <div className="header-wrapper">
             <div className="top-menu py-1 bg-opacity-75 text-white">
-             <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center px-3">
+              <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center px-3">
                 <div className="top-contact">
                   <span>{headerTop?.phone}</span>
                   <span className="d-none d-md-inline">|</span>
@@ -117,7 +117,17 @@ export default function Header() {
                           {item.name}
                         </NavLink>
                       </li>
+
                     ))}
+                    <li className='nav-item fw-semibold'>
+                      <NavLink
+                        to="/cards"
+                        onClick={() => setMenuOpen(false)}
+                        className="nav-link"
+                      >
+                        Details
+                      </NavLink>
+                    </li>
                   </ul>
                 </div>
               </div>
