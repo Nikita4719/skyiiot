@@ -49,10 +49,10 @@ const Carousel = () => {
   return (
     <div className="carousel-container mb-4">
       <div
-        className="carousel-bg pt-3 pb-4"
+        className="carousel-bg pt-4 pb-5"
         style={{ backgroundImage: `url(${cbg})` }}
       >
-        <h2 className="carousel-heading ">
+        <h2 className="carousel-heading mb-4">
           SKY IIOT IS Everywhere
         </h2>
 

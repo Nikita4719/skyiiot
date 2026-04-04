@@ -87,7 +87,7 @@ export default function Hero() {
                                         </div>
 
                                         <h6
-                                            className="fw-bold mobile-h6"
+                                            className=" mobile-h6"
                                             dangerouslySetInnerHTML={{
                                                 __html: item.title
                                             }}

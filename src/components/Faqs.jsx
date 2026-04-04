@@ -2,9 +2,10 @@
 import { useState, useEffect } from "react";
 import api from "./api";
 import { ROOT_URL } from "./api";
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export default function Faqs() {
+  const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [faqsData, setFaqsData] = useState([]);
@@ -134,6 +135,7 @@ export default function Faqs() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+
         const faqsres = await api.get("/faqs");
         const faqscmsres = await api.get("/cms-faqs");
         setFaqsData(faqsres.data);
@@ -157,6 +159,8 @@ export default function Faqs() {
           <div className="col-md-6">
             <div className="accordion" id="faqAccordion">
               {faqsData.map((faq, index) => {
+                console.log("FAQ ID:", faq.id);
+                console.log("CMS DATA:", faqscmsData);
                 const matchedAnswer = faqscmsData.find(
                   (item) => item.faq_id === faq.id
                 );
@@ -276,3 +280,21 @@ export default function Faqs() {
     </section>
   );
 }
+
+
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   // Handle form submission logic here
+//   const info = {
+//     firstName: document.getElementById("firstName").value,
+//     phone: document.getElementById("phone").value,
+//   };
+//   console.log(info);
+// };
+// return(
+//   <form onSubmit={handleSubmit}>
+//     <input type="text" id="firstName" placeholder="First Name" />
+//     <input type="text" id="phone" placeholder="Phone Number" />
+//     <button type="submit">Submit</button>
+//   </form>
+// )

@@ -45,7 +45,7 @@ export default function Footer() {
                     </div>
                 ) : (
                     <div className="row">
-                        <div className="col-md-4 mb-3">
+                        <div className="col-md-4 mb-3 ">
                             <a>
                                 <img
                                     src={`${ROOT_URL}/uploads/qrcodes/${footer?.logo}`}
@@ -77,7 +77,7 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        <div className="col-md-4 mb-4">
+                        <div className="col-md-4 mb-3  text-md-start">
                             <h6 className="footer-title" dangerouslySetInnerHTML={{
                                 __html: footer?.title
                             }}></h6>
@@ -100,7 +100,7 @@ export default function Footer() {
                         </div>
 
 
-                        <div className="col-md-4 mb-3">
+                        <div className="col-md-4 mb-3  text-md-start">
                             <div className="row g-2">
                                 {qrCodes.map((qr, i) => (
                                     <div className="col-6 text-center mb-3" key={i}>

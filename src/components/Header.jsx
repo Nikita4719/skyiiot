@@ -6,6 +6,7 @@ import api from "./api";
 import { ROOT_URL } from "./api";
 export default function Header() {
   const [loading, setLoading] = useState(true);
+  const [slideData, setSlideData] = useState({});
   const [headerTop, setHeaderTop] = useState(null);
   const [navbarLogo, setNavbarLogo] = useState(null);
   const [navbarMenu, setNavbarMenu] = useState([]);
@@ -36,8 +37,14 @@ export default function Header() {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    if (isHome) {
+      api.get("/slides").then(res => setSlideData(res.data)).catch(err => console.log(err));
+    }
+  }, [isHome]);
   return (
-    <header className={isHome ? "header floating-header fixed-bottom" : "header normal-header fixed-top"}>
+    // <header className={`header ${isHome ? "floating-header" : "normal-header"} sticky-top`}>
+    <header className={isHome ? "header floating-header fixed-top" : "header normal-header fixed-top"}>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center" style={{ height: "80px" }}>
           <div className="loader"></div>
@@ -45,6 +52,21 @@ export default function Header() {
       ) : (
         <>
           <div className="header-wrapper">
+            {/* {isHome && slideData?.media && (
+              <div className="hero-video-wrapper">
+                <video
+                  className="w-100 h-100 position-absolute top-0 start-0 object-fit-cover"
+                  src={`${ROOT_URL}/${slideData.media}`}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+                <div className="overlay"></div>
+              </div>
+            )} */}
+
+
             <div className="top-menu py-1 bg-opacity-75 text-white">
               <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center px-3">
                 <div className="top-contact">
@@ -119,15 +141,7 @@ export default function Header() {
                       </li>
 
                     ))}
-                    <li className='nav-item fw-semibold'>
-                      <NavLink
-                        to="/cards"
-                        onClick={() => setMenuOpen(false)}
-                        className="nav-link"
-                      >
-                        Details
-                      </NavLink>
-                    </li>
+                    
                   </ul>
                 </div>
               </div>
@@ -139,3 +153,8 @@ export default function Header() {
     </header >
   );
 }
+// to={
+//                             item.link === "/system-details"
+//                               ? `/system-details/${item.id}`   // 🔥 yaha ID add hogi
+//                               : item.link                     // baki normal
+//                           }

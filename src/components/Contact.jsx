@@ -13,7 +13,7 @@ export default function Contact() {
       try {
         const res = await api.get("/contact-settings");
 
-        console.log("API DATA:", res.data);
+        // console.log("API DATA:", res.data);
         const headerRes = await api.get("/header-top");
         setHeaderTop(headerRes.data);
 

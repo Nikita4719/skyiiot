@@ -89,10 +89,10 @@ function Embeded() {
                     </div>
                 ) : (
 
-                    <div className="row">
-                        <div className="col-md-6">
+                    <div className="row align-items-start">
+                        <div className="col-md-6 d-flex flex-column">
                             <div className="section-box mb-5">
-                                <div className="row mt-3 text-center">
+                               <div className="row mt-3 text-center justify-content-start">
 
                                     {services.map((section, index) => {
                                         
