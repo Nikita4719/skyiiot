@@ -93,35 +93,76 @@ export default function TransformMonitor({ solutions }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [solution_sub_cat, setSolution_sub_cat] = useState(null);
   const [navbarMenu, setNavbarMenu] = useState([]);
-  const [solution_cards, setSolution_cards] = useState([]);
+  const [cardsData, setCardsData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await api.get("/solution-sub-cat");
-        const filteredData = res.data.find(
+        // 👉 Parallel API calls (fast & clean)
+        const [subCatRes, cardRes, menuRes] = await Promise.all([
+          api.get("/solution-sub-cat"),
+          api.get("/solution-card"),
+          api.get("/navbar-menu"),
+        ]);
+
+        // ==============================
+        // ✅ 1. MAIN DATA (banner + content)
+        // ==============================
+        const filteredData = subCatRes.data.find(
           (item) => item.solutionCatId === Number(id)
         );
 
         if (!filteredData) return;
+
+        // image2 parse
         if (filteredData.image2) {
-          filteredData.image2 = JSON.parse(filteredData.image2);
+          try {
+            filteredData.image2 = JSON.parse(filteredData.image2);
+          } catch {
+            filteredData.image2 = [];
+          }
         } else {
           filteredData.image2 = [];
         }
 
         setSolution_sub_cat(filteredData);
 
+        // selected image set
         if (filteredData.image2.length > 0) {
           setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
         } else if (filteredData.image1) {
           setSelectedImage(`${ROOT_URL}/${filteredData.image1}`);
         }
-        const menuRes = await api.get("/navbar-menu");
+
+        // ==============================
+        // ✅ 2. CARDS DATA (NEW API)
+        // ==============================
+        const filteredCards = cardRes.data.find(
+          (item) => item.solutionCatId === Number(id)
+        );
+
+        if (filteredCards) {
+          const paragraphs = [
+            filteredCards.paragraph1,
+            filteredCards.paragraph2,
+            filteredCards.paragraph3,
+            filteredCards.paragraph4,
+            filteredCards.paragraph5,
+            filteredCards.paragraph6,
+          ];
+
+          const cleaned = paragraphs.filter(Boolean);
+          setCardsData(cleaned);
+        } else {
+          setCardsData([]);
+        }
+
+        // ==============================
+        // ✅ 3. NAVBAR
+        // ==============================
         setNavbarMenu(menuRes.data);
 
-      }
-      catch (error) {
-        console.error(error);
+      } catch (error) {
+        console.error("API Error:", error);
       }
     };
 
@@ -251,27 +292,47 @@ export default function TransformMonitor({ solutions }) {
       </section> */}
 
 
-      {/* <section className="py-5">
-        <Container>
-          <Row className="g-4">
-            {productData.functionalCapabilities.map((item, index) => {
-              const Icon = item.icon;
+      <section className="py-5">
+        <Container fluid className="px-4">
+          <Row className="g-5">
+            {cardsData.map((html, index) => {
+
+              const cleanHTML = DOMPurify.sanitize(html);
+              const temp = document.createElement("div");
+              temp.innerHTML = cleanHTML;
+
+              const title = temp.querySelector("h4")?.innerText || "";
+              const desc = temp.querySelector("p")?.innerText || "";
+              const iconMapDynamic = {
+                "24/7 Real-Time Monitoring": Activity,
+                "Multi-Channel Alerts": BellRing,
+                "Asset Tagging & Dashboards": Database,
+                "Fault Event Logging": Cpu,
+                "AI Predictive Maintenance": BrainCircuit,
+                "Offline Data Buffering": HardDrive
+              };
+
+              const Icon = iconMapDynamic[title] || Activity;
 
               return (
-                <Col key={index} xs={12} md={6} xl={4}>
-                  <Card className="h-100 shadow border-0 rounded-4 card-hover">
+                <Col key={index} xs={12} md={4} xl={4} className="d-flex">
+                  <Card className="h-100 shadow border-0 rounded-4 card-hover"
+                    style={{ width: "100%", maxWidth: "320px" }} >
                     <Card.Body>
 
+                      {/* ICON */}
                       <div className="icon-box mb-4">
-                        <Icon size={28} />
+                        <Icon size={25} />
                       </div>
 
+                      {/* TITLE */}
                       <Card.Title className="fw-semibold fs-4 mb-3">
-                        {item.title}
+                        {title}
                       </Card.Title>
 
+                      {/* DESCRIPTION */}
                       <Card.Text className="text-muted">
-                        {item.desc}
+                        {desc}
                       </Card.Text>
 
                     </Card.Body>
@@ -281,7 +342,7 @@ export default function TransformMonitor({ solutions }) {
             })}
           </Row>
         </Container>
-      </section> */}
+      </section>
 
       <section className="mb-1 pt-5 text-center">
         <p className="fw-semibold text-uppercase text-primary small mb-2">
@@ -349,7 +410,7 @@ export default function TransformMonitor({ solutions }) {
 
                   return (
                     <tr>
-                
+
                       <td style={{ width: "40px", textAlign: "center" }}>
                         {Icon ? <Icon size={18} /> : null}
                       </td>
@@ -365,7 +426,7 @@ export default function TransformMonitor({ solutions }) {
           return (
             <Row
               key={idx}
-              className="align-items-start px-3 py-4 border-bottom table-row-hover"
+              className="align-items-start px-3 py-4 border-bottom "
             >
               <Col md={12} className="text-muted">
                 <div className="table-responsive table-fix mobile-big-text">
