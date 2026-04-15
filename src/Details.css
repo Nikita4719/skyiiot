@@ -397,3 +397,114 @@
     padding: 0 10px;
   }
 }
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-text::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 6px;
+}
+
+/* MUST MATCH EXACT TEXT */
+.icon-text[data-icon="Smart Sensor Nodes"]::before {
+  background-image: url("/icons/thermometer.svg");
+}
+
+.icon-text[data-icon="IoT Gateway"]::before {
+  background-image: url("/icons/router.svg");
+}
+
+.icon-text[data-icon="Energy Meter Interface"]::before {
+  background-image: url("/icons/barchart.svg");
+}
+
+.icon-text[data-icon="Dashboard and Mobile App"]::before {
+  background-image: url("/icons/mobile.svg");
+}
+
+.icon-text[data-icon="Alert Engine"]::before {
+  background-image: url("/icons/siren.svg");
+}
+
+.icon-text[data-icon="Integration Layer"]::before {
+  background-image: url("/icons/plug.svg");
+}
+
+.icon-text[data-icon="Offline Data Buffer"]::before {
+  background-image: url("/icons/database.svg");
+}
+
+.icon-text[data-icon="Battery Backup Unit"]::before {
+  background-image: url("/icons/battery.svg");
+}
+
+.icon-text[data-icon="Surge Protection Unit"]::before {
+  background-image: url("/icons/shield.svg");
+}
+.table-fix img {
+  display: inline-block !important;
+  max-width: 100% !important;
+  height: auto !important;
+  visibility: visible !important;
+}
+.table-fix table {
+  width: 100% !important;
+  border-collapse: collapse;
+  table-layout: auto;
+  /* REMOVE THIS */
+  /* min-width: 600px; */
+}
+
+.table-fix td {
+  vertical-align: top;
+  overflow: visible;
+}
+.icon-text::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+.table-fix table {
+  width: 100% ;
+  border-collapse: collapse;
+  table-layout: auto; /* change from fixed */
+}
+
+.table-fix {
+  overflow-x: unset; /* remove scroll */
+}
+
+.table-fix th,
+.table-fix td {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+   white-space: normal;
+  word-break: break-word;
+
+}
+
+.table-fix thead {
+  background: #f8fafc;
+  font-weight: 600;
+}
+@media (max-width: 768px) {
+  .table-fix table {
+    min-width: 700px;
+  }
+}
+@media (max-width: 768px) {
+  .table-fix td,
+  .table-fix th {
+    white-space: normal;
+    word-break: break-word;
+  }
+}

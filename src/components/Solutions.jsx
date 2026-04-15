@@ -38,66 +38,66 @@ export default function Solutions() {
         </div>
       ) : (
         <>
-         <main className="main-content no-gap">
-          <section className=" bg-white">
-            <div className="mb-5">
-              <img
-                src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
-                alt="background img"
-                className="img-fluid w-100"
-                style={{ maxHeight: "300px", objectFit: "cover" }}
-              />
-            </div>
+          <main className="main-content no-gap">
+            <section className=" bg-white">
+              <div className="mb-5">
+                <img
+                  src={solution_image?.imagechart ? `${ROOT_URL}/${solution_image.imagechart}` : "null"}
+                  alt="background img"
+                  className="img-fluid w-100"
+                  style={{ maxHeight: "300px", objectFit: "cover" }}
+                />
+              </div>
 
-            <div className="container text-center">
-              <div className="row g-4">
-                {/* <div className="col-md-3"> */}
-                {solution_cat.map((item) => (
-                  <div className="col-6 col-md-3" key={item.id}>
-                    <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
-                      <div className="position-relative">
-                        <img
-                          src={`${ROOT_URL}/${item.image}`}
-                          alt={item.title}
-                          className="w-100"
-                          style={{ objectFit: "contain", height: "auto" }}
-                        />
-                        {/* <span className="position-absolute top-0 start-50 translate-middle-x mt-2 badge text-primary">
-                          NEW
-                        </span> */}
-                      </div>
-                      <div className="card-body d-flex flex-column text-start">
-                        <div className="d-flex justify-content-between align-items-start mb-3">
-                          <h4 className="fw-semibold mb-0"
-                            dangerouslySetInnerHTML={{
-                              __html: item.title
-                            }}>
-                          </h4>
-                          <FaHeart className="text-danger flex-shrink-0" size={18} />
+              <div className="container text-center">
+                <div className="row g-4">
+                  {solution_cat.map((item) => (
+                    <div className="col-6 col-md-3" key={item.id}>
+                      <div className="card border-0 shadow rounded-4 overflow-hidden h-100">
+                        <div className="position-relative">
+                          <img
+                            src={`${ROOT_URL}/${item.image}`}
+                            alt={item.title}
+                            className="w-100"
+                            style={{ objectFit: "contain", height: "auto" }}
+                          />
 
                         </div>
-                        <div className="mt-auto d-flex gap-1">
-                          <Link
-                            to={`/transform-monitor/${item.id}`}
-                            className="btn btn-outline-primary w-50 rounded-pill"
-                          >
-                            View Details
-                          </Link>
+                        <div className="card-body d-flex flex-column text-start">
+                          <div className="d-flex justify-content-between align-items-start mb-3">
+                            <h4 className="fw-semibold mb-0"
+                              dangerouslySetInnerHTML={{
+                                __html: item.title
+                              }}>
+                            </h4>
+                            <FaHeart className="text-danger flex-shrink-0" size={18} />
 
-                          {contactItem && (
-                            <Link to={contactItem.link} className="btn btn-primary rounded-pill">
-                              Start Order
+                          </div>
+                          <div className="mt-auto d-flex gap-1">
+                            <Link
+                              to={`/transform-monitor/${item.id}`}
+                              className="btn btn-outline-primary btn-sm w-50 rounded-pill"
+                            >
+                              View Details
                             </Link>
-                          )}
-                        </div>
 
+                            {contactItem && (
+                              <Link
+                                to={contactItem.link}
+                                className="btn btn-primary btn-sm rounded-pill"
+                              >
+                                Start Order
+                              </Link>
+                            )}
+                          </div>
+
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
           </main>
 
           <section className="py-2 bg-white">

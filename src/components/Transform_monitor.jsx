@@ -3,7 +3,10 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "./api";
+import parse, { domToReact } from "html-react-parser";
+// import thermo from "./svg1.png";
 import { ROOT_URL } from "./api";
+import DOMPurify from "dompurify";
 import {
   Activity,
   BellRing,
@@ -24,39 +27,16 @@ import {
 
 import "../Details.css";
 
-const productData = {
-  functionalCapabilities: [
-    {
-      title: "24/7 Real-Time Monitoring",
-      desc: "Track temperature, load current, voltage, oil level, moisture, and vibration continuously.",
-      icon: Activity
-    },
-    {
-      title: "Multi-Channel Alerts",
-      desc: "Get configurable alerts through SMS, Email, and Mobile App notifications.",
-      icon: BellRing
-    },
-    {
-      title: "Asset Tagging & Dashboards",
-      desc: "Organize transformer assets with transformer-level dashboards and visibility.",
-      icon: Cpu
-    },
-    {
-      title: "Fault Event Logging",
-      desc: "Maintain historical records, event logs, and archived operational data.",
-      icon: Database
-    },
-    {
-      title: "AI Predictive Maintenance",
-      desc: "Use AI-driven analytics to predict faults before failure occurs.",
-      icon: BrainCircuit
-    },
-    {
-      title: "Offline Data Buffering",
-      desc: "Ensure data continuity during communication downtime or network loss.",
-      icon: WifiOff
-    }
-  ]
+const iconMap = {
+  "Smart Sensor Nodes": Thermometer,
+  "IoT Gateway": Router,
+  "Energy Meter Interface": BarChart3,
+  "Dashboard and Mobile App": MonitorSmartphone,
+  "Alert Engine": Siren,
+  "Integration Layer": PlugZap,
+  "Offline Data Buffer": HardDrive,
+  "Battery Backup Unit": BatteryCharging,
+  "Surge Protection Unit": ShieldAlert
 };
 const componentsData = [
   {
@@ -109,9 +89,11 @@ const componentsData = [
 
 export default function TransformMonitor({ solutions }) {
   const { id } = useParams();
+  const solutionCatId = Number(id);
   const [selectedImage, setSelectedImage] = useState(null);
   const [solution_sub_cat, setSolution_sub_cat] = useState(null);
   const [navbarMenu, setNavbarMenu] = useState([]);
+  const [solution_cards, setSolution_cards] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -121,8 +103,6 @@ export default function TransformMonitor({ solutions }) {
         );
 
         if (!filteredData) return;
-
-        // Convert image2 from string to array if necessary
         if (filteredData.image2) {
           filteredData.image2 = JSON.parse(filteredData.image2);
         } else {
@@ -131,7 +111,6 @@ export default function TransformMonitor({ solutions }) {
 
         setSolution_sub_cat(filteredData);
 
-        // Set first thumbnail as default selected image
         if (filteredData.image2.length > 0) {
           setSelectedImage(`${ROOT_URL}/${filteredData.image2[0]}`);
         } else if (filteredData.image1) {
@@ -193,8 +172,8 @@ export default function TransformMonitor({ solutions }) {
                         alt={`thumb-${idx}`}
                         onClick={() => setSelectedImage(`${ROOT_URL}/${img}`)}
                         className={`border rounded-lg cursor-pointer thumbnail-img ${selectedImage === `${ROOT_URL}/${img}`
-                            ? "border-primary"
-                            : "border-secondary"
+                          ? "border-primary"
+                          : "border-secondary"
                           }`}
                         style={{ objectFit: "cover" }}
                       />
@@ -256,8 +235,9 @@ export default function TransformMonitor({ solutions }) {
       ) : (
         <p className="text-center mt-5">Loading...</p>
       )}
-      {/* Header */}
-      <section
+
+
+      {/* <section
         className="pt-1 text-center position-relative"
         style={{ marginTop: "50px", zIndex: 2 }}
       >
@@ -268,10 +248,10 @@ export default function TransformMonitor({ solutions }) {
         <h2 className="fw-bold display-5 text-dark">
           Smart Monitoring Features Built for Reliability
         </h2>
-      </section>
+      </section> */}
 
-      {/* Cards */}
-      <section className="py-5">
+
+      {/* <section className="py-5">
         <Container>
           <Row className="g-4">
             {productData.functionalCapabilities.map((item, index) => {
@@ -301,58 +281,133 @@ export default function TransformMonitor({ solutions }) {
             })}
           </Row>
         </Container>
-      </section>
+      </section> */}
 
-      <section className="mb-5 pt-5 text-center">
+      <section className="mb-1 pt-5 text-center">
         <p className="fw-semibold text-uppercase text-primary small mb-2">
           System Components & Architecture
         </p>
 
-        <h2 className="fw-bold display-5 text-dark">
+        <h3 className="fw-bold display-5 text-dark">
           Structured for Industrial Deployment
-        </h2>
+        </h3>
       </section>
 
-      <Container className="py-5">
+      <Container className="py-1">
+        {["para1"].map((key, idx) => {
 
-        {/* Table Wrapper */}
-        <div className="border rounded-4 shadow-sm overflow-hidden">
+          let rawHTML = solution_sub_cat?.[key] || "";
+          console.log("RAW HTML:", rawHTML);
+          Object.keys(iconMap).forEach((iconName) => {
+            const regex = new RegExp(`\\b${iconName}\\b`, "g");
 
-          {/* Header */}
-          <Row className="bg-light fw-semibold px-3 py-3 border-bottom">
-            <Col md={4}>Component</Col>
-            <Col md={8}>Description</Col>
-          </Row>
+            rawHTML = rawHTML.replace(
+              regex,
+              `<span class="icon-text" data-icon="${iconName}">${iconName}</span>`
+            );
+          });
 
-          {/* Rows */}
-          {componentsData.map((item, index) => {
-            const Icon = item.icon;
+          const cleanHTML = DOMPurify.sanitize(rawHTML, {
+            ALLOWED_TAGS: [
+              "h1", "h2", "h3", "h4", "h5", "h6",
+              "p", "ul", "ol", "li",
+              "strong", "b", "em", "br",
+              "table", "thead", "tbody", "tr", "td", "th",
+              "img", "figure", "span"
+            ],
+            ALLOWED_ATTR: [
+              "class", "style", "src", "alt", "width", "height", "data-icon"
+            ]
+          });
+
+          const getTextFromNode = (node) => {
+            if (node.type === "text") return node.data;
+            if (node.children) return node.children.map(getTextFromNode).join("");
+            return "";
+          };
+          const renderTableWithIcons = (html) => {
+            return parse(html, {
+              replace: (node) => {
+                if (node.name === "tr" && node.children) {
+
+                  const firstCell = node.children.find(
+                    (child) => child.name === "td" || child.name === "th"
+                  );
+
+                  let text = "";
+
+                  if (firstCell) {
+                    text = getTextFromNode(firstCell)
+                      .replace(/\u00A0/g, " ")
+                      .replace(/\s+/g, " ")
+                      .trim();
+                  }
+
+                  console.log("ROW TEXT:", text);
+
+                  const Icon = iconMap[text];
+
+                  return (
+                    <tr>
+                
+                      <td style={{ width: "40px", textAlign: "center" }}>
+                        {Icon ? <Icon size={18} /> : null}
+                      </td>
+
+                      {domToReact(node.children)}
+                    </tr>
+                  );
+                }
+              },
+            });
+          };
+
+          return (
+            <Row
+              key={idx}
+              className="align-items-start px-3 py-4 border-bottom table-row-hover"
+            >
+              <Col md={12} className="text-muted">
+                <div className="table-responsive table-fix mobile-big-text">
+                  {renderTableWithIcons(cleanHTML)}
+                </div>
+              </Col>
+            </Row>
+          );
+        })}
+      </Container>
+
+      {/* <section className="container py-5">
+        <div className="border-bottom d-flex gap-4 mb-4">
+          <button className="btn p-0 border-0 border-bottom border-2 border-primary text-primary fw-semibold">
+            System Components & Architecture
+          </button>
+        </div>
+
+        <h6 className="fw-semibold text-secondary">Basic Info.</h6>
+
+        <div className="row mt-4 g-4">
+          {["para1"].map((key, idx) => {
+
+            const cleanHTML = DOMPurify.sanitize(solution_sub_cat[key] || "");
 
             return (
-              <Row
-                key={index}
-                className="align-items-center px-3 py-4 border-bottom table-row-hover"
-              >
-                {/* Left Side */}
-                <Col md={4} className="d-flex align-items-center gap-3 fw-semibold">
-
-                  <div className="icon-box">
-                    <Icon size={20} />
-                  </div>
-
-                  {item.title}
-                </Col>
-
-                {/* Right Side */}
-                <Col md={8} className="text-muted">
-                  {item.desc}
-                </Col>
-              </Row>
+              <div className="col-lg-6 d-flex" key={idx}>
+                <div
+                  className="p-4 border rounded d-flex flex-column w-100"
+                  style={{ backgroundColor: "#F1F5F9" }}
+                >
+                  <div
+                    // className={`${key === "para1" ? "table-fix" : ""} mobile-big-text`}
+                    dangerouslySetInnerHTML={{ __html: cleanHTML }}
+                  />
+                </div>
+              </div>
             );
           })}
         </div>
-      </Container>
+      </section> */}
 
-    </div>
+    </div >
   );
 }

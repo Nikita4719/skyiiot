@@ -1709,3 +1709,56 @@ h6 {
     padding-right: 0;
   }
 }
+.table-row-hover:hover {
+  background-color: transparent !important;
+}
+.table-fix td .icon-box {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.table-fix td svg {
+  width: 18px;
+  height: 18px;
+}
+.table-fix td {
+  vertical-align: middle;
+}
+
+.table-fix svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon-text {
+  position: relative;
+  padding-left: 25px;
+}
+
+.icon-text::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon-text[data-icon="sensor"]::before {
+  background-image: url("/icons/thermometer.svg");
+}
+
+.icon-text[data-icon="gateway"]::before {
+  background-image: url("/icons/router.svg");
+}
+.small-btn {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+.btn-group-sm>.btn, .btn-sm {
+    --bs-btn-padding-y: 0.25rem;
+    --bs-btn-padding-x: 0.5rem;
+    --bs-btn-font-size: 0.83rem;
+    --bs-btn-border-radius: var(--bs-border-radius-sm);
+}
