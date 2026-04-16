@@ -37,98 +37,98 @@ export default function About_us() {
         </div>
       ) : (
         <>
-         <main className="main-content">
-          <section className="py-0">
-            <div className="mb-4 ">
-              <img
-                src={aboutusData?.image1 ? `${ROOT_URL}/${aboutusData.image1}` : ""}
-                alt="about"
-                className="img-fluid w-100"
-              />
-            </div>
-
-            <div className="container">
-
-              {/* SECTION 1 */}
-              <div className="row align-items-center mb-5 g-5">
-
-                <div className="col-12 col-md-6 d-flex flex-column justify-content-center">
-                  <h2 className="fw-bold mb-3 mobile-heading"
-                    dangerouslySetInnerHTML={{
-                      __html: aboutusData.heading
-                    }}></h2>
-
-                  <p className="about-text mobile-para"
-                    dangerouslySetInnerHTML={{
-                      __html: aboutusData.paragraph
-                    }}>
-                  </p>
-                </div>
-
-                <div className="col-12 col-md-6 text-center">
-                  <img
-                    src={aboutusData?.image2 ? `${ROOT_URL}/${aboutusData.image2}` : ""}
-                    alt="about"
-                    className="img-fluid rounded shadow w-100"
-                    style={{ maxHeight: "300px", objectFit: "cover" }}
-                  />
-                </div>
-
+          <main className="main-content">
+            <section className="py-0">
+              <div className="mb-4 ">
+                <img
+                  src={aboutusData?.image1 ? `${ROOT_URL}/${aboutusData.image1}` : ""}
+                  alt="about"
+                  className="img-fluid w-100"
+                />
               </div>
 
-              {/* SECTION 2 (DOUBLE IMAGE FIXED) */}
-              <div className="row align-items-center g-4">
+              <div className="container-fluid px-3 px-md-4 px-lg-5">
 
-                <div className="col-12 col-md-6">
-                  <div className="row g-3">
-                     <div className="col-6 col-md-6 text-center">
-                      <img
-                        src={about_enterprise?.image1 ? `${ROOT_URL}/${about_enterprise.image1}` : ""}
-                        alt=""
-                        className="img-fluid rounded shadow"
-                        style={{
-                          width: "100%",
-                          maxHeight: "250px",
-                          objectFit: "cover"
-                        }}
-                      />
-                    </div>
-                    <div className="col-6 col-md-6 text-center">
-                      <img
-                        src={about_enterprise?.image2 ? `${ROOT_URL}/${about_enterprise.image2}` : ""}
-                        alt=""
-                        className="img-fluid rounded shadow"
-                        style={{
-                          width: "100%",
-                          maxHeight: "250px",
-                          objectFit: "cover"
-                        }}
-                      />
+                {/* SECTION 1 */}
+                <div className="row align-items-center mb-5 g-5">
+
+                  <div className="col-12 col-md-6 d-flex flex-column justify-content-center">
+                    <h2 className="fw-bold mb-3 mobile-heading"
+                      dangerouslySetInnerHTML={{
+                        __html: aboutusData.heading
+                      }}></h2>
+
+                    <p className="about-text mobile-para" style={{ lineHeight: "1.4rem" }}
+                      dangerouslySetInnerHTML={{
+                        __html: aboutusData.paragraph
+                      }}>
+                    </p>
+                  </div>
+
+                  <div className="col-12 col-md-6 text-center">
+                    <img
+                      src={aboutusData?.image2 ? `${ROOT_URL}/${aboutusData.image2}` : ""}
+                      alt="about"
+                      className="img-fluid rounded shadow w-100"
+                      style={{ maxHeight: "300px", objectFit: "cover" }}
+                    />
+                  </div>
+
+                </div>
+
+                {/* SECTION 2 (DOUBLE IMAGE FIXED) */}
+                <div className="row align-items-center g-4">
+
+                  <div className="col-12 col-md-6">
+                    <div className="row g-3">
+                      <div className="col-6 col-md-6 text-center">
+                        <img
+                          src={about_enterprise?.image1 ? `${ROOT_URL}/${about_enterprise.image1}` : ""}
+                          alt=""
+                          className="img-fluid rounded shadow"
+                          style={{
+                            width: "100%",
+                            maxHeight: "250px",
+                            objectFit: "cover"
+                          }}
+                        />
+                      </div>
+                      <div className="col-6 col-md-6 text-center">
+                        <img
+                          src={about_enterprise?.image2 ? `${ROOT_URL}/${about_enterprise.image2}` : ""}
+                          alt=""
+                          className="img-fluid rounded shadow"
+                          style={{
+                            width: "100%",
+                            maxHeight: "250px",
+                            objectFit: "cover"
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="col-12 col-md-6">
-                  <h2 className="fw-bold mb-3 mobile-heading"
-                    dangerouslySetInnerHTML={{
-                      __html: about_enterprise.heading
-                    }}></h2>
+                  <div className="col-12 col-md-6">
+                    <h2 className="fw-bold mb-3 mobile-heading"
+                      dangerouslySetInnerHTML={{
+                        __html: about_enterprise.heading
+                      }}></h2>
 
-                  <p className="mobile-para"
-                    dangerouslySetInnerHTML={{
-                      __html: about_enterprise.paragraph
-                    }}>
-                  </p>
+                    <p className="mobile-para" style={{ lineHeight: "1.4rem" }}
+                      dangerouslySetInnerHTML={{
+                        __html: about_enterprise.paragraph
+                      }}>
+                    </p>
+                  </div>
+
                 </div>
 
               </div>
-
-            </div>
-          </section>
-</main>
+            </section>
+          </main>
           {/* BENEFITS SECTION */}
           <section className="py-5">
-            <div className="container">
+            <div className="container-fluid px-3 px-md-4 px-lg-5">
 
               <div className="row align-items-center g-4">
 
@@ -180,7 +180,10 @@ export default function About_us() {
                               alt=""
                               className="img-fluid rounded shadow"
                               style={{
-                                height: i === 0 ? "200px" : "150px",
+                                height:
+                                  typeof window !== "undefined" && window.innerWidth < 768
+                                    ? "140px"
+                                    : (i === 0 ? "250px" : "200px"),
                                 objectFit: "cover"
                               }}
                             />

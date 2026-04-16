@@ -162,7 +162,7 @@ export default function Detail1() {
   return (
     <div>
 
-      <section className="w-100 overflow-hidden">
+      <section className="w-100 overflow-hidden"  style={{ paddingTop: "110px" }} >
         <div className="bg-white py-3 px-3 px-sm-4 px-lg-5 w-100">
           <div className="container">
             <div className="row g-4 align-items-center text-center text-lg-start">

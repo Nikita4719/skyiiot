@@ -55,7 +55,7 @@ export default function About() {
       ) : (
         <>
           <section id="about" className="py-4">
-            <div className="container-fluid" style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 15px" }}>
+            <div className="container px-3 px-md-4 px-lg-5" style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 15px" }}>
               <div className="row align-items-center g-4">
                 <div className="col-md-6">
                   <h2 className="fw-bold text-start text-md-start mb-3 mobile-heading "
@@ -81,7 +81,7 @@ export default function About() {
             </div>
           </section>
 
-          <section
+         <section
             className="relative w-full overflow-hidden reveal-section bg-image-section"
             ref={sectionRef}
             style={{

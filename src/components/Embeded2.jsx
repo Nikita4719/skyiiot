@@ -27,8 +27,8 @@ function Embeded2() {
         fetchData();
     }, []);
     return (
-        <section className="embeded2"  style={{ marginTop: "-60px" }}>
-            <div className="container mb-4 mt-2">
+        <section className="embeded2"  style={{ marginTop: "-30px" }}>
+           <div className="container-fluid px-3 px-md-4 px-lg-5 px-xl-6 mb-4 mt-2">
                 {loading ? (
                     <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>
                         <div className="loader"></div>

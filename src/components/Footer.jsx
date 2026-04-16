@@ -101,7 +101,7 @@ export default function Footer() {
 
 
                         <div className="col-md-4 mb-3  text-md-start">
-                            <div className="row g-2">
+                            <div className="row g-1 g-md-2">
                                 {qrCodes.map((qr, i) => (
                                     <div className="col-6 text-center mb-3" key={i}>
                                         <div className="bg-white p-1 shadow d-inline-block">

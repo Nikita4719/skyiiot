@@ -39,7 +39,7 @@ export default function Team() {
                     <div className="loader"></div>
                 </div>
             ) : (
-                <section className="container mt-2">
+                <section className="container-fluid mt-2 px-3 px-md-4 px-lg-5">
                     <h1 className="text-center fw-bold mb-5">
                         Our Team
                     </h1>

@@ -150,7 +150,7 @@ export default function Faqs() {
 
   return (
     <section className="py-2 bg-white">
-      <div className="container">
+      <div className="container-fluid px-3 px-md-4 px-lg-5">
         <h1 className="text-center fw-bold mb-5 mobile-heading">
           Frequently Asked Questions
         </h1>

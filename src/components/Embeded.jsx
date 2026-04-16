@@ -1,22 +1,7 @@
 import React from "react";
 import embededImg from "../assets/embeded.png";
 import { Link } from "react-router-dom";
-import img1 from "../assets/img1.png";
-import img2 from "../assets/img2.png";
-import img3 from "../assets/img3.png";
-import img4 from "../assets/img4.png";
-import img5 from "../assets/img5.png";
-import img6 from "../assets/img6.png";
-import img7 from "../assets/img7.png";
-import img8 from "../assets/img8.png";
-import img9 from "../assets/img9.png";
-import img10 from "../assets/img10.png";
-import img11 from "../assets/img11.png";
-import img12 from "../assets/img12.png";
-import img13 from "../assets/img13.png";
-import img14 from "../assets/img14.png";
-import img15 from "../assets/img15.png";
-import img16 from "../assets/img16.png";
+
 import { useState, useEffect } from "react";
 import api from "./api";
 import { ROOT_URL } from "./api";
@@ -81,17 +66,17 @@ function Embeded() {
 
     return (
 
-        <section className="embeded mt-5">
-            <div className="container">
+        <section className="embeded mt-5 mb-3">
+            <div className="container-fluid mt-2 custom-fluid-spacing">
                 {loading ? (
                     <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>
                         <p>Loading...</p>
                     </div>
                 ) : (
 
-                    <div className="row align-items-start">
+                    <div className="row align-items-start ">
                         <div className="col-md-6 d-flex flex-column">
-                            <div className="section-box mb-5">
+                            <div className="section-box mb-2">
                                <div className="row mt-3 text-center justify-content-start">
 
                                     {services.map((section, index) => {
@@ -99,15 +84,15 @@ function Embeded() {
                                         return (
                                             <div className="col-12" key={section.id}>
                                                 <div
-                                                    className="section-box mb-5"
+                                                    className="section-box mb-2"
                                                     key={section.id}
                                                     ref={(el) => (sectionRefs.current[index] = el)}
                                                 >
 
-                                                    <h6 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
+                                                    <h5 className=" text-start text-skyiiot mobile-heading" style={{ color: "#00A3B2" }}
                                                         dangerouslySetInnerHTML={{
                                                             __html: section.title
-                                                        }}></h6>
+                                                        }}></h5>
 
                                                     <h3
                                                         className="text-start service-heading"
@@ -116,7 +101,8 @@ function Embeded() {
                                                         }}
                                                     ></h3>
 
-                                                    <p className="text-start text-black mobile-para " dangerouslySetInnerHTML={{
+                                                    <p className="text-start text-black mobile-para " style={{lineHeight:"1.3rem"}}
+                                                     dangerouslySetInnerHTML={{
                                                         __html: section.paragraph
                                                     }}></p>
 
@@ -126,7 +112,7 @@ function Embeded() {
                                                             .filter(icon => icon.service_id === section.id)
                                                             .map(icon => (
 
-                                                                <div className="col-6 col-md-3 mb-4" key={icon.id}>
+                                                                <div className="col-6 col-md-3 mb-2" key={icon.id}>
 
                                                                     <div className="feature-img-wrapper">
 

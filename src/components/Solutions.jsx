@@ -49,7 +49,7 @@ export default function Solutions() {
                 />
               </div>
 
-              <div className="container text-center">
+              <div className="container-fluid text-center px-3 px-md-4 px-lg-5 px-xl-5">
                 <div className="row g-4">
                   {solution_cat.map((item) => (
                     <div className="col-6 col-md-3" key={item.id}>
@@ -73,10 +73,10 @@ export default function Solutions() {
                             <FaHeart className="text-danger flex-shrink-0" size={18} />
 
                           </div>
-                          <div className="mt-auto d-flex gap-1">
+                          <div className="mt-auto d-flex justify-content-between gap-2">
                             <Link
                               to={`/transform-monitor/${item.id}`}
-                              className="btn btn-outline-primary btn-sm w-50 rounded-pill"
+                              className="btn btn-outline-primary btn-sm rounded-pill w-50"
                             >
                               View Details
                             </Link>
@@ -84,7 +84,7 @@ export default function Solutions() {
                             {contactItem && (
                               <Link
                                 to={contactItem.link}
-                                className="btn btn-primary btn-sm rounded-pill"
+                                className="btn btn-primary btn-sm rounded-pill w-50"
                               >
                                 Start Order
                               </Link>
@@ -101,7 +101,7 @@ export default function Solutions() {
           </main>
 
           <section className="py-2 bg-white">
-            <div className="container">
+            <div className="container-fluid text-center px-3 px-md-4 px-lg-5 px-xl-5">
               <div className="row g-4 mb-4">
 
                 <div className="col-md-6">
