@@ -71,7 +71,7 @@ export default function About() {
                 <div className="col-md-6 text-center text-md-end">
                   <img
                     src={aboutusData?.image2 ? `${ROOT_URL}/${aboutusData.image2}` : "null"}
-                     className="img-fluid rounded ms-md-5 ms-2"
+                     className="img-fluid rounded ms-md-3 ms-3 about-img"
                     alt="About SkyIIOT"
                     style={{ maxWidth: "90%" }}
                   />
