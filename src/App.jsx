@@ -14,6 +14,7 @@ import Testimonials from "./components/Testimonials";
 import Details from "./components/Details";
 import Transform_monitor from "./components/Transform_monitor";
 import "./index.css";
+import "./custom_styles.css";
 import Carousal2 from "./components/Carousal2";
 
 import { useEffect, useState } from "react";

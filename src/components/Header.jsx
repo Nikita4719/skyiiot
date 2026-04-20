@@ -6,13 +6,13 @@ import api from "./api";
 import { ROOT_URL } from "./api";
 export default function Header() {
   const [loading, setLoading] = useState(true);
-  const [slideData, setSlideData] = useState({});
   const [headerTop, setHeaderTop] = useState(null);
   const [navbarLogo, setNavbarLogo] = useState(null);
   const [navbarMenu, setNavbarMenu] = useState([]);
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const isHome = location.pathname === "/";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,120 +37,120 @@ export default function Header() {
 
     fetchData();
   }, []);
-  useEffect(() => {
-    if (isHome) {
-      api.get("/slides").then(res => setSlideData(res.data)).catch(err => console.log(err));
-    }
-  }, [isHome]);
+
   return (
-    // <header className={`header ${isHome ? "floating-header" : "normal-header"} sticky-top`}>
-    <header className={isHome ? "header floating-header fixed-top" : "header normal-header fixed-top"}>
+    <header className="fixed-top w-100" style={{ zIndex: "2000" }}>
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: "80px" }}>
-          <div className="loader"></div>
+        <div className="bg-white d-flex justify-content-center align-items-center" style={{ height: "80px" }}>
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
       ) : (
-        <>
-          <div className="header-wrapper">
-            {/* {isHome && slideData?.media && (
-              <div className="hero-video-wrapper">
-                <video
-                  className="w-100 h-100 position-absolute top-0 start-0 object-fit-cover"
-                  src={`${ROOT_URL}/${slideData.media}`}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-                <div className="overlay"></div>
-              </div>
-            )} */}
+        <div className="max-w-7xl mx-auto" style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          
+          {/* TOP INFO BAR */}
+          <div className="d-flex flex-column flex-sm-row px-4 gap-2 gap-sm-4 text-white py-3 position-relative" 
+               style={{ 
+                 backgroundColor: "rgba(23, 1, 44, 1)", 
+                 borderBottomLeftRadius: "12px", 
+                 borderBottomRightRadius: "12px", 
+                 zIndex: "1050", 
+                 fontSize: "0.875rem",
+                 marginBottom: "-10px" // Slightly reduced overlap
+               }}>
+            <div className="d-flex gap-4 fw-medium">
+              <span>{headerTop?.phone}</span>
+              <span>{headerTop?.email}</span>
+            </div>
+            <div className="d-flex gap-4 ms-sm-auto align-items-center">
+              {[
+                { link: headerTop?.facebook_link, icon: <FaFacebookF />, hover: "#2563eb" },
+                { link: headerTop?.twitter_link, icon: <FaTwitter />, hover: "#38bdf8" },
+                { link: headerTop?.linkedin_link, icon: <FaLinkedinIn />, hover: "#2563eb" },
+                { link: headerTop?.youtube_link, icon: <FaYoutube />, hover: "#dc2626" }
+              ].map((social, idx) => social.link && (
+                <a 
+                  key={idx} 
+                  href={social.link} 
+                  className="text-white social-hover-icon" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  style={{ fontSize: "1rem" }}
+                  onMouseOver={(e) => e.currentTarget.style.color = social.hover}
+                  onMouseOut={(e) => e.currentTarget.style.color = "white"}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
 
+          {/* NAVBAR */}
+          <nav className="d-flex align-items-center justify-content-between position-relative px-4 py-3 navbar-premium-gradient" 
+               style={{ zIndex: "1040", backdropFilter: "blur(12px)" }}>
+            
+            <NavLink to="/" className="d-inline-block">
+              <img
+                src={`${ROOT_URL}/${navbarLogo?.logo}`}
+                alt={navbarLogo?.logo_text}
+                className="img-fluid"
+                style={{ height: "auto", maxHeight: "48px" }}
+              />
+            </NavLink>
 
-            <div className="top-menu py-1 bg-opacity-75 text-white">
-              <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center px-3">
-                <div className="top-contact">
-                  <span>{headerTop?.phone}</span>
-                  <span className="d-none d-md-inline">|</span>
-                  <span>{headerTop?.email}</span>
-                </div>
-                <div className="d-flex gap-2 flex-wrap justify-content-center">
-                  {headerTop?.facebook_link && (
-                    <a href={headerTop.facebook_link} className="social-icon" target="_blank" rel="noreferrer">
-                      <FaFacebookF />
-                    </a>
-                  )}
-                  {headerTop?.twitter_link && (
-                    <a href={headerTop.twitter_link} className="social-icon" target="_blank" rel="noreferrer">
-                      <FaTwitter />
-                    </a>
-                  )}
-                  {headerTop?.linkedin_link && (
-                    <a href={headerTop.linkedin_link} className="social-icon" target="_blank" rel="noreferrer">
-                      <FaLinkedinIn />
-                    </a>
-                  )}
-                  {headerTop?.youtube_link && (
-                    <a href={headerTop.youtube_link} className="social-icon youtube-icon" target="_blank" rel="noreferrer">
-                      <FaYoutube />
-                    </a>
-                  )}
-                </div>
+            {/* DESKTOP MENU */}
+            <ul className="d-none d-md-flex align-items-center mb-0 list-unstyled ms-auto mx-4 gap-4 fw-medium">
+              {navbarMenu.filter(item => item.id !== 4).map(item => (
+                <li key={item.id}>
+                  <NavLink
+                    to={item.link}
+                    className={({ isActive }) => 
+                      `nav-link-premium ${isActive ? "active-nav-premium" : ""}`
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
 
-              </div>
+            <div className="d-flex gap-4 align-items-center">
+              <NavLink to="/contact" className="d-none d-sm-inline-block btn-contact-gradient">
+                WORK WITH US
+              </NavLink>
+              
+              {/* MOBILE BUTTON */}
+              <button 
+                className="d-md-none border-0 bg-transparent fs-2 text-dark"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                ☰
+              </button>
             </div>
 
-
-            <nav className="navbar navbar-expand-lg navbar-light navbar-gradient  ">
-              <div className="container-fluid d-flex align-items-center justify-content-between px-3">
-                <a className='navbar-brand' href='/'>
-                  <img
-                    src={`${ROOT_URL}/${navbarLogo?.logo}`}
-                    alt={navbarLogo?.logo_text}
-                    className="img-fluid navbar-logo"
-                  />
-                </a>
-
-                <button
-                  className="navbar-toggler custom-toggler"
-                  type="button"
-                  onClick={() => setMenuOpen(!menuOpen)}
-                >
-                  <span className="bar"></span>
-                  <span className="bar"></span>
-                  <span className="bar"></span>
-                </button>
-
-                <div className={`navbar-collapse justify-content-end ${menuOpen ? "show" : "collapse"}`}>
-                  <ul className="navbar-nav ms-auto">
-                    {navbarMenu.map(item => (
-                      <li key={item.id} className='nav-item fw-semibold'>
-                        <NavLink
-                          to={item.link}
-                          onClick={() => setMenuOpen(false)}
-                          className={({ isActive }) =>
-                            item.id === 4
-                              ? "btn btn-light rounded-pill px-3 px-md-4 mt-2 mt-lg-0"
-                              : isActive
-                                ? "nav-link active-nav"
-                                : "nav-link"
-                          }
-                        >
-                          {item.name}
-                        </NavLink>
-                      </li>
-
-                    ))}
-                    
-                  </ul>
-                </div>
-              </div>
-            </nav>
-          </div>
-        </>
-      )
-      }
-    </header >
+            {/* MOBILE MENU */}
+            <div className={`d-md-none position-absolute top-100 start-0 end-0 mt-3 mx-4 bg-white rounded-4 shadow-xl overflow-hidden transition-all duration-500`}
+                 style={{ maxHeight: menuOpen ? "500px" : "0", visibility: menuOpen ? "visible" : "hidden", transition: "all 0.5s ease" }}>
+              <ul className="d-flex flex-column list-unstyled text-center mb-0 fw-medium">
+                {navbarMenu.map(item => (
+                  <li key={item.id} className="border-bottom">
+                    <NavLink
+                      to={item.link}
+                      className={item.id === 4 ? "btn-contact-gradient my-3 mx-auto" : "d-block py-3 text-dark text-decoration-none"}
+                      onClick={() => setMenuOpen(false)}
+                      style={{ transition: "0.3s" }}
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
+        </div>
+      )}
+    </header>
   );
 }
 // to={

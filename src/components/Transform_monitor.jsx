@@ -3,6 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "./api";
+import "../custom_styles.css";
 import parse, { domToReact } from "html-react-parser";
 import { ROOT_URL } from "./api";
 import DOMPurify from "dompurify";
@@ -21,7 +22,9 @@ import {
   PlugZap,
   HardDrive,
   BatteryCharging,
-  ShieldAlert
+  ShieldAlert,
+  Network,
+  Power
 } from "lucide-react";
 import "../Details.css";
 
@@ -112,51 +115,100 @@ export default function TransformMonitor({ solutions }) {
   if (!solution_sub_cat)
     return <p className="text-center mt-5">Loading...</p>;
   const contactItem = navbarMenu.find(item => item.id === 4);
-  const tableIcons = [
-    Thermometer,
-    Router,
-    BarChart3,
-    MonitorSmartphone,
-    Siren,
-    PlugZap,
-    HardDrive,
-    BatteryCharging,
-    ShieldAlert
-  ];
 
   const renderTableWithIcons = (html) => {
-    return parse(html, {
-      replace: (node) => {
+    // Parse the HTML content to extract table data
+    const temp = document.createElement("div");
+    temp.innerHTML = DOMPurify.sanitize(html);
+    const rows = temp.querySelectorAll("tr");
 
-        if (node.name === "tr") {
+    // Process all rows
+    const allRows = Array.from(rows);
 
-          const rows = node.parent?.children?.filter(n => n.name === "tr") || [];
-          const index = rows.indexOf(node);
-          if (index === 0) {
+    return (
+      <div className="bg-white">
+        {allRows.map((row, index) => {
+          const cols = row.querySelectorAll("td");
+          if (cols.length < 2) return null;
+
+          const title = cols[0].innerText.trim();
+          const desc = cols[1].innerText.trim();
+
+          const isHeader = index === 0;
+
+          if (isHeader) {
             return (
-              <tr>
-                <th className="text-dark" style={{ width: "70px", textAlign: "center", fontSize: "17px", fontWeight: "600" }}>
-                  Icon
-                </th>
-                {domToReact(node.children)}
-              </tr>
+              <div
+                key={index}
+                className="system-grid-header border-b border-slate-200"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "320px 1fr",
+                  padding: "1rem 1.5rem",
+                  background: "#f1f5f9", // slate-100
+                  position: "sticky",
+                  top: 0,
+                  zIndex: 10,
+                  fontWeight: "600",
+                  color: "#334155", // slate-700
+                  fontSize: "1rem"
+                }}
+              >
+                <div>Component</div>
+                <div>Description</div>
+              </div>
             );
           }
 
-          const Icon = tableIcons[index - 1];
+          const iconMap = {
+            "Smart Sensor Nodes": Thermometer,
+            "Smart Gateway": Router,
+            "IoT Gateway": Router,
+            "Energy Meter Interface": BarChart3,
+            "Edge Processing Unit": Cpu,
+            "Cloud Integration Unit": Activity,
+            "Dashboard & Mobile App": MonitorSmartphone,
+            "Control Interface (HMI)": MonitorSmartphone,
+            "Alert Engine": Siren,
+            "Alerting Module": Siren,
+            "Integration Layer": PlugZap,
+            "Connectivity Modules": Network,
+            "Power Management Unit": Power,
+            "Offline Data Buffer": HardDrive,
+            "Battery Backup Unit": BatteryCharging,
+            "Surge Protection Unit": ShieldAlert
+          };
+
+          const Icon = iconMap[title] || MonitorSmartphone;
 
           return (
-            <tr className="table-row-hover">
-              <td className="icon-cell">
-                {Icon && <Icon size={18} />}
-              </td>
-              {domToReact(node.children)}
-            </tr>
-          );
-        }
+            <div
+              key={index}
+              className="system-grid-row border-t border-slate-200 hover:bg-blue-50 transition-all duration-300"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "320px 1fr",
+                padding: "1.25rem 1.5rem",
+                transition: "background-color 0.2s ease"
+              }}
+            >
+              <div className="flex items-center gap-3 font-semibold text-slate-900 d-flex align-items-center gap-3">
+                <div className="icon-wrap rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center d-flex align-items-center justify-content-center"
+                  style={{ width: "40px", height: "40px", flexShrink: 0, backgroundColor: "#eff6ff", color: "#2563eb", borderRadius: "0.75rem" }}>
+                  <Icon size={20} />
+                </div>
+                <span style={{ fontSize: "1rem", fontWeight: "600", color: "#0f172a" }}>{title}</span>
+              </div>
 
-      },
-    });
+              <div className="text-slate-600 flex items-center d-flex align-items-center"
+                style={{ color: "#475569", fontSize: "0.95rem", lineHeight: "1.6" }}>
+                {desc}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
@@ -256,23 +308,17 @@ export default function TransformMonitor({ solutions }) {
       )}
 
 
-      <section
-        className="pt-1 text-center position-relative"
-        style={{ marginTop: "50px", zIndex: 2 }}
-      >
-        <p className="fw-semibold text-uppercase text-primary small mb-2">
-          Functional Capabilities
-        </p>
-
-        <h4 className=" display-5 text-dark" style={{ fontWeight: "600" }}>
-          Smart Monitoring Features Built for Reliability
-        </h4>
-      </section>
-
-
-      <section className="py-3">
-        <Container fluid className="px-4">
-          <Row className="g-5">
+      <section className="py-5" style={{ backgroundColor: "#fafafa" }}>
+        <Container>
+          <div className="text-center mb-5">
+            <h2 className="fw-semibold text-uppercase text-primary small mb-2">
+              Functional Capabilities
+            </h2>
+            <p className="display-5 text-dark mx-auto" style={{ fontWeight: "600", maxWidth: "800px" }}>
+              Smart Monitoring Features Built for Reliability
+            </p>
+          </div>
+          <Row className="g-4 justify-content-center">
             {cardsData.map((html, index) => {
 
               const cleanHTML = DOMPurify.sanitize(html);
@@ -281,40 +327,71 @@ export default function TransformMonitor({ solutions }) {
 
               const title = temp.querySelector("h4")?.innerText || "";
               const desc = temp.querySelector("p")?.innerText || "";
+
               const iconMapDynamic = {
                 "24/7 Real-Time Monitoring": Activity,
                 "Multi-Channel Alerts": BellRing,
-                "Asset Tagging & Dashboards": Database,
-                "Fault Event Logging": Cpu,
+                "Asset Tagging & Dashboards": Cpu,
+                "Fault Event Logging": Database,
                 "AI Predictive Maintenance": BrainCircuit,
-                "Offline Data Buffering": HardDrive
+                "Offline Data Buffering": WifiOff
               };
 
               const Icon = iconMapDynamic[title] || Activity;
 
               return (
-                <Col key={index} xs={12} md={4} xl={4} className="d-flex">
-                  <Card className="h-100 shadow border-0 rounded-4 card-hover"
-                    style={{ width: "100%", maxWidth: "320px" }} >
-                    <Card.Body>
+                <Col
+                  key={index}
+                  xs={12}
+                  md={6}
+                  xl={4}
+                  className="d-flex justify-content-center px-3"   //  padding reduced
+                >
+                  <div
+                    className="card-capability-group w-100 rounded-4 border border-slate-200 bg-white p-4 card-highlight-transition h-100 d-flex flex-column"
+                    style={{
+                      transition: "all 0.3s ease",
+                      maxWidth: "100%"   // full width 
+                    }}
+                  >
 
-                      {/* ICON */}
-                      <div className="icon-box mb-4">
-                        <Icon size={25} />
-                      </div>
+                    {/* ICON */}
+                    <div
+                      className="icon-box-dynamic mb-4 d-flex align-items-center justify-content-center"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        backgroundColor: "#eff6ff",
+                        color: "#2563eb",
+                        borderRadius: "0.75rem"
+                      }}
+                    >
+                      <Icon size={24} />
+                    </div>
 
-                      {/* TITLE */}
-                      <Card.Title className="fw-semibold fs-4 mb-3">
-                        {title}
-                      </Card.Title>
+                    {/* TITLE */}
+                    <h3
+                      style={{
+                        fontSize: "1.5rem",
+                        fontWeight: "600",
+                        color: "#0f172a",
+                        marginBottom: "1rem"
+                      }}
+                    >
+                      {title}
+                    </h3>
 
-                      {/* DESCRIPTION */}
-                      <Card.Text className="text-muted">
-                        {desc}
-                      </Card.Text>
-
-                    </Card.Body>
-                  </Card>
+                    {/* DESC */}
+                    <p
+                      style={{
+                        color: "#475569",
+                        lineHeight: "1.75",
+                        fontSize: "1rem"
+                      }}
+                    >
+                      {desc}
+                    </p>
+                  </div>
                 </Col>
               );
             })}
@@ -323,52 +400,32 @@ export default function TransformMonitor({ solutions }) {
       </section>
 
       <section className="mb-1 pt-5 text-center">
-        <p className="fw-semibold text-uppercase text-primary small mb-2">
-          System Components & Architecture
-        </p>
+        <Container>
+          <p className="fw-semibold text-uppercase text-primary small mb-2">
+            System Components & Architecture
+          </p>
 
-        <h3 className=" display-5 text-dark" style={{ fontWeight: "600" }}>
-          Structured for Industrial Deployment
-        </h3>
+          <h3 className="display-5 text-dark mx-auto" style={{ fontWeight: "600", maxWidth: "900px" }}>
+            Structured for Industrial Deployment
+          </h3>
+        </Container>
       </section>
 
-      <Container className="py-4">
-        <div className="table-responsive">
-          {renderTableWithIcons(
-            DOMPurify.sanitize(solution_sub_cat?.para1 || "")
-          )}
+      <Container className="py-5">
+        <div
+          className="system-architecture-grid shadow-lg bg-white border border-slate-200 overflow-hidden"
+          style={{ borderRadius: "1.5rem" }}
+        >
+          <div
+            style={{ maxHeight: "600px", overflowY: "auto" }}
+            className="custom-scrollbar"
+          >
+            {renderTableWithIcons(
+              DOMPurify.sanitize(solution_sub_cat?.para1 || "")
+            )}
+          </div>
         </div>
       </Container>
-      {/* <section className="container py-5">
-        <div className="border-bottom d-flex gap-4 mb-4">
-          <button className="btn p-0 border-0 border-bottom border-2 border-primary text-primary fw-semibold">
-            System Components & Architecture
-          </button>
-        </div>
-
-        <h6 className="fw-semibold text-secondary">Basic Info.</h6>
-
-        <div className="row mt-4 g-4">
-          {["para1"].map((key, idx) => {
-
-            const cleanHTML = DOMPurify.sanitize(solution_sub_cat[key] || "");
-
-            return (
-              <div className="col-lg-6 d-flex" key={idx}>
-                <div
-                  className="p-4 border rounded d-flex flex-column w-100"
-                  style={{ backgroundColor: "#F1F5F9" }}
-                >
-                  <div
-                    // className={`${key === "para1" ? "table-fix" : ""} mobile-big-text`}
-                    dangerouslySetInnerHTML={{ __html: cleanHTML }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section> */}
 
     </div >
   );
