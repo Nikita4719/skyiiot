@@ -2,6 +2,10 @@ body {
   overflow-x: hidden;
 }
 
+:root {
+  --color-slate-950: #020617;
+}
+
 * {
   box-sizing: border-box;
 }

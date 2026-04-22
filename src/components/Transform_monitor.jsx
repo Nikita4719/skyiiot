@@ -49,6 +49,14 @@ export default function TransformMonitor({ solutions }) {
   const [solution_sub_cat, setSolution_sub_cat] = useState(null);
   const [navbarMenu, setNavbarMenu] = useState([]);
   const [cardsData, setCardsData] = useState([]);
+  const [coreModules, setCoreModules] = useState([
+    { title: "Processing unit", desc: "High-performance ARM-based processor for edge computing and data analysis." },
+    { title: "Communication Module", desc: "Supports 4G/5G, Wi-Fi, and LoRaWAN for seamless connectivity." },
+    { title: "Sensor Interface", desc: "Universal analog and digital inputs for various industrial sensors." },
+    { title: "Power Management", desc: "Efficient power circuitry with battery backup and surge protection." },
+    { title: "Security Chip", desc: "Hardware-level encryption for secure data transmission and storage." },
+    { title: "Status Display", desc: "OLED display for real-time status and diagnostics on the device." }
+  ]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -227,7 +235,7 @@ export default function TransformMonitor({ solutions }) {
 
                 <div className="col-lg-6 d-flex flex-column flex-lg-row align-items-center">
                   <div className="mb-3 mb-lg-0 me-lg-3">
-                    <div className="rounded-lg overflow-hidden selected-img-wrapper">
+                    <div className="rounded-lg overflow-hidden selected-img-wrapper" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.1)" }}>
                       <img
                         src={selectedImage}
                         alt={solution_sub_cat.heading}
@@ -248,7 +256,7 @@ export default function TransformMonitor({ solutions }) {
                           ? "border-primary"
                           : "border-secondary"
                           }`}
-                        style={{ objectFit: "cover" }}
+                        style={{ objectFit: "cover", width: "80px", height: "80px", borderRadius: "12px" }}
                       />
                     ))}
                   </div>
@@ -256,23 +264,25 @@ export default function TransformMonitor({ solutions }) {
 
                 <div className="col-lg-6">
                   <h2
-                    className="fw-bold mb-3"
+                    className="fw-bold mb-3 display-6"
+                    style={{ color: "#17012C" }}
                     dangerouslySetInnerHTML={{ __html: solution_sub_cat.heading }}
                   ></h2>
 
                   <div className="border-top pt-3 mb-3">
                     <div
-                      className="text-sm mobile-big-text"
+                      className="text-muted leading-7"
+                      style={{ fontSize: "1.1rem" }}
                       dangerouslySetInnerHTML={{
                         __html: solution_sub_cat.description1 || "",
                       }}
                     />
                   </div>
 
-                  <div className="mb-3">
+                  <div className="mb-4">
                     {navbarMenu.find((item) => item.id === 4) && (
                       <Link to={navbarMenu.find((item) => item.id === 4).link}>
-                        <button className="btn btn-primary px-4 py-2 rounded-pill">
+                        <button className="btn btn-contact-gradient px-5 py-3 rounded-pill fw-bold shadow-lg">
                           Start Order Request
                         </button>
                       </Link>
@@ -280,7 +290,7 @@ export default function TransformMonitor({ solutions }) {
                   </div>
 
                   <div
-                    className="border-top pt-3 text-sm mobile-big-text"
+                    className="border-top pt-3 text-muted"
                     dangerouslySetInnerHTML={{
                       __html: solution_sub_cat.description2 || "",
                     }}
@@ -292,14 +302,19 @@ export default function TransformMonitor({ solutions }) {
           </section>
 
           {solution_sub_cat.imagechart && (
-            <section className="mb-0 px-3">
-              <img
-                src={`${ROOT_URL}/${solution_sub_cat.imagechart}`}
-                alt="Chart Banner"
-                className="chart-img"
-              />
+            <section className="mb-0">
+              <div className="top-bannerr" style={{ marginTop: "0" }}>
+                <img
+                  src={`${ROOT_URL}/${solution_sub_cat.imagechart}`}
+                  alt="Chart Banner"
+                  className="chart-img"
+                  style={{ marginTop: "0" }}
+                />
+              </div>
             </section>
           )}
+
+
 
 
         </div>
@@ -308,15 +323,19 @@ export default function TransformMonitor({ solutions }) {
       )}
 
 
-      <section className="py-5" style={{ backgroundColor: "#fafafa" }}>
+      <section className="py-5" style={{ backgroundColor: "#ffffff" }}>
         <Container>
-          <div className="text-center mb-5">
-            <h2 className="fw-semibold text-uppercase text-primary small mb-2">
-              Functional Capabilities
-            </h2>
-            <p className="display-5 text-dark mx-auto" style={{ fontWeight: "600", maxWidth: "800px" }}>
-              Smart Monitoring Features Built for Reliability
-            </p>
+          <div className="section-header-side mb-5 pb-3 border-bottom border-slate-200">
+            <Row className="align-items-end g-3">
+              <Col lg={12}>
+                <h2 className="fw-bold text-uppercase text-primary small mb-2" style={{ letterSpacing: "0.1em" }}>
+                  Functional Capabilities
+                </h2>
+                <h3 className="display-6 text-dark mb-0" style={{ fontWeight: "700" }}>
+                  Smart Monitoring Features Built for Reliability
+                </h3>
+              </Col>
+            </Row>
           </div>
           <Row className="g-4 justify-content-center">
             {cardsData.map((html, index) => {
@@ -345,19 +364,18 @@ export default function TransformMonitor({ solutions }) {
                   xs={12}
                   md={6}
                   xl={4}
-                  className="d-flex justify-content-center px-3"   //  padding reduced
+                  className="d-flex justify-content-center px-3"
                 >
                   <div
-                    className="card-capability-group w-100 rounded-4 border border-slate-200 bg-white p-4 card-highlight-transition h-100 d-flex flex-column"
+                    className="card-capability-group w-100 rounded-4 border border-slate-200 bg-white p-4 card-highlight-transition h-100 d-flex flex-column align-items-start gap-3"
                     style={{
                       transition: "all 0.3s ease",
-                      maxWidth: "100%"   // full width 
+                      maxWidth: "100%"
                     }}
                   >
-
                     {/* ICON */}
                     <div
-                      className="icon-box-dynamic mb-4 d-flex align-items-center justify-content-center"
+                      className="icon-box-dynamic d-flex align-items-center justify-content-center flex-shrink-0 mb-2"
                       style={{
                         width: "50px",
                         height: "50px",
@@ -369,28 +387,31 @@ export default function TransformMonitor({ solutions }) {
                       <Icon size={24} />
                     </div>
 
-                    {/* TITLE */}
-                    <h3
-                      style={{
-                        fontSize: "1.5rem",
-                        fontWeight: "600",
-                        color: "#0f172a",
-                        marginBottom: "1rem"
-                      }}
-                    >
-                      {title}
-                    </h3>
+                    <div className="card-body-content">
+                      {/* TITLE */}
+                      <h3
+                        style={{
+                          fontSize: "1.35rem",
+                          fontWeight: "600",
+                          color: "#0f172a",
+                          marginBottom: "0.75rem"
+                        }}
+                      >
+                        {title}
+                      </h3>
 
-                    {/* DESC */}
-                    <p
-                      style={{
-                        color: "#475569",
-                        lineHeight: "1.75",
-                        fontSize: "1rem"
-                      }}
-                    >
-                      {desc}
-                    </p>
+                      {/* DESC */}
+                      <p
+                        className="mb-0"
+                        style={{
+                          color: "#475569",
+                          lineHeight: "1.6",
+                          fontSize: "0.95rem"
+                        }}
+                      >
+                        {desc}
+                      </p>
+                    </div>
                   </div>
                 </Col>
               );
@@ -399,15 +420,99 @@ export default function TransformMonitor({ solutions }) {
         </Container>
       </section>
 
-      <section className="mb-1 pt-5 text-center">
+      <section className="py-5" style={{ backgroundColor: "var(--color-slate-950)" }}>
         <Container>
-          <p className="fw-semibold text-uppercase text-primary small mb-2">
-            System Components & Architecture
-          </p>
+          <div className="section-header-side mb-5 focus-title-area">
+            <Row className="align-items-end g-3">
+              <Col lg={12}>
+                <h2 className="fw-bold text-uppercase text-blue-400 small mb-2" style={{ letterSpacing: "0.1em", color: "#60a5fa" }}>
+                  Core Modules
+                </h2>
+                <h3 className="display-6 text-white mb-0" style={{ fontWeight: "700" }}>
+                  A Powerful Modular Stack Behind the System
+                </h3>
+              </Col>
+            </Row>
+          </div>
+          <Row className="g-4 justify-content-center">
+            {coreModules.map((module, index) => {
+              const Icon = Cpu; // Default icon for core modules
 
-          <h3 className="display-5 text-dark mx-auto" style={{ fontWeight: "600", maxWidth: "900px" }}>
-            Structured for Industrial Deployment
-          </h3>
+              return (
+                <Col
+                  key={index}
+                  xs={12}
+                  md={6}
+                  xl={4}
+                  className="d-flex justify-content-center px-3"
+                >
+                  <div
+                    className="card-capability-group w-100 rounded-4 border border-slate-800 bg-slate-900/50 p-5 card-highlight-transition h-100 d-flex flex-column align-items-start gap-3"
+                    style={{
+                      transition: "all 0.3s ease",
+                      maxWidth: "100%",
+                      backgroundColor: "rgba(30, 41, 59, 0.4)",
+                      borderColor: "rgba(255, 255, 255, 0.1)",
+                      minHeight: "260px"
+                    }}
+                  >
+                    <div
+                      className="icon-box-dynamic d-flex align-items-center justify-content-center flex-shrink-0 mb-2"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        backgroundColor: "rgba(96, 165, 250, 0.1)",
+                        color: "#60a5fa",
+                        borderRadius: "0.75rem"
+                      }}
+                    >
+                      <Icon size={24} />
+                    </div>
+
+                    <div className="card-body-content">
+                      <h3
+                        style={{
+                          fontSize: "1.35rem",
+                          fontWeight: "600",
+                          color: "#f8fafc",
+                          marginBottom: "0.75rem"
+                        }}
+                      >
+                        {module.title}
+                      </h3>
+                      <p
+                        className="mb-0"
+                        style={{
+                          color: "#94a3b8",
+                          lineHeight: "1.6",
+                          fontSize: "0.95rem"
+                        }}
+                      >
+                        {module.desc}
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+              );
+            })}
+          </Row>
+        </Container>
+      </section>
+
+      <section className="mb-0 pt-5">
+        <Container>
+          <div className="section-header-side mb-4 pb-3 border-bottom border-slate-200">
+            <Row className="align-items-end g-3">
+              <Col lg={12}>
+                <h2 className="fw-bold text-uppercase text-primary small mb-2" style={{ letterSpacing: "0.1em" }}>
+                  System Components & Architecture
+                </h2>
+                <h3 className="display-6 text-dark mb-0" style={{ fontWeight: "700" }}>
+                  Structured for Industrial Deployment
+                </h3>
+              </Col>
+            </Row>
+          </div>
         </Container>
       </section>
 

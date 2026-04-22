@@ -149,9 +149,9 @@ export default function Faqs() {
 
 
   return (
-    <section className="py-2 bg-white">
+    <section className="pt-0 pb-4 bg-white" style={{ marginTop: "-2rem" }}>
       <div className="container-fluid px-3 px-md-4 px-lg-5">
-        <h1 className="text-center fw-bold mb-5 mobile-heading">
+        <h1 className="text-center fw-bold mb-5 mt-0 mobile-heading">
           Frequently Asked Questions
         </h1>
 

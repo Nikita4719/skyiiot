@@ -17,25 +17,26 @@
   border-radius: 1.5rem !important;
 }
 
-/* Custom Scrollbar for the table */
+/* Custom Scrollbar for the table (Sleek Industrial Style) */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 6px;
+  height: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: #f1f5f9;
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1; /* slate-300 */
+  background: #cbd5e1; /* Default slate-300 */
   border-radius: 10px;
-  border: 3px solid #f8fafc;
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; /* slate-400 */
+  background: #2563eb; /* Active Primary Blue from reference */
 }
 
 /* Scrollbar styling for Firefox */
@@ -44,26 +45,30 @@
   scrollbar-color: #cbd5e1 #f8fafc;
 }
 
-/* Enhanced Hover for cards in Transform Monitor */
+/* Enhanced Hover for cards (Match :5174) */
 .card-capability-group {
   cursor: pointer;
-  border: 1px solid #e2e8f0 !important;
+  border: 1.5px solid #f1f5f9 !important;
+  border-radius: 1.5rem !important;
+  background-color: #ffffff;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .card-capability-group:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
-  border-color: #2563eb !important;
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.12), 0 18px 36px -18px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(37, 99, 235, 0.3) !important;
 }
 
 /* Group Hover for Icon Box */
 .card-capability-group:hover .icon-box-dynamic {
-  background-color: #2563eb !important; /* blue-600 */
+  background-color: #2563eb !important;
   color: #ffffff !important;
+  transform: scale(1.1);
 }
 
 .card-highlight-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
 }
 
 /* System Grid Row Styles */
@@ -147,13 +152,77 @@
 }
 
 .navbar-premium-gradient {
-  background: linear-gradient(90deg, rgba(237, 246, 255, 0.9) 0%, rgba(245, 227, 252, 0.9) 100%) !important;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, rgba(237, 246, 255, 0.98) 0%, rgba(245, 227, 252, 0.98) 100%) !important;
+  box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.4); /* The "Line" effect requested */
+  backdrop-filter: blur(10px);
 }
 
 @media (min-width: 768px) {
   .navbar-premium-gradient {
     border-radius: 1rem !important;
+  }
+}
+
+/* Improved Chart Banner Scale (Natural Aspect Ratio - NO CROPPING) */
+.chart-img {
+  width: 100% !important;
+  height: auto !important; /* Forces natural proportional scale */
+  object-fit: contain !important;
+  border-radius: 12px !important; 
+  box-shadow: none !important;
+  margin: 1rem auto !important;
+  display: block !important;
+}
+
+/* Enhanced Hover for cards (Restored 3-per-row grid style) */
+.card-capability-group {
+  cursor: pointer;
+  border: 1.5px solid #f1f5f9 !important;
+  border-radius: 1.5rem !important;
+  background-color: #ffffff;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  overflow: hidden;
+}
+
+.card-capability-group:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 40px 80px -15px rgba(37, 99, 235, 0.15) !important;
+  border-color: rgba(37, 99, 235, 0.4) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .nav-link-premium {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Remove or reduce header overlap on mobile for better visibility */
+  header .max-w-7xl [style*="marginBottom: -5px"] {
+    margin-bottom: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  
+  .automation-section h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .automation-section p {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Base Utility for Centering */
+.mx-lg-0 {
+  @media (min-width: 992px) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 

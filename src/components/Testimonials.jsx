@@ -129,11 +129,11 @@ export default function Testimonial() {
         </div>
       </section>
 
-      <section className="automation-section py-5 bg-white">
+      <section className="automation-section py-4 py-lg-5 bg-white">
         <div className="container">
-          <div className="row justify-content-between align-items-center gy-4">
+          <div className="row gx-lg-5 gy-5 align-items-center">
 
-            <div className="col-lg-5 flex">
+            <div className="col-lg-6">
               <div className="video-wrapper w-100 shadow-sm rounded-4 overflow-hidden">
                 <video
                   src={smarterData?.media ? `${ROOT_URL}/${smarterData.media}` : "null"}
@@ -146,16 +146,18 @@ export default function Testimonial() {
               </div>
             </div>
 
-            <div className="col-lg-5">
-              <div className="content-wrap">
-                <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4 mobile-heading leading-tight"
-                  dangerouslySetInnerHTML={{
-                    __html: smarterData?.heading
-                  }}>
-                </h2>
+            <div className="col-lg-6 ps-lg-5">
+              <div className="automation-content text-center text-lg-start" style={{ margin: "0 auto", maxWidth: "100%" }}>
+                <div style={{ maxWidth: "580px", marginLeft: "auto", marginRight: "auto" }} className="mx-lg-0">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-4 leading-tight"
+                    dangerouslySetInnerHTML={{
+                      __html: smarterData?.heading
+                    }}>
+                  </h2>
 
-                <p className="text-slate-600 mb-4 mobile-para text-lg"
-                  dangerouslySetInnerHTML={{ __html: smarterData?.para }}></p>
+                  <p className="text-slate-600 mb-4 text-base md:text-lg"
+                    dangerouslySetInnerHTML={{ __html: smarterData?.para }}></p>
+                </div>
               </div>
             </div>
 
@@ -163,36 +165,38 @@ export default function Testimonial() {
         </div>
       </section>
 
-      <section className="automation-section py-5 bg-white">
+      <section className="automation-section py-4 py-lg-5 bg-white">
         <div className="container">
-          <div className="row justify-content-between align-items-center gy-4">
+          <div className="row gx-lg-5 gy-5 align-items-center">
             
-            <div className="col-lg-5 order-2 order-lg-1">
-              <div className="content-wrap">
-                <h2
-                  className="text-3xl lg:text-4xl font-bold text-black mb-4 mobile-heading leading-tight"
-                  dangerouslySetInnerHTML={{ __html: poweredData?.heading1 }}
-                ></h2>
-                <h4
-                  className="text-xl font-semibold text-purple-600 mb-4"
-                  dangerouslySetInnerHTML={{ __html: poweredData.heading2 }}
-                ></h4>
+            <div className="col-lg-6 order-2 order-lg-1 pe-lg-5">
+              <div className="automation-content text-center text-lg-start">
+                <div style={{ maxWidth: "580px", marginLeft: "auto", marginRight: "auto" }} className="mx-lg-0">
+                  <h2
+                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-4 leading-tight"
+                    dangerouslySetInnerHTML={{ __html: poweredData?.heading1 }}
+                  ></h2>
+                  <h4
+                    className="text-lg md:text-xl font-semibold text-sky-600 mb-4"
+                    dangerouslySetInnerHTML={{ __html: poweredData.heading2 }}
+                  ></h4>
 
-                <p className="text-slate-600 mb-4 mobile-para"
-                  dangerouslySetInnerHTML={{ __html: poweredData.paragraph1 }}></p>
+                  <p className="text-slate-600 mb-4 text-base md:text-lg"
+                    dangerouslySetInnerHTML={{ __html: poweredData.paragraph1 }}></p>
 
 
-                <h4
-                  className="text-xl font-semibold text-purple-600 mb-4"
-                  dangerouslySetInnerHTML={{ __html: poweredData.heading3 }}
-                ></h4>
-                <p className="text-slate-600 mb-4 mobile-para"
-                  dangerouslySetInnerHTML={{ __html: poweredData?.paragraph2 }}
-                ></p>
+                  <h4
+                    className="text-lg md:text-xl font-semibold text-sky-600 mb-4"
+                    dangerouslySetInnerHTML={{ __html: poweredData.heading3 }}
+                  ></h4>
+                  <p className="text-slate-600 mb-4 text-base md:text-lg"
+                    dangerouslySetInnerHTML={{ __html: poweredData?.paragraph2 }}
+                  ></p>
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-5 order-1 order-lg-2">
+            <div className="col-lg-6 order-1 order-lg-2">
               <div className="video-wrapper w-100 shadow-sm rounded-4 overflow-hidden">
                 <video
                   src={poweredData?.media ? `${ROOT_URL}/${poweredData.media}` : "null"}

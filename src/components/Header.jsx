@@ -47,18 +47,18 @@ export default function Header() {
           </div>
         </div>
       ) : (
-        <div className="max-w-7xl mx-auto" style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          
+        <div className={isHome ? "mx-auto px-2 px-md-0" : "mx-auto"} style={{ maxWidth: isHome ? "1140px" : "100%", margin: "0 auto" }}>
+
           {/* TOP INFO BAR */}
-          <div className="d-flex flex-column flex-sm-row px-4 gap-2 gap-sm-4 text-white py-3 position-relative" 
-               style={{ 
-                 backgroundColor: "rgba(23, 1, 44, 1)", 
-                 borderBottomLeftRadius: "12px", 
-                 borderBottomRightRadius: "12px", 
-                 zIndex: "1050", 
-                 fontSize: "0.875rem",
-                 marginBottom: "-10px" // Slightly reduced overlap
-               }}>
+          <div className="d-flex flex-column flex-sm-row px-4 gap-2 gap-sm-4 text-white py-2 position-relative" // Slightly larger top bar (py-2)
+            style={{
+              backgroundColor: "rgba(23, 1, 44, 1)",
+              borderBottomLeftRadius: isHome ? "12px" : "0",
+              borderBottomRightRadius: isHome ? "12px" : "0",
+              zIndex: "1050",
+              fontSize: "0.85rem", // Balanced font size
+              marginBottom: "-5px"
+            }}>
             <div className="d-flex gap-4 fw-medium">
               <span>{headerTop?.phone}</span>
               <span>{headerTop?.email}</span>
@@ -70,12 +70,12 @@ export default function Header() {
                 { link: headerTop?.linkedin_link, icon: <FaLinkedinIn />, hover: "#2563eb" },
                 { link: headerTop?.youtube_link, icon: <FaYoutube />, hover: "#dc2626" }
               ].map((social, idx) => social.link && (
-                <a 
-                  key={idx} 
-                  href={social.link} 
-                  className="text-white social-hover-icon" 
-                  target="_blank" 
-                  rel="noreferrer" 
+                <a
+                  key={idx}
+                  href={social.link}
+                  className="text-white social-hover-icon"
+                  target="_blank"
+                  rel="noreferrer"
                   style={{ fontSize: "1rem" }}
                   onMouseOver={(e) => e.currentTarget.style.color = social.hover}
                   onMouseOut={(e) => e.currentTarget.style.color = "white"}
@@ -87,27 +87,28 @@ export default function Header() {
           </div>
 
           {/* NAVBAR */}
-          <nav className="d-flex align-items-center justify-content-between position-relative px-4 py-3 navbar-premium-gradient" 
-               style={{ zIndex: "1040", backdropFilter: "blur(12px)" }}>
-            
+          <nav className="d-flex align-items-center justify-content-between position-relative px-4 pt-2 pb-3 navbar-premium-gradient" // Reduced top padding (pt-2)
+            style={{ zIndex: "1040", backdropFilter: "blur(12px)" }}>
+
             <NavLink to="/" className="d-inline-block">
               <img
                 src={`${ROOT_URL}/${navbarLogo?.logo}`}
                 alt={navbarLogo?.logo_text}
                 className="img-fluid"
-                style={{ height: "auto", maxHeight: "48px" }}
+                style={{ height: "auto", maxHeight: "52px" }} // Larger logo for better visibility
               />
             </NavLink>
 
             {/* DESKTOP MENU */}
-            <ul className="d-none d-md-flex align-items-center mb-0 list-unstyled ms-auto mx-4 gap-4 fw-medium">
+            <ul className="d-none d-md-flex align-items-center mb-0 list-unstyled ms-auto mx-4 gap-5 fw-medium"> {/* Increased gap to gap-5 */}
               {navbarMenu.filter(item => item.id !== 4).map(item => (
                 <li key={item.id}>
                   <NavLink
                     to={item.link}
-                    className={({ isActive }) => 
+                    className={({ isActive }) =>
                       `nav-link-premium ${isActive ? "active-nav-premium" : ""}`
                     }
+                    style={{ fontSize: "1.05rem" }} // Slightly larger font
                   >
                     {item.name}
                   </NavLink>
@@ -119,9 +120,9 @@ export default function Header() {
               <NavLink to="/contact" className="d-none d-sm-inline-block btn-contact-gradient">
                 WORK WITH US
               </NavLink>
-              
+
               {/* MOBILE BUTTON */}
-              <button 
+              <button
                 className="d-md-none border-0 bg-transparent fs-2 text-dark"
                 onClick={() => setMenuOpen(!menuOpen)}
               >
@@ -131,7 +132,7 @@ export default function Header() {
 
             {/* MOBILE MENU */}
             <div className={`d-md-none position-absolute top-100 start-0 end-0 mt-3 mx-4 bg-white rounded-4 shadow-xl overflow-hidden transition-all duration-500`}
-                 style={{ maxHeight: menuOpen ? "500px" : "0", visibility: menuOpen ? "visible" : "hidden", transition: "all 0.5s ease" }}>
+              style={{ maxHeight: menuOpen ? "500px" : "0", visibility: menuOpen ? "visible" : "hidden", transition: "all 0.5s ease" }}>
               <ul className="d-flex flex-column list-unstyled text-center mb-0 fw-medium">
                 {navbarMenu.map(item => (
                   <li key={item.id} className="border-bottom">
@@ -155,6 +156,6 @@ export default function Header() {
 }
 // to={
 //                             item.link === "/system-details"
-//                               ? `/system-details/${item.id}`   // 🔥 yaha ID add hogi
+//                               ? `/system-details/${item.id}`   // yaha ID add hogi
 //                               : item.link                     // baki normal
 //                           }
