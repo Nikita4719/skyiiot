@@ -331,7 +331,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="map-section">
+      {/* <section className="map-section">
         <div className="container-fluid mt-5">
           <div className="map-wrapper shadow-lg">
             <iframe
@@ -347,7 +347,7 @@ export default function Contact() {
             ></iframe>
           </div>
         </div>
-      </section>
+      </section> */}
 
     </div>
   );
