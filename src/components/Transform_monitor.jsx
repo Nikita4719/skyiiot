@@ -60,10 +60,11 @@ export default function TransformMonitor({ solutions }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [subCatRes, cardRes, menuRes] = await Promise.all([
+        const [subCatRes, cardRes, menuRes, solutionCardsRes] = await Promise.all([
           api.get("/solution-sub-cat"),
           api.get("/solution-card"),
           api.get("/navbar-menu"),
+          api.get("/solution-cards"),
         ]);
 
         const filteredData = subCatRes.data.find(
@@ -108,6 +109,54 @@ export default function TransformMonitor({ solutions }) {
           setCardsData(cleaned);
         } else {
           setCardsData([]);
+        }
+
+        const filteredSolutionCards = solutionCardsRes.data.find(
+          (item) => item.solutionCatId === Number(id)
+        );
+
+        if (filteredSolutionCards) {
+          const paragraphs = [
+            filteredSolutionCards.paragraph1,
+            filteredSolutionCards.paragraph2,
+            filteredSolutionCards.paragraph3,
+            filteredSolutionCards.paragraph4,
+            filteredSolutionCards.paragraph5,
+            filteredSolutionCards.paragraph6,
+          ];
+
+          const parsedModules = paragraphs
+            .filter(Boolean)
+            .map((html) => {
+              const cleanHTML = DOMPurify.sanitize(html);
+              const temp = document.createElement("div");
+              temp.innerHTML = cleanHTML;
+
+              let title = "";
+              let desc = "";
+
+              const h4 = temp.querySelector("h4");
+              if (h4) {
+                title = h4.innerText;
+                desc = temp.querySelector("p")?.innerText || "";
+              } else {
+                const ps = temp.querySelectorAll("p");
+                if (ps.length >= 2) {
+                  title = ps[0].innerText;
+                  desc = ps[1].innerText;
+                } else if (ps.length === 1) {
+                  desc = ps[0].innerText;
+                }
+              }
+
+              return {
+                title: title.trim(),
+                desc: desc.trim()
+              };
+            });
+          setCoreModules(parsedModules);
+        } else {
+          setCoreModules([]);
         }
 
         setNavbarMenu(menuRes.data);
