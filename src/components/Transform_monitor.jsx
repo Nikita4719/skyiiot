@@ -2,11 +2,15 @@ import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import api from "./api";
+import axios from "axios";
 import "../custom_styles.css";
 import parse, { domToReact } from "html-react-parser";
-import { ROOT_URL } from "./api";
 import DOMPurify from "dompurify";
+
+const ROOT_URL = "https://skyiot.skylabsapp.com";
+const api = axios.create({
+  baseURL: `${ROOT_URL}/api`,
+});
 import {
   Activity,
   BellRing,
