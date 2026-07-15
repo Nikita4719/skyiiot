@@ -6,6 +6,16 @@ export default function Hero() {
     const [loading, setLoading] = useState(true);
     const [slideData, setSlideData] = useState({});
     const [what_section, setWhat_section] = useState([]);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,7 +46,13 @@ export default function Hero() {
             ) : (
                 <>
 
-                    <section style={{ position: "relative", width: "100%", minHeight: "85vh" }}>
+                    <section style={{ 
+                        position: "relative", 
+                        width: "100%", 
+                        minHeight: isMobile ? "240px" : "85vh",
+                        aspectRatio: isMobile ? "16/9" : "auto",
+                        marginTop: isMobile ? "150px" : "0px"
+                    }}>
 
                         <video style={{ zIndex: 1, objectFit: "cover" }}
                             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"

@@ -31,6 +31,7 @@ const Carousel = () => {
 
   const nextClick = () => {
     setItems((prev) => {
+      if (prev.length === 0) return prev;
       const newArr = [...prev];
       const first = newArr.shift(); // first remove
       newArr.push(first); // last me add
@@ -39,6 +40,7 @@ const Carousel = () => {
   };
   const prevClick = () => {
     setItems((prev) => {
+      if (prev.length === 0) return prev;
       const newArr = [...prev];
       const last = newArr.pop();
       newArr.unshift(last);

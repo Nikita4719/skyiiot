@@ -238,3 +238,50 @@
     padding: 10px !important;
   }
 }
+
+/* System Grid Layout and Responsiveness */
+.system-grid-header {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  padding: 1rem 1.5rem;
+  background: #f1f5f9;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  font-weight: 600;
+  color: #334155;
+  font-size: 1rem;
+}
+
+.system-grid-row {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  padding: 1.25rem 1.5rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .system-grid-header {
+    grid-template-columns: 120px 1fr !important;
+    font-size: 0.9rem !important;
+    padding: 0.75rem 1rem !important;
+  }
+  .system-grid-row {
+    grid-template-columns: 120px 1fr !important;
+    padding: 0.75rem 1rem !important;
+    gap: 0.5rem !important;
+  }
+  .system-grid-row .d-flex {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.25rem !important;
+  }
+  .system-grid-row .icon-wrap {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .system-grid-row .icon-wrap svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
