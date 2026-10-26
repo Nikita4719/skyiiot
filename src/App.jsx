@@ -16,6 +16,7 @@ import Transform_monitor from "./components/Transform_monitor";
 import "./index.css";
 import "./custom_styles.css";
 import Carousal2 from "./components/Carousal2";
+import ChatBot from "./components/ChatBot";
 
 import { useEffect, useState } from "react";
 
@@ -54,6 +55,7 @@ function App() {
   
       </Routes>
       <Footer />
+      <ChatBot />
     </BrowserRouter>
   );
 }
